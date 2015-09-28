@@ -274,3 +274,7 @@
 	path = extensions/SyntaxHighlight_GeSHi
 	url = https://git.wikimedia.org/git/mediawiki/extensions/SyntaxHighlight_GeSHi.git
 	branch = REL1_25
+[submodule "extensions/TemplateSandbox"]
+	path = extensions/TemplateSandbox
+	url = https://git.wikimedia.org/git/mediawiki/extensions/TemplateSandbox.git
+	branch = REL1_25
