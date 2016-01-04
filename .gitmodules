@@ -336,3 +336,7 @@
 	path = skins/foreground
 	url = https://github.com/thingles/foreground
 	branch = REL1_26
+[submodule "extensions/Collection"]
+	path = extensions/Collection
+	url = https://github.com/wikimedia/mediawiki-extensions-Collection
+	branch = REL1_26
