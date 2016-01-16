@@ -336,3 +336,7 @@
 	path = skins/foreground
 	url = https://github.com/thingles/foreground
 	branch = master
+[submodule "extensions/WebChat"]
+	path = extensions/WebChat
+	url = https://github.com/wikimedia/mediawiki-extensions-WebChat
+	branch = master
