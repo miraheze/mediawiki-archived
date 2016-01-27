@@ -344,3 +344,7 @@
 	path = extensions/NoTitle
 	url = https://github.com/wikimedia/mediawiki-extensions-NoTitle
 	branch = REL1_26
+[submodule "extensions/HTMLets"]
+	path = extensions/HTMLets
+	url = https://github.com/wikimedia/mediawiki-extensions-HTMLets
+	branch = REL1_26
