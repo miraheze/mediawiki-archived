@@ -348,3 +348,7 @@
 	path = extensions/AddHTMLMetaAndTitle
 	url = https://github.com/wikimedia/mediawiki-extensions-AddHTMLMetaAndTitle
 	branch = REL1_26
+[submodule "extensions/Calendar"]
+	path = extensions/Calendar
+	url = https://github.com/wikimedia/mediawiki-extensions-Calendar
+	branch = REL1_26
