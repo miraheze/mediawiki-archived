@@ -348,3 +348,7 @@
 	path = extensions/AddHTMLMetaAndTitle
 	url = https://github.com/wikimedia/mediawiki-extensions-AddHTMLMetaAndTitle
 	branch = master
+[submodule "mediawiki-extensions-FlaggedRevs"]
+	path = mediawiki-extensions-FlaggedRevs
+	url = https://github.com/wikimedia/mediawiki-extensions-FlaggedRevs
+	branch = REL1_26
