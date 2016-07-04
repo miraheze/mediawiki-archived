@@ -424,3 +424,7 @@
 	path = extensions/WebChat
 	url = https://github.com/wikimedia/mediawiki-extensions-WebChat
 	branch = REL1_26
+[submodule "skins/Monaco"]
+	path = skins/Monaco
+	url = https://github.com/Arcane21/monaco-port
+	branch = master
