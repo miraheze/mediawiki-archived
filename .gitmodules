@@ -428,3 +428,7 @@
 	path = skins/Monaco
 	url = https://github.com/Arcane21/monaco-port
 	branch = master
+[submodule "extensions/MSCalendar"]
+	path = extensions/MSCalendar
+	url = https://github.com/wikimedia/mediawiki-extensions-MSCalendar
+	branch = REL1_26
