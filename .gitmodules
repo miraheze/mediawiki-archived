@@ -435,3 +435,7 @@
 [submodule "extensions/AccessControl"]
 	path = extensions/AccessControl
 	url = https://github.com/wikimedia/mediawiki-extensions-AccessControl.git
+[submodule "extensions/Widgets"]
+	path = extensions/Widgets
+	url = https://github.com/wikimedia/mediawiki-extensions-Widgets.git
+	branch = REL1_26
