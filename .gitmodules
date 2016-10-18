@@ -538,3 +538,7 @@
 	path = extensions/ArticleFeedbackv5
 	url = https://github.com/wikimedia/mediawiki-extensions-ArticleFeedbackv5
 	branch = REL1_27
+[submodule "extensions/AutomaticBoardWelcome"]
+	path = extensions/AutomaticBoardWelcome
+	url = https://github.com/wikimedia/mediawiki-extensions-AutomaticBoardWelcome
+	branch = REL1_27
