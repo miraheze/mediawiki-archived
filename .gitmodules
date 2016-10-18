@@ -542,3 +542,7 @@
 	path = extensions/AutomaticBoardWelcome
 	url = https://github.com/wikimedia/mediawiki-extensions-AutomaticBoardWelcome
 	branch = REL1_27
+[submodule "extensions/NewUsersList"]
+	path = extensions/NewUsersList
+	url = https://github.com/wikimedia/mediawiki-extensions-NewUsersList
+	branch = REL1_27
