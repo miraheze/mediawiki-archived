@@ -538,3 +538,15 @@
 	path = extensions/ArticleFeedbackv5
 	url = https://github.com/wikimedia/mediawiki-extensions-ArticleFeedbackv5
 	branch = REL1_27
+[submodule "extensions/AutomaticBoardWelcome"]
+	path = extensions/AutomaticBoardWelcome
+	url = https://github.com/wikimedia/mediawiki-extensions-AutomaticBoardWelcome
+	branch = REL1_27
+[submodule "extensions/NewUsersList"]
+	path = extensions/NewUsersList
+	url = https://github.com/wikimedia/mediawiki-extensions-NewUsersList
+	branch = REL1_27
+[submodule "skins/Nostalgia"]
+	path = skins/Nostalgia
+	url = https://github.com/wikimedia/mediawiki-skins-Nostalgia
+	branch = REL1_27
