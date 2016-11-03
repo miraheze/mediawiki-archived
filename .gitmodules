@@ -550,3 +550,7 @@
 	path = skins/Nostalgia
 	url = https://github.com/wikimedia/mediawiki-skins-Nostalgia
 	branch = REL1_27
+[submodule "extensions/FlaggedRevs"]
+	path = extensions/FlaggedRevs
+	url = https://github.com/wikimedia/mediawiki-extensions-FlaggedRevs
+	branch = REL1_27
