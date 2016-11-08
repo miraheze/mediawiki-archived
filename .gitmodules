@@ -554,3 +554,7 @@
 	path = extensions/FlaggedRevs
 	url = https://github.com/wikimedia/mediawiki-extensions-FlaggedRevs
 	branch = REL1_27
+[submodule "extensions/TorBlock"]
+	path = extensions/TorBlock
+	url = https://github.com/wikimedia/mediawiki-extensions-TorBlock
+	branch = REL1_27
