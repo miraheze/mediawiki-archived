@@ -562,3 +562,7 @@
 	path = extensions/TorBlock
 	url = https://github.com/wikimedia/mediawiki-extensions-TorBlock
 	branch = REL1_27
+[submodule "extensions/LocalisationUpdate"]
+	path = extensions/LocalisationUpdate
+	url = https://github.com/wikimedia/mediawiki-extensions-LocalisationUpdate
+	branch = REL1_27
