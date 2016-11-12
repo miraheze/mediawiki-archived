@@ -566,3 +566,7 @@
 	path = extensions/LocalisationUpdate
 	url = https://github.com/wikimedia/mediawiki-extensions-LocalisationUpdate
 	branch = REL1_27
+[submodule "extensions/Newsletter"]
+	path = extensions/Newsletter
+	url = https://github.com/wikimedia/mediawiki-extensions-Newsletter
+	branch = REL1_27
