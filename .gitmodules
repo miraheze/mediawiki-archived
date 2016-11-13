@@ -578,3 +578,7 @@
 	path = extensions/SiteScout
 	url = https://github.com/wikimedia/mediawiki-extensions-SiteScout
 	branch = REL1_27
+[submodule "extensions/CreatePage"]
+	path = extensions/CreatePage
+	url = https://github.com/wikimedia/mediawiki-extensions-CreatePage
+	branch = REL1_27
