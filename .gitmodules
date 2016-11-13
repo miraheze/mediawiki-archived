@@ -574,3 +574,11 @@
 	path = extensions/OATHAuth
 	url = https://github.com/wikimedia/mediawiki-extensions-OATHAuth
 	branch = REL1_27
+[submodule "extensions/SiteScout"]
+	path = extensions/SiteScout
+	url = https://github.com/wikimedia/mediawiki-extensions-SiteScout
+	branch = REL1_27
+[submodule "extensions/CreatePage"]
+	path = extensions/CreatePage
+	url = https://github.com/wikimedia/mediawiki-extensions-CreatePage
+	branch = REL1_27
