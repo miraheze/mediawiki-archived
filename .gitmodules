@@ -582,3 +582,7 @@
 	path = extensions/CreatePage
 	url = https://github.com/wikimedia/mediawiki-extensions-CreatePage
 	branch = REL1_27
+[submodule "extension/wikihiero"]
+	path = extension/wikihiero
+	url = https://github.com/wikimedia/mediawiki-extensions-wikihiero
+	branch = REL1_27
