@@ -569,7 +569,7 @@
 [submodule "extensions/Newsletter"]
 	path = extensions/Newsletter
 	url = https://github.com/wikimedia/mediawiki-extensions-Newsletter
-	branch = REL1_27
+	branch = master
 [submodule "extensions/OATHAuth"]
 	path = extensions/OATHAuth
 	url = https://github.com/wikimedia/mediawiki-extensions-OATHAuth
