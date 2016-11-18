@@ -586,3 +586,7 @@
 	path = extensions/wikihiero
 	url = https://github.com/wikimedia/mediawiki-extensions-wikihiero
 	branch = REL1_27
+[submodule "extensions/ProtectSite"]
+	path = extensions/ProtectSite
+	url = https://github.com/wikimedia/mediawiki-extensions-ProtectSite
+	branch = REL1_27
