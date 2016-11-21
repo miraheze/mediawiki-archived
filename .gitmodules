@@ -586,3 +586,6 @@
 	path = extensions/wikihiero
 	url = https://github.com/wikimedia/mediawiki-extensions-wikihiero
 	branch = REL1_27
+[submodule "extensions/ManageWiki"]
+	path = extensions/ManageWiki
+	url = https://github.com/miraheze/ManageWiki
