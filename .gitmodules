@@ -589,3 +589,7 @@
 [submodule "extensions/ManageWiki"]
 	path = extensions/ManageWiki
 	url = https://github.com/miraheze/ManageWiki
+[submodule "extensions/Quiz"]
+	path = extensions/Quiz
+	url = https://github.com/wikimedia/mediawiki-extensions-Quiz
+	branch = REL1_27
