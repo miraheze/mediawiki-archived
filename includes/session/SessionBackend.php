@@ -499,8 +499,8 @@ final class SessionBackend {
 				'SessionBackend "{session}" metadata dirty due to provider metadata change ({oldMetadata} => {newMetadata}): {callers}',
 				[
 					'session' => $this->id,
-					'oldMetadata' => print_r( $oldMetadata, true ),
-					'newMetadata' => print_r( $metadata, true ),
+					'oldMetadata' => str_replace( "    ", "", str_replace( PHP_EOL, "", print_r( $oldMetadata, true ) ) ),
+					'newMetadata' => str_replace( "    ", "", str_replace( PHP_EOL, "", print_r( $metadata, true ) ) ),
 					'callers' => wfGetAllCallers( 5 ),
 				]
 			);
