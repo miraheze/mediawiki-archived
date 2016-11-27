@@ -492,13 +492,18 @@ final class SessionBackend {
 			throw new \InvalidArgumentException( '$metadata must be an array or null' );
 		}
 		if ( $this->providerMetadata !== $metadata ) {
+			$oldMetadata = $this->providerMetadata;
 			$this->providerMetadata = $metadata;
 			$this->metaDirty = true;
 			$this->logger->debug(
-				'SessionBackend "{session}" metadata dirty due to provider metadata change',
+				'SessionBackend "{session}" metadata dirty due to provider metadata change ({oldMetadata} => {newMetadata}): {callers}',
 				[
 					'session' => $this->id,
-			] );
+					'oldMetadata' => print_r( $oldMetadata, true ),
+					'newMetadata' => print_r( $metadata, true ),
+					'callers' => wfGetAllCallers( 5 ),
+				]
+			);
 			$this->autosave();
 		}
 	}
