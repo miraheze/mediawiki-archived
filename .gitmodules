@@ -593,3 +593,7 @@
 	path = extensions/Quiz
 	url = https://github.com/wikimedia/mediawiki-extensions-Quiz
 	branch = REL1_27
+[submodule "extensions/ProtectSite"]
+	path = extensions/ProtectSite
+	url = https://github.com/wikimedia/mediawiki-extensions-ProtectSite
+	branch = REL1_28
