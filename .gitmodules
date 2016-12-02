@@ -454,10 +454,6 @@
 	path = extensions/YouTube
 	url = https://github.com/miraheze/YouTube.git
 	branch = master
-[submodule "extensions/SectionHide"]
-	path = extensions/SectionHide
-	url = https://github.com/miraheze/SectionHide.git
-	branch = master
 [submodule "extensions/MsCalendar"]
 	path = extensions/MsCalendar
 	url = https://github.com/wikimedia/mediawiki-extensions-MsCalendar
