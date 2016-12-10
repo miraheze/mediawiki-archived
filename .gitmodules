@@ -590,3 +590,7 @@
 	path = extensions/ProtectSite
 	url = https://github.com/wikimedia/mediawiki-extensions-ProtectSite
 	branch = REL1_28
+[submodule "extensions/EducationProgram"]
+	path = extensions/EducationProgram
+	url = https://github.com/wikimedia/mediawiki-extensions-EducationProgram
+	branch = REL1_28
