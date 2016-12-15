@@ -436,7 +436,7 @@
 	branch = master
 [submodule "extensions/Comments"]
 	path = extensions/Comments
-	url = https://github.com/miraheze/mediawiki-extensions-Comments.git
+	url = https://github.com/wikimedia/mediawiki-extensions-Comments.git
 	branch = master
 [submodule "extensions/ScratchBlocks"]
 	path = extensions/ScratchBlocks
