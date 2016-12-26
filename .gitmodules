@@ -594,3 +594,11 @@
 	path = extensions/EducationProgram
 	url = https://github.com/wikimedia/mediawiki-extensions-EducationProgram
 	branch = REL1_28
+[submodule "extensions/Theme"]
+	path = extensions/Theme
+	url = https://github.com/wikimedia/mediawiki-extensions-Theme
+	branch = REL1_28
+[submodule "skins/Gamepress"]
+	path = skins/Gamepress
+	url = https://github.com/wikimedia/mediawiki-skins-Gamepress.git
+	branch = REL1_28
