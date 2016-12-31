@@ -709,6 +709,7 @@ abstract class LoginSignupSpecialPage extends AuthManagerSpecialPage {
 			'mRetype' => $request->getText( 'wpRetype' ),
 			'mEmail' => $request->getText( 'wpEmail' ),
 			'mRealName' => $request->getText( 'wpRealName' ),
+			'mPolicy' => $request->getText(' wpPolicy' ),
 			'mDomain' => $request->getText( 'wpDomain' ),
 			'mReason' => $request->getText( 'wpReason' ),
 			'mRemember' => $request->getCheck( 'wpRemember' ),
@@ -988,6 +989,13 @@ abstract class LoginSignupSpecialPage extends AuthManagerSpecialPage {
 					'size' => 20,
 					'id' => 'wpRealName',
 				],
+				'policy' => [
+					'type' => 'text'
+					'help-message' => By using a wiki hosted by Miraheze, you agree to the <a href="https://meta.miraheze.org/wiki/Terms_of_Use">Terms of Use</a> and accept the <a href="https://meta.miraheze.org/wiki/Privacy_Policy">Privacy Policy</a>
+					'label-message' => '',
+					'cssclass' => 'loginText',
+					'size' => 20,
+					'id' => 'wpPolicy',
 				'reason' => [
 					// comment for the user creation log
 					'type' => 'text',
