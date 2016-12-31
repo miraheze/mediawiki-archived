@@ -996,6 +996,7 @@ abstract class LoginSignupSpecialPage extends AuthManagerSpecialPage {
 					'cssclass' => 'loginText',
 					'size' => 20,
 					'id' => 'wpPolicy',
+				],
 				'reason' => [
 					// comment for the user creation log
 					'type' => 'text',
