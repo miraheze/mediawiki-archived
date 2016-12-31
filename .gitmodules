@@ -1,3 +1,11 @@
+[submodule "extensions/ArticleFeedbackv5"]
+	path = extensions/ArticleFeedbackv5
+	url = https://github.com/wikimedia/mediawiki-extensions-ArticleFeedbackv5.git
+	branch = REL1_27
+[submodule "extensions/ArticleRatings"]
+	path = extensions/ArticleRatings
+	url = https://github.com/wikimedia/mediawiki-extensions-ArticleRatings.git
+	branch = REL1_27
 [submodule "extensions/CheckUser"]
 	path = extensions/CheckUser
 	url = https://github.com/wikimedia/mediawiki-extensions-CheckUser.git
