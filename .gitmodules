@@ -602,3 +602,7 @@
 	path = skins/Gamepress
 	url = https://github.com/wikimedia/mediawiki-skins-Gamepress.git
 	branch = REL1_28
+[submodule "extensions/DismissableSiteNotice"]
+	path = extensions/DismissableSiteNotice
+	url = https://github.com/wikimedia/mediawiki-extensions-DismissableSiteNotice.git
+	branch = REL1_28
