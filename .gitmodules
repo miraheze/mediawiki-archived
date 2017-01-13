@@ -614,3 +614,7 @@
 	path = extensions/NewSignupPage
 	url = https://github.com/wikimedia/mediawiki-extensions-NewSignupPage
 	branch = REL1_28
+[submodule "extensions/Graph"]
+	path = extensions/Graph
+	url = https://github.com/wikimedia/mediawiki-extensions-Graph
+	branch = REL1_28
