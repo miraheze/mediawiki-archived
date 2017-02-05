@@ -618,3 +618,7 @@
 	path = extensions/Graph
 	url = https://github.com/wikimedia/mediawiki-extensions-Graph
 	branch = REL1_28
+[submodule "extensions/News"]
+	path = extensions/News
+	url = https://github.com/wikimedia/mediawiki-extensions-News
+	branch = REL1_28
