@@ -622,3 +622,7 @@
 	path = extensions/News
 	url = https://github.com/wikimedia/mediawiki-extensions-News
 	branch = REL1_28
+[submodule "extensions/Spoilers"]
+	path = extensions/Spoilers
+	url = https://github.com/Telshin/Spoilers
+	branch = master
