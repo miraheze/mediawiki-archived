@@ -626,3 +626,11 @@
 	path = extensions/Spoilers
 	url = https://github.com/Telshin/Spoilers
 	branch = master
+[submodule "extensions/Duplicator"]
+	path = extensions/Duplicator
+	url = https://github.com/wikimedia/mediawiki-extensions-Duplicator
+	branch = REL1_28
+[submodule "extensions/SimpleChanges"]
+	path = extensions/SimpleChanges
+	url = https://github.com/wikimedia/mediawiki-extensions-SimpleChanges
+	branch = REL1_28
