@@ -634,3 +634,7 @@
 	path = extensions/SimpleChanges
 	url = https://github.com/wikimedia/mediawiki-extensions-SimpleChanges
 	branch = REL1_28
+[submodule "extensions/CreateRedirect"]
+	path = extensions/CreateRedirect
+	url = https://github.com/wikimedia/mediawiki-extensions-CreateRedirect
+	branch = REL1_28
