@@ -638,3 +638,7 @@
 	path = extensions/CreateRedirect
 	url = https://github.com/wikimedia/mediawiki-extensions-CreateRedirect
 	branch = REL1_28
+[submodule "extensions/PageForms"]
+	path = extensions/PageForms
+	url = https://github.com/wikimedia/mediawiki-extensions-PageForms
+	branch = REL1_28
