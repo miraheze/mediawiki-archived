@@ -646,3 +646,7 @@
 	path = extensions/WhoIsWatching
 	url = https://github.com/wikimedia/mediawiki-extensions-WhoIsWatching
 	branch = REL1_28
+[submodule "extensions/EditSubpages"]
+	path = extensions/EditSubpages
+	url = https://github.com/wikimedia/mediawiki-extensions-EditSubpages
+	branch = REL1_28
