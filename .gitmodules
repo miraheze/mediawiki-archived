@@ -650,3 +650,11 @@
 	path = extensions/EditSubpages
 	url = https://github.com/wikimedia/mediawiki-extensions-EditSubpages
 	branch = REL1_28
+[submodule "extensions/ProofreadPage"]
+	path = extensions/ProofreadPage
+	url = https://github.com/wikimedia/mediawiki-extensions-ProofreadPage
+	branch = REL1_28
+[submodule "extensions/PagedTiffHandler"]
+	path = extensions/PagedTiffHandler
+	url = https://github.com/wikimedia/mediawiki-extensions-PagedTiffHandler
+	branch = REL1_28
