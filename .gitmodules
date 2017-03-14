@@ -658,7 +658,7 @@
 	path = extensions/PagedTiffHandler
 	url = https://github.com/wikimedia/mediawiki-extensions-PagedTiffHandler
 	branch = REL1_28
-[submodule "skin/ModernSkylight"]
-	path = skin/ModernSkylight
+[submodule "skins/ModernSkylight"]
+	path = skins/ModernSkylight
 	url = https://github.com/labster/ModernSkylight
 	branch = REL1_28
