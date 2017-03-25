@@ -662,3 +662,7 @@
 	path = skins/ModernSkylight
 	url = https://github.com/labster/ModernSkylight
 	branch = REL1_28
+[submodule "extensions/AutoCreateCategoryPages"]
+	path = extensions/AutoCreateCategoryPages
+	url = https://github.com/wikimedia/mediawiki-extensions-AutoCreateCategoryPages
+	branch = REL1_28
