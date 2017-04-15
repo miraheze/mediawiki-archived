@@ -666,3 +666,7 @@
 	path = extensions/AutoCreateCategoryPages
 	url = https://github.com/wikimedia/mediawiki-extensions-AutoCreateCategoryPages
 	branch = REL1_28
+[submodule "extensions/CrossReference"]
+	path = extensions/CrossReference
+	url = https://github.com/gallandarakhneorg/mediawiki-crossreference
+	branch = master
