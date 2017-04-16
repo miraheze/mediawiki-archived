@@ -670,3 +670,7 @@
 	path = extensions/CrossReference
 	url = https://github.com/gallandarakhneorg/mediawiki-crossreference
 	branch = master
+[submodule "skins/BootstrapMediawiki"]
+	path = skins/BootstrapMediawiki
+	url = https://github.com/borkweb/bootstrap-mediawiki
+	branch = master
