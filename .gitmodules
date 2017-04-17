@@ -638,10 +638,6 @@
 	path = extensions/CreateRedirect
 	url = https://github.com/wikimedia/mediawiki-extensions-CreateRedirect
 	branch = REL1_28
-[submodule "extensions/PageForms"]
-	path = extensions/PageForms
-	url = https://github.com/wikimedia/mediawiki-extensions-PageForms
-	branch = REL1_28
 [submodule "extensions/WhoIsWatching"]
 	path = extensions/WhoIsWatching
 	url = https://github.com/wikimedia/mediawiki-extensions-WhoIsWatching
@@ -673,4 +669,8 @@
 [submodule "skins/BootstrapMediawiki"]
 	path = skins/BootstrapMediawiki
 	url = https://github.com/borkweb/bootstrap-mediawiki
+	branch = master
+[submodule "extensions/PageForms"]
+	path = extensions/PageForms
+	url = https://github.com/wikimedia/mediawiki-extensions-PageForms
 	branch = master
