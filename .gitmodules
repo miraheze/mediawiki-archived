@@ -606,10 +606,6 @@
 	path = extensions/DismissableSiteNotice
 	url = https://github.com/wikimedia/mediawiki-extensions-DismissableSiteNotice.git
 	branch = REL1_28
-[submodule "extensions/SecurePoll"]
-	path = extensions/SecurePoll
-	url = https://github.com/wikimedia/mediawiki-extensions-SecurePoll
-	branch = REL1_28
 [submodule "extensions/NewSignupPage"]
 	path = extensions/NewSignupPage
 	url = https://github.com/wikimedia/mediawiki-extensions-NewSignupPage
