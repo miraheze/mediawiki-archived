@@ -670,3 +670,7 @@
 	path = extensions/PageForms
 	url = https://github.com/wikimedia/mediawiki-extensions-PageForms
 	branch = master
+[submodule "skins/DarkVector"]
+	path = skins/DarkVector
+	url = https://github.com/dolfinus/DarkVector
+	branch = master
