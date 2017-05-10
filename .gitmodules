@@ -674,3 +674,7 @@
 	path = skins/DarkVector
 	url = https://github.com/dolfinus/DarkVector
 	branch = master
+[submodule "skins/Timeless"]
+	path = skins/Timeless
+	url = https://github.com/wikimedia/mediawiki-skins-Timeless
+	branch = REL1_28
