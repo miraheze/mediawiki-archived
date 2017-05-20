@@ -682,3 +682,7 @@
 	path = extensions/ContributionScores
 	url = https://github.com/wikimedia/mediawiki-extensions-ContributionScores
 	branch = REL1_28
+[submodule "extensions/CustomHeader"]
+	path = extensions/CustomHeader
+	url = https://github.com/miraheze/CustomHeader
+	branch = master
