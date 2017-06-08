@@ -694,3 +694,7 @@
 	path = extensions/TocTree
 	url = https://github.com/wikimedia/mediawiki-extensions-TocTree
 	branch = REL1_28
+[submodule "extensions/GroupsSidebar"]
+	path = extensions/GroupsSidebar
+	url = https://github.com/wikimedia/mediawiki-extensions-GroupsSidebar
+	branch = REL1_28
