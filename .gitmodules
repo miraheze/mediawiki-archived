@@ -690,3 +690,7 @@
 	path = extensions/AutoSitemap
 	url = https://github.com/dolfinus/AutoSitemap
 	branch = master
+[submodule "extensions/TocTree"]
+	path = extensions/TocTree
+	url = https://github.com/wikimedia/mediawiki-extensions-TocTree
+	branch = REL1_28
