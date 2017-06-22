@@ -706,4 +706,7 @@
 	path = extensions/GuidedTour
 	url = https://github.com/wikimedia/mediawiki-extensions-GuidedTour
 	branch = master
-	
+[submodule "extensions/EventLogging"]
+	path = extensions/EventLogging
+	url = https://github.com/wikimedia/mediawiki-extensions-EventLogging
+	branch = master
