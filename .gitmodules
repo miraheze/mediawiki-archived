@@ -702,3 +702,8 @@
 	path = skins/Tweeki
 	url = https://github.com/thaider/Tweeki
 	branch = master
+[submodule "extensions/GuidedTour"]
+	path = extensions/GuidedTour
+	url = https://github.com/wikimedia/mediawiki-extensions-GuidedTour
+	branch = master
+	
