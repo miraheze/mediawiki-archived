@@ -705,8 +705,16 @@
 [submodule "extensions/GuidedTour"]
 	path = extensions/GuidedTour
 	url = https://github.com/wikimedia/mediawiki-extensions-GuidedTour
-	branch = master
+	branch = REL1_28
 [submodule "extensions/EventLogging"]
 	path = extensions/EventLogging
 	url = https://github.com/wikimedia/mediawiki-extensions-EventLogging
-	branch = master
+	branch = REL1_28
+[submodule "extensions\\GuidedTour"]
+	path = extensions\\GuidedTour
+	url = https://github.com/wikimedia/mediawiki-extensions-GuidedTour
+	branch = REL1_28
+[submodule "extensions\\EventLogging"]
+	path = extensions\\EventLogging
+	url = https://github.com/wikimedia/mediawiki-extensions-EventLogging
+	branch = REL1_28
