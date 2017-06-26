@@ -702,11 +702,11 @@
 	path = skins/Tweeki
 	url = https://github.com/thaider/Tweeki
 	branch = master
-[submodule "extensions\\GuidedTour"]
-	path = extensions\\GuidedTour
+[submodule "extensions/GuidedTour"]
+	path = extensions/GuidedTour
 	url = https://github.com/wikimedia/mediawiki-extensions-GuidedTour
 	branch = REL1_28
-[submodule "extensions\\EventLogging"]
-	path = extensions\\EventLogging
+[submodule "extensions/EventLogging"]
+	path = extensions/EventLogging
 	url = https://github.com/wikimedia/mediawiki-extensions-EventLogging
 	branch = REL1_28
