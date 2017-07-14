@@ -686,10 +686,6 @@
 	path = extensions/CustomHeader
 	url = https://github.com/miraheze/CustomHeader
 	branch = master
-[submodule "extensions/AutoSitemap"]
-	path = extensions/AutoSitemap
-	url = https://github.com/dolfinus/AutoSitemap
-	branch = master
 [submodule "extensions/TocTree"]
 	path = extensions/TocTree
 	url = https://github.com/wikimedia/mediawiki-extensions-TocTree
