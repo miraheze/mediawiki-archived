@@ -706,3 +706,7 @@
 	path = extensions/EventLogging
 	url = https://github.com/wikimedia/mediawiki-extensions-EventLogging
 	branch = REL1_29
+[submodule "extensions/PdfBook"]
+	path = extensions/PdfBook
+	url = https://github.com/wikimedia/mediawiki-extensions-PdfBook
+	branch = REL1_29
