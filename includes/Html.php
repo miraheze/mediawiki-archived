@@ -605,7 +605,8 @@ class Html {
 
 	/**
 	 * Output a "<style>" tag with the given contents for the given media type
-	 * (if any).
+	 * (if any).  TODO: do some useful escaping as well, like if $contents
+	 * contains literal "</style>" (admittedly unlikely).
 	 *
 	 * @param string $contents CSS
 	 * @param string $media A media type string, like 'screen'

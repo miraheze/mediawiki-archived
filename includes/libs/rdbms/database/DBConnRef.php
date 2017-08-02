@@ -602,14 +602,6 @@ class DBConnRef implements IDatabase {
 			$this->lb->reuseConnection( $this->conn );
 		}
 	}
-
-	/**
-	 * @deprecated since 1.28 use SearchEngineFactory::getSearchEngineClass instead
-	 * @return string
-	 */
-	public function getSearchEngine() {
-		return $this->__call( __FUNCTION__, func_get_args() );
-	}
 }
 
 class_alias( DBConnRef::class, 'DBConnRef' );
