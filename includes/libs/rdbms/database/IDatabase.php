@@ -1802,12 +1802,6 @@ interface IDatabase {
 	 * @since 1.28
 	 */
 	public function setTableAliases( array $aliases );
-
-	/**
-	 * @deprecated since 1.28 use SearchEngineFactory::getSearchEngineClass instead
-	 * @return string
-	 */
-	public function getSearchEngine();
 }
 
 class_alias( IDatabase::class, 'IDatabase' );
