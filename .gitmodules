@@ -209,7 +209,7 @@
 [submodule "extensions/SocialProfile"]
 	path = extensions/SocialProfile
 	url = https://github.com/wikimedia/mediawiki-extensions-SocialProfile.git
-	branch = REL1_28
+	branch = master
 [submodule "extensions/Variables"]
 	path = extensions/Variables
 	url = https://github.com/wikimedia/mediawiki-extensions-Variables.git
@@ -517,7 +517,7 @@
 [submodule "skins/Refreshed"]
 	path = skins/Refreshed
 	url = https://github.com/wikimedia/mediawiki-skins-Refreshed
-	branch = REL1_28
+	branch = master
 [submodule "extensions/MediaWikiChat"]
 	path = extensions/MediaWikiChat
 	url = https://github.com/wikimedia/mediawiki-extensions-MediaWikiChat
