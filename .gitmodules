@@ -526,10 +526,6 @@
 	path = extensions/ArticleRatings
 	url = https://github.com/wikimedia/mediawiki-extensions-ArticleRatings
 	branch = REL1_29
-[submodule "extensions/ArticleFeedbackv5"]
-	path = extensions/ArticleFeedbackv5
-	url = https://github.com/wikimedia/mediawiki-extensions-ArticleFeedbackv5
-	branch = REL1_29
 [submodule "extensions/AutomaticBoardWelcome"]
 	path = extensions/AutomaticBoardWelcome
 	url = https://github.com/wikimedia/mediawiki-extensions-AutomaticBoardWelcome
@@ -709,4 +705,8 @@
 [submodule "extensions/PdfBook"]
 	path = extensions/PdfBook
 	url = https://github.com/OrganicDesign/extensions
+	branch = master
+[submodule "extensions/ArticleFeedbackv5"]
+	path = extensions/ArticleFeedbackv5
+	url = https://github.com/wikimedia/mediawiki-extensions-ArticleFeedbackv5
 	branch = master
