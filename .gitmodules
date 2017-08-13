@@ -710,3 +710,7 @@
 	path = extensions/ArticleFeedbackv5
 	url = https://github.com/wikimedia/mediawiki-extensions-ArticleFeedbackv5
 	branch = master
+[submodule "vendor"]
+	path = vendor
+	url = https://github.com/wikimedia/mediawiki-vendor
+	branch = REL1_29
