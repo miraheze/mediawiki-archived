@@ -722,3 +722,7 @@
 	path = extensions/UrlGetParameters
 	url = https://github.com/wikimedia/mediawiki-extensions-UrlGetParameters
 	branch = REL1_29
+[submodule "extensions/Moderation"]
+	path = extensions/Moderation
+	url = https://github.com/edwardspec/mediawiki-moderation
+	branch = master
