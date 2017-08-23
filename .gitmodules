@@ -718,3 +718,7 @@
 	path = extensions/CentralNotice
 	url = https://github.com/wikimedia/mediawiki-extensions-CentralNotice
 	branch = REL1_29
+[submodule "extensions/UrlGetParameters"]
+	path = extensions/UrlGetParameters
+	url = https://github.com/wikimedia/mediawiki-extensions-UrlGetParameters
+	branch = REL1_29
