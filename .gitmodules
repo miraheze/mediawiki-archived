@@ -526,10 +526,6 @@
 	path = extensions/ArticleRatings
 	url = https://github.com/wikimedia/mediawiki-extensions-ArticleRatings
 	branch = REL1_29
-[submodule "extensions/ArticleFeedbackv5"]
-	path = extensions/ArticleFeedbackv5
-	url = https://github.com/wikimedia/mediawiki-extensions-ArticleFeedbackv5
-	branch = REL1_29
 [submodule "extensions/AutomaticBoardWelcome"]
 	path = extensions/AutomaticBoardWelcome
 	url = https://github.com/wikimedia/mediawiki-extensions-AutomaticBoardWelcome
@@ -709,4 +705,24 @@
 [submodule "extensions/PdfBook"]
 	path = extensions/PdfBook
 	url = https://github.com/OrganicDesign/extensions
+	branch = master
+[submodule "extensions/ArticleFeedbackv5"]
+	path = extensions/ArticleFeedbackv5
+	url = https://github.com/wikimedia/mediawiki-extensions-ArticleFeedbackv5
+	branch = master
+[submodule "vendor"]
+	path = vendor
+	url = https://github.com/wikimedia/mediawiki-vendor
+	branch = REL1_29
+[submodule "extensions/CentralNotice"]
+	path = extensions/CentralNotice
+	url = https://github.com/wikimedia/mediawiki-extensions-CentralNotice
+	branch = REL1_29
+[submodule "extensions/UrlGetParameters"]
+	path = extensions/UrlGetParameters
+	url = https://github.com/wikimedia/mediawiki-extensions-UrlGetParameters
+	branch = REL1_29
+[submodule "extensions/Moderation"]
+	path = extensions/Moderation
+	url = https://github.com/edwardspec/mediawiki-moderation
 	branch = master
