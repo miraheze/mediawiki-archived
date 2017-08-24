@@ -209,7 +209,7 @@
 [submodule "extensions/SocialProfile"]
 	path = extensions/SocialProfile
 	url = https://github.com/wikimedia/mediawiki-extensions-SocialProfile.git
-	branch = master
+	branch = REL1_29
 [submodule "extensions/Variables"]
 	path = extensions/Variables
 	url = https://github.com/wikimedia/mediawiki-extensions-Variables.git
