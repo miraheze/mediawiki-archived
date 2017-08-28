@@ -462,10 +462,6 @@
 	path = extensions/LabeledSectionTransclusion
 	url = https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion
 	branch = REL1_29
-[submodule "extensions/CustomNavBlocks"]
-	path = extensions/CustomNavBlocks
-	url = https://github.com/mathiasertl/CustomNavBlocks.git
-	branch = master
 [submodule "extensions/ReplaceText"]
 	path = extensions/ReplaceText
 	url = https://github.com/wikimedia/mediawiki-extensions-ReplaceText.git
