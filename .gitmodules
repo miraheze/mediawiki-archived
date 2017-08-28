@@ -517,7 +517,7 @@
 [submodule "skins/Refreshed"]
 	path = skins/Refreshed
 	url = https://github.com/wikimedia/mediawiki-skins-Refreshed
-	branch = master
+	branch = REL1_29
 [submodule "extensions/MediaWikiChat"]
 	path = extensions/MediaWikiChat
 	url = https://github.com/wikimedia/mediawiki-extensions-MediaWikiChat
