@@ -722,3 +722,7 @@
 	path = extensions/Moderation
 	url = https://github.com/edwardspec/mediawiki-moderation
 	branch = master
+[submodule "extensions/ArticleToCategory2"]
+	path = extensions/ArticleToCategory2
+	url = https://github.com/wikimedia/mediawiki-extensions-ArticleToCategory2
+	branch = master
