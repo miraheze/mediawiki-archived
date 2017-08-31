@@ -726,3 +726,7 @@
 	path = extensions/ArticleToCategory2
 	url = https://github.com/wikimedia/mediawiki-extensions-ArticleToCategory2
 	branch = master
+[submodule "extensions/Score"]
+	path = extensions/Score
+	url = https://github.com/wikimedia/mediawiki-extensions-Score
+	branch = REL1_29
