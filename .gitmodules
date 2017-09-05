@@ -730,3 +730,7 @@
 	path = extensions/Score
 	url = https://github.com/wikimedia/mediawiki-extensions-Score
 	branch = REL1_29
+[submodule "extensions/LoginNotify"]
+	path = extensions/LoginNotify
+	url = https://github.com/wikimedia/mediawiki-extensions-LoginNotify
+	branch = REL1_29
