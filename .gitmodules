@@ -730,7 +730,3 @@
 	path = extensions/Score
 	url = https://github.com/wikimedia/mediawiki-extensions-Score
 	branch = REL1_29
-[submodule "extensions/AddThis"]
-	path = extensions/AddThis
-	url = https://github.com/wikimedia/mediawiki-extensions-AddThis
-	branch = REL1_29
