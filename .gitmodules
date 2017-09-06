@@ -734,3 +734,7 @@
 	path = extensions/LoginNotify
 	url = https://github.com/wikimedia/mediawiki-extensions-LoginNotify
 	branch = REL1_29
+[submodule "extensions/AddThis"]
+	path = extensions/AddThis
+	url = https://github.com/wikimedia/mediawiki-extensions-AddThis
+	branch = REL1_29
