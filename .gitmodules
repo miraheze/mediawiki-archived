@@ -738,3 +738,7 @@
 	path = extensions/AddThis
 	url = https://github.com/wikimedia/mediawiki-extensions-AddThis
 	branch = REL1_29
+[submodule "extensions/MagicNoCache"]
+	path = extensions/MagicNoCache
+	url = https://github.com/wikimedia/mediawiki-extensions-MagicNoCache
+	branch = REL1_29
