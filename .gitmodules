@@ -286,10 +286,6 @@
 	path = extensions/FeaturedFeeds
 	url = https://github.com/wikimedia/mediawiki-extensions-FeaturedFeeds
 	branch = REL1_29
-[submodule "extensions/WikiForum"]
-	path = extensions/WikiForum
-	url = https://github.com/wikimedia/mediawiki-extensions-WikiForum
-	branch = REL1_29
 [submodule "extensions/NoTitle"]
 	path = extensions/NoTitle
 	url = https://github.com/wikimedia/mediawiki-extensions-NoTitle
@@ -742,3 +738,7 @@
 	path = extensions/MagicNoCache
 	url = https://github.com/wikimedia/mediawiki-extensions-MagicNoCache
 	branch = REL1_29
+[submodule "extensions/WikiForum"]
+	path = extensions/WikiForum
+	url = https://github.com/wikimedia/mediawiki-extensions-WikiForum
+	branch = master
