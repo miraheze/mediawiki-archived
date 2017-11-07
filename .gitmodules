@@ -742,3 +742,6 @@
 	path = extensions/WikiForum
 	url = https://github.com/wikimedia/mediawiki-extensions-WikiForum
 	branch = master
+[submodule "extensions/Cargo"]
+	path = extensions/Cargo
+	url = https://github.com/wikimedia/mediawiki-extensions-Cargo
