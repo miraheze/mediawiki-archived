@@ -518,10 +518,6 @@
 	path = extensions/ArticleRatings
 	url = https://github.com/wikimedia/mediawiki-extensions-ArticleRatings
 	branch = REL1_29
-[submodule "extensions/AutomaticBoardWelcome"]
-	path = extensions/AutomaticBoardWelcome
-	url = https://github.com/wikimedia/mediawiki-extensions-AutomaticBoardWelcome
-	branch = REL1_29
 [submodule "extensions/NewUsersList"]
 	path = extensions/NewUsersList
 	url = https://github.com/wikimedia/mediawiki-extensions-NewUsersList
