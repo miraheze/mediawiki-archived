@@ -742,3 +742,7 @@
 	path = extensions/Cargo
 	url = https://github.com/wikimedia/mediawiki-extensions-Cargo
 	branch = REL1_29
+[submodule "extensions/HAWelcome"]
+	path = extensions/HAWelcome
+	url = https://github.com/wikimedia/mediawiki-extensions-HAWelcome
+	branch = master
