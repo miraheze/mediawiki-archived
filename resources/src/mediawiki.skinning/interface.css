@@ -72,8 +72,18 @@ textarea {
 	font-size: 84%;
 	line-height: 1.2em;
 	margin: 0 0 1.4em 1em;
-	color: #545454;
+	color: #54595d;
 	width: auto;
+}
+
+#contentSub:empty,
+#contentSub2:empty {
+	display: none;
+}
+
+#contentSub:empty ~ #jump-to-nav,
+#contentSub2:empty ~ #jump-to-nav {
+	margin-top: 0;
 }
 
 span.subpages {

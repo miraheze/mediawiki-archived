@@ -29,7 +29,7 @@
 [submodule "skins/MonoBook"]
 	path = skins/MonoBook
 	url = https://github.com/wikimedia/mediawiki-skins-MonoBook
-	branch = REL1_29
+	branch = REL1_30
 [submodule "extensions/AntiSpoof"]
 	path = extensions/AntiSpoof
 	url = https://github.com/wikimedia/mediawiki-extensions-AntiSpoof
@@ -701,7 +701,7 @@
 [submodule "vendor"]
 	path = vendor
 	url = https://github.com/wikimedia/mediawiki-vendor
-	branch = REL1_29
+	branch = REL1_30
 [submodule "extensions/CentralNotice"]
 	path = extensions/CentralNotice
 	url = https://github.com/wikimedia/mediawiki-extensions-CentralNotice
