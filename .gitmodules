@@ -746,3 +746,7 @@
 	path = extensions/HAWelcome
 	url = https://github.com/wikimedia/mediawiki-extensions-HAWelcome
 	branch = master
+[submodule "skins/MinervaNeue"]
+	path = skins/MinervaNeue
+	url = https://github.com/wikimedia/mediawiki-skins-MinervaNeue
+	branch = REL1_30
