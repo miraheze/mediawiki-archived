@@ -750,3 +750,7 @@
 	path = skins/MinervaNeue
 	url = https://github.com/wikimedia/mediawiki-skins-MinervaNeue
 	branch = REL1_30
+[submodule "extensions/ElectronPdfService"]
+	path = extensions/ElectronPdfService
+	url = https://github.com/wikimedia/mediawiki-extensions-ElectronPdfService
+	branch = REL1_30
