@@ -757,4 +757,3 @@
 [submodule "extensions/GlobalUserPage"]
 	path = extensions/GlobalUserPage
 	url = https://github.com/wikimedia/mediawiki-extensions-GlobalUserPage
-	branch = REL1_30
