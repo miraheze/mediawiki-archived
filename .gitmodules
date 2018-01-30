@@ -754,3 +754,6 @@
 	path = extensions/ElectronPdfService
 	url = https://github.com/wikimedia/mediawiki-extensions-ElectronPdfService
 	branch = REL1_30
+[submodule "extensions/GlobalUserPage"]
+	path = extensions/GlobalUserPage
+	url = https://github.com/wikimedia/mediawiki-extensions-GlobalUserPage
