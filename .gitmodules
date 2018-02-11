@@ -754,3 +754,7 @@
 	path = extensions/ElectronPdfService
 	url = https://github.com/wikimedia/mediawiki-extensions-ElectronPdfService
 	branch = REL1_30
+[submodule "extensions/QuizGame"]
+	path = extensions/QuizGame
+	url = https://github.com/wikimedia/mediawiki-extensions-QuizGame
+	branch = REL1_30
