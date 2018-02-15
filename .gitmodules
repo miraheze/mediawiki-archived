@@ -758,7 +758,3 @@
 	path = extensions/GlobalUserPage
 	url = https://github.com/wikimedia/mediawiki-extensions-GlobalUserPage
 	branch = REL1_30
-[submodule "extensions/GlobalPreferences"]
-	path = extensions/GlobalPreferences
-	url = https://github.com/wikimedia/mediawiki-extensions-GlobalPreferences
-	branch = REL1_30
