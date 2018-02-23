@@ -758,3 +758,7 @@
 	path = extensions/QuizGame
 	url = https://github.com/wikimedia/mediawiki-extensions-QuizGame
 	branch = REL1_30
+[submodule "extensions/Capiunto"]
+	path = extensions/Capiunto
+	url = https://github.com/wikimedia/mediawiki-extensions-Capiunto
+	branch = REL1_30
