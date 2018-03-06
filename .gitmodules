@@ -762,3 +762,7 @@
 	path = extensions/Capiunto
 	url = https://github.com/wikimedia/mediawiki-extensions-Capiunto
 	branch = REL1_30
+[submodule "extensions/DonateBoxInSidebar"]
+	path = extensions/DonateBoxInSidebar
+	url = https://github.com/iSCInc/mediawiki-extensions-DonateBoxInSidebar
+	branch = master
