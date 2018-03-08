@@ -754,6 +754,14 @@
 	path = extensions/ElectronPdfService
 	url = https://github.com/wikimedia/mediawiki-extensions-ElectronPdfService
 	branch = REL1_30
+[submodule "extensions/GlobalUserPage"]
+	path = extensions/GlobalUserPage
+	url = https://github.com/wikimedia/mediawiki-extensions-GlobalUserPage
+  branch = REL1_30
+  [submodule "extensions/GlobalPreferences"]
+	path = extensions/GlobalPreferences
+	url = https://github.com/wikimedia/mediawiki-extensions-GlobalPreferences
+  branch = REL1_30
 [submodule "extensions/QuizGame"]
 	path = extensions/QuizGame
 	url = https://github.com/wikimedia/mediawiki-extensions-QuizGame
@@ -762,3 +770,7 @@
 	path = extensions/Capiunto
 	url = https://github.com/wikimedia/mediawiki-extensions-Capiunto
 	branch = REL1_30
+[submodule "extensions/DonateBoxInSidebar"]
+	path = extensions/DonateBoxInSidebar
+	url = https://github.com/iSCInc/mediawiki-extensions-DonateBoxInSidebar
+	branch = master
