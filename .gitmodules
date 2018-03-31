@@ -774,3 +774,7 @@
 	path = extensions/DonateBoxInSidebar
 	url = https://github.com/iSCInc/mediawiki-extensions-DonateBoxInSidebar
 	branch = master
+[submodule "extensions/TemplateStyles"]
+	path = extensions/TemplateStyles
+	url = https://github.com/wikimedia/mediawiki-extensions-TemplateStyles
+	branch = REL1_30
