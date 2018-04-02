@@ -778,3 +778,7 @@
 	path = extensions/TemplateStyles
 	url = https://github.com/wikimedia/mediawiki-extensions-TemplateStyles
 	branch = REL1_30
+[submodule "extensions/WikiDiscover"]
+	path = extensions/WikiDiscover
+	url = https://github.com/miraheze/WikiDiscover.git
+	branch = master
