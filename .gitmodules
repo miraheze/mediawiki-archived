@@ -136,7 +136,7 @@
 	branch = REL1_30
 [submodule "extensions/Math"]
 	path = extensions/Math
-	url = https://github.com/miraheze/mediawiki-extensions-Math.git
+	url = https://github.com/wikimedia/mediawiki-extensions-Math.git
 	branch = REL1_30
 [submodule "extensions/MultiUpload"]
 	path = extensions/MultiUpload
