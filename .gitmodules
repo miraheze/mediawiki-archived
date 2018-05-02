@@ -778,3 +778,7 @@
         path = extensions/Collection
         url = https://github.com/wikimedia/mediawiki-extensions-Collection
         branch = REL1_30
+[submodule "extensions/PipeEscape"]
+	path = extensions/PipeEscape
+	url = https://github.com/wikimedia/mediawiki-extensions-PipeEscape
+	branch = REL1_30
