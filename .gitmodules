@@ -782,3 +782,7 @@
 	path = extensions/PipeEscape
 	url = https://github.com/wikimedia/mediawiki-extensions-PipeEscape
 	branch = REL1_30
+[submodule "extensions/Kartographer"]
+	path = extensions/Kartographer
+	url = https://github.com/wikimedia/mediawiki-extensions-Kartographer
+	branch = REL1_30
