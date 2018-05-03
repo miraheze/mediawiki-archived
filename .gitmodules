@@ -748,8 +748,8 @@
 	branch = REL1_30
 [submodule "extensions/GlobalUserPage"]
 	path = extensions/GlobalUserPage
-	url = https://github.com/wikimedia/mediawiki-extensions-GlobalUserPage
-        branch = REL1_30
+	url = https://github.com/macfanforks/mediawiki-extensions-GlobalUserPage
+        branch = master
 [submodule "extensions/GlobalPreferences"]
 	path = extensions/GlobalPreferences
 	url = https://github.com/wikimedia/mediawiki-extensions-GlobalPreferences
