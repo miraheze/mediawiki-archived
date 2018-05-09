@@ -28,11 +28,17 @@ matrix:
       php: 5.5
     # https://docs.travis-ci.com/user/languages/php#HHVM-versions
     - env: dbtype=mysql dbuser=root
-      php: hhvm-3.12
-    - env: dbtype=mysql dbuser=root
       php: hhvm-3.18
     - env: dbtype=mysql dbuser=root
+      php: hhvm-3.21
+    - env: dbtype=mysql dbuser=root
+      php: hhvm-3.24
+    - env: dbtype=mysql dbuser=root
       php: 7
+    - env: dbtype=mysql dbuser=root
+      php: 7.1
+    - env: dbtype=mysql dbuser=root
+      php: 7.2
 
 services:
   - mysql
@@ -63,6 +69,8 @@ before_script:
       --dbuser "$dbuser"
       --dbpass ""
       --scriptpath "/w"
+  - echo -en "\n\nrequire_once __DIR__ . '/includes/DevelopmentSettings.php';\n" >> ./LocalSettings.php
+  - php -l ./LocalSettings.php
 
 script:
   - php tests/phpunit/phpunit.php
