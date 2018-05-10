@@ -436,7 +436,7 @@
 	branch = master
 [submodule "extensions/PDFEmbed"]
 	path = extensions/PDFEmbed
-	url = https://github.com/HydraWiki/PDFEmbed.git
+	url = https://github.com/miraheze/PDFEmbed.git
 	branch = master
 [submodule "extensions/YouTube"]
 	path = extensions/YouTube
