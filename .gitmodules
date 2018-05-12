@@ -782,3 +782,7 @@
 	path = extensions/Kartographer
 	url = https://github.com/wikimedia/mediawiki-extensions-Kartographer
 	branch = REL1_31
+[submodule "extensions/Description2"]
+	path = extensions/Description2
+	url = https://github.com/wikimedia/mediawiki-extensions-Description2
+	branch = REL1_31
