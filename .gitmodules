@@ -789,3 +789,6 @@
 [submodule "skins/pivot"]
 	path = skins/pivot
 	url = https://github.com/Hutchy68/pivot.git
+[submodule "skins/liberty"]
+	path = skins/liberty
+	url = https://github.com/librewiki/liberty-skin.git
