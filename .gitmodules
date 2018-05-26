@@ -220,7 +220,7 @@
 	branch = REL1_30
 [submodule "extensions/NewUserMessage"]
 	path = extensions/NewUserMessage
-	url = https://github.com/wikimedia/mediawiki-extensions-NewUserMessage.git
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/NewUsersList
 	branch = REL1_30
 [submodule "extensions/CSS"]
 	path = extensions/CSS
