@@ -220,7 +220,7 @@
 	branch = REL1_30
 [submodule "extensions/NewUserMessage"]
 	path = extensions/NewUserMessage
-	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/NewUsersList
+	url = https://github.com/wikimedia/mediawiki-extensions-NewUserMessage.git
 	branch = REL1_30
 [submodule "extensions/CSS"]
 	path = extensions/CSS
@@ -512,7 +512,7 @@
 	branch = REL1_30
 [submodule "extensions/NewUsersList"]
 	path = extensions/NewUsersList
-	url = https://github.com/wikimedia/mediawiki-extensions-NewUsersList
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/NewUsersList
 	branch = REL1_30
 [submodule "skins/Nostalgia"]
 	path = skins/Nostalgia
