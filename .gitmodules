@@ -686,10 +686,6 @@
 	path = extensions/ArticleFeedbackv5
 	url = https://github.com/wikimedia/mediawiki-extensions-ArticleFeedbackv5
 	branch = master
-[submodule "vendor"]
-	path = vendor
-	url = https://github.com/wikimedia/mediawiki-vendor
-	branch = REL1_30
 [submodule "extensions/CentralNotice"]
 	path = extensions/CentralNotice
 	url = https://github.com/wikimedia/mediawiki-extensions-CentralNotice
