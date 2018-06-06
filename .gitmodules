@@ -678,6 +678,10 @@
 	path = extensions/EventLogging
 	url = https://github.com/wikimedia/mediawiki-extensions-EventLogging
 	branch = REL1_30
+[submodule "extensions/PdfBook"]
+        path = extensions/PdfBook
+        url = https://gitlab.com/Aranad/extensions.git
+        branch = master
 [submodule "extensions/ArticleFeedbackv5"]
 	path = extensions/ArticleFeedbackv5
 	url = https://github.com/wikimedia/mediawiki-extensions-ArticleFeedbackv5
@@ -788,3 +792,4 @@
 [submodule "skins/liberty"]
 	path = skins/liberty
 	url = https://github.com/librewiki/liberty-skin.git
+
