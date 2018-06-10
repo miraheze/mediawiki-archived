@@ -82,10 +82,6 @@
 	path = extensions/Renameuser
 	url = https://github.com/wikimedia/mediawiki-extensions-Renameuser
 	branch = REL1_31
-[submodule "extensions/SiteMatrix"]
-	path = extensions/SiteMatrix
-	url = https://github.com/wikimedia/mediawiki-extensions-SiteMatrix
-	branch = REL1_31
 [submodule "extensions/Thanks"]
 	path = extensions/Thanks
 	url = https://github.com/wikimedia/mediawiki-extensions-Thanks
