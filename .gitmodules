@@ -784,3 +784,8 @@
 [submodule "skins/liberty"]
 	path = skins/liberty
 	url = https://github.com/librewiki/liberty-skin.git
+[submodule "extensions/GeoData"]
+	path = extensions/GeoData
+	url = https://github.com/wikimedia/mediawiki-extensions-GeoData
+        branch = REL1_31
+
