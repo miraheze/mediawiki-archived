@@ -789,3 +789,7 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-GeoData
         branch = REL1_31
 
+[submodule "extensions/TwoColConflict"]
+	path = extensions/TwoColConflict
+	url = https://github.com/wikimedia/mediawiki-extensions-TwoColConflict
+	branch = REL1_31
