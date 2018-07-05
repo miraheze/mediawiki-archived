@@ -793,3 +793,19 @@
 	path = extensions/TwoColConflict
 	url = https://github.com/wikimedia/mediawiki-extensions-TwoColConflict
 	branch = REL1_31
+[submodule "extensions/JSBreadCrumbs"]
+	path = extensions/JSBreadCrumbs
+	url = https://github.com/wikimedia/mediawiki-extensions-JSBreadCrumbs
+	branch = REL1_31
+[submodule "extensions/MyVariables"]
+	path = extensions/MyVariables
+	url = https://github.com/wikimedia/mediawiki-extensions-MyVariables
+	branch = REL1_31
+[submodule "extensions/RandomGameUnit"]
+	path = extensions/RandomGameUnit
+	url = https://github.com/wikimedia/mediawiki-extensions-RandomGameUnit
+	branch = REL1_31
+[submodule "extensions/NewUserNotif"]
+	path = extensions/NewUserNotif
+	url = https://github.com/wikimedia/mediawiki-extensions-NewUserNotif
+	branch = REL1_31
