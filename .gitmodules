@@ -809,3 +809,7 @@
 	path = extensions/NewUserNotif
 	url = https://github.com/wikimedia/mediawiki-extensions-NewUserNotif
 	branch = REL1_31
+[submodule "extensions/LinkTarget"]
+	path = extensions/LinkTarget
+	url = https://github.com/wikimedia/mediawiki-extensions-LinkTarget
+	branch = REL1_31
