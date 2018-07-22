@@ -813,3 +813,7 @@
 	path = extensions/LinkTarget
 	url = https://github.com/wikimedia/mediawiki-extensions-LinkTarget
 	branch = REL1_31
+[submodule "extensions/MatomoAnalytics"]
+	path = extensions/MatomoAnalytics
+	url = https://github.com/miraheze/MatomoAnalytics
+	branch = master
