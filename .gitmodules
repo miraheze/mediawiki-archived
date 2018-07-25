@@ -825,3 +825,7 @@
 	path = extensions/Listings
 	url = https://github.com/wikimedia/mediawiki-extensions-Listings
 	branch = REL1_31
+[submodule "extensions/UploadsLink"]
+	path = extensions/UploadsLink
+	url = https://github.com/wikimedia/mediawiki-extensions-UploadsLink
+	branch = REL1_31
