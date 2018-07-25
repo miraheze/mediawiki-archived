@@ -817,3 +817,11 @@
 	path = extensions/MatomoAnalytics
 	url = https://github.com/miraheze/MatomoAnalytics
 	branch = master
+[submodule "extensions/WikidataPageBanner"]
+	path = extensions/WikidataPageBanner
+	url = https://github.com/wikimedia/mediawiki-extensions-WikidataPageBanner
+	branch = REL1_31
+[submodule "extensions/Listings"]
+	path = extensions/Listings
+	url = https://github.com/wikimedia/mediawiki-extensions-Listings
+	branch = REL1_31
