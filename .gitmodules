@@ -829,3 +829,7 @@
 	path = extensions/UploadsLink
 	url = https://github.com/wikimedia/mediawiki-extensions-UploadsLink
 	branch = REL1_31
+[submodule "extensions/RevisionSlider"]
+	path = extensions/RevisionSlider
+	url = https://github.com/wikimedia/mediawiki-extensions-RevisionSlider
+	branch = REL1_31
