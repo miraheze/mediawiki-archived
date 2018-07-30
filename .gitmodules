@@ -833,3 +833,7 @@
 	path = extensions/RevisionSlider
 	url = https://github.com/wikimedia/mediawiki-extensions-RevisionSlider
 	branch = REL1_31
+[submodule "extensions/CodeMirror"]
+	path = extensions/CodeMirror
+	url = https://github.com/wikimedia/mediawiki-extensions-CodeMirror
+	branch = REL1_31
