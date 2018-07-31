@@ -54,10 +54,9 @@ node_modules/
 /tests/phpunit/phpunit.phar
 
 # Composer
-.composer
-composer.lock
-composer.local.json
-composer.phar
+/composer.lock
+/composer.local.json
+/composer.phar
 
 # MediaWiki UI documentation
 /docs/kss/static
