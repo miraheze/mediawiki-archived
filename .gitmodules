@@ -1040,3 +1040,7 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-CodeMirror
 	branch = REL1_31
 	ignore = dirty
+[submodule "extensions/DiscordNotifications"]
+	path = extensions/DiscordNotifications
+	url = https://github.com/kulttuuri/DiscordNotifications.git
+        ignore = dirty
