@@ -1044,3 +1044,7 @@
 	path = extensions/DiscordNotifications
 	url = https://github.com/kulttuuri/DiscordNotifications.git
         ignore = dirty
+[submodule "extensions/GeoCrumbs"]
+	path = extensions/GeoCrumbs
+	url = https://github.com/wikimedia/mediawiki-extensions-GeoCrumbs.git
+        ignore = dirty
