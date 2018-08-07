@@ -839,7 +839,7 @@
 	ignore = dirty
 [submodule "extensions/PdfBook"]
 	path = extensions/PdfBook
-	url = https://gitlab.com/Aranad/extensions.git
+	url = https://gitlab.com/Aranad/PdfBook.git
 	branch = master
 	ignore = dirty
 [submodule "extensions/ArticleFeedbackv5"]
