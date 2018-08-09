@@ -1051,7 +1051,3 @@
 	path = extensions/GeoCrumbs
 	url = https://github.com/wikimedia/mediawiki-extensions-GeoCrumbs.git
 	ignore = dirty
-[submodule "extensions/Bootstrap"]
-	path = extensions/Bootstrap
-	url = https://github.com/cmln/mw-bootstrap.git
-        ignore = dirty
