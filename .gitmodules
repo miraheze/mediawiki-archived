@@ -1051,3 +1051,7 @@
 	path = extensions/GeoCrumbs
 	url = https://github.com/wikimedia/mediawiki-extensions-GeoCrumbs.git
 	ignore = dirty
+[submodule "extensions/NukeDPL"]
+	path = extensions/NukeDPL
+	url = https://github.com/wikimedia/mediawiki-extensions-NukeDPL.git
+        ignore = dirty
