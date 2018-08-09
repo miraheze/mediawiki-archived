@@ -1055,3 +1055,7 @@
 	path = extensions/Bootstrap
 	url = https://github.com/cmln/mw-bootstrap.git
         ignore = dirty
+[submodule "extensions/Chameleon"]
+	path = extensions/Chameleon
+	url = https://github.com/cmln/chameleon.git
+        ignore = dirty
