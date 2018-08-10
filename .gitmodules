@@ -1055,3 +1055,8 @@
 	path = extensions/NukeDPL
 	url = https://github.com/wikimedia/mediawiki-extensions-NukeDPL.git
         ignore = dirty
+[submodule "extensions/ImageRating"]
+	path = extensions/ImageRating
+	url = https://github.com/wikimedia/mediawiki-extensions-ImageRating.git
+        branch = REL1_31
+        ignore = dirty
