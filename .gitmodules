@@ -1065,3 +1065,8 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-RandomImage.git
         branch = REL1_31
         ignore = dirty
+[submodule "extensions/PollNY"]
+	path = extensions/PollNY
+	url = https://github.com/wikimedia/mediawiki-extensions-PollNY.git
+        branch = master
+        ignore = dirty
