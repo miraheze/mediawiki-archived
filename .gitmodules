@@ -1071,6 +1071,7 @@
         branch = master
         ignore = dirty
 [submodule "extensions/WikimediaIncubator"]
-	path = extensions/WikimediaIncubator
-	url = https://github.com/wikimedia/mediawiki-extensions-WikimediaIncubator
-	branch = REL1_31
+        path = extensions/WikimediaIncubator
+        url = https://github.com/wikimedia/mediawiki-extensions-WikimediaIncubator
+        branch = REL1_31
+        ignore = dirty
