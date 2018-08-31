@@ -219,7 +219,7 @@
 	ignore = dirty
 [submodule "extensions/MwEmbedSupport"]
 	path = extensions/MwEmbedSupport
-	url = https://github.com/wikimedia/mediawiki-extensions-MwEmbedSupport
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/MwEmbedSupport
 	branch = REL1_31
 	ignore = dirty
 [submodule "extensions/CollapsibleVector"]
