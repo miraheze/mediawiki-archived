@@ -1075,3 +1075,8 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-ApprovedRevs.git
 	branch = REL1_31
 	ignore = dirty
+[submodule "extensions/Purge"]
+        path = extensions/Purge
+        url = https://github.com/Hutchy68/Purge.git
+        branch = master
+        ignore = dirty
