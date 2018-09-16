@@ -494,7 +494,7 @@
 	ignore = dirty
 [submodule "extensions/RandomSelection"]
 	path = extensions/RandomSelection
-	url = https://github.com/Inclumedia/RandomSelection.git
+	url = https://github.com/wikimedia/mediawiki-extensions-RandomSelection.git
 	branch = master
 	ignore = dirty
 [submodule "skins/foreground"]
