@@ -1080,3 +1080,8 @@
         url = https://github.com/Hutchy68/Purge.git
         branch = master
         ignore = dirty
+[submodule "extensions/3D"]
+        path = extensions/3D
+        url = https://github.com/wikimedia/mediawiki-extensions-3D.git
+        branch = master
+        ignore = dirty
