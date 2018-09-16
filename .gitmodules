@@ -971,7 +971,7 @@
 	ignore = dirty
 [submodule "skins/liberty"]
 	path = skins/liberty
-	url = https://github.com/librewiki/liberty-skin.git
+	url = https://gitlab.com/librewiki/Liberty-MW-Skin.git
 	ignore = dirty
 [submodule "extensions/GeoData"]
 	path = extensions/GeoData
