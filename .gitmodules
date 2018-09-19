@@ -1085,3 +1085,8 @@
         url = https://github.com/wikimedia/mediawiki-extensions-3D.git
         branch = master
         ignore = dirty
+[submodule "extensions/GettingStarted"]
+        path = extensions/GettingStarted
+        url = https://github.com/wikimedia/mediawiki-extensions-GettingStarted.git
+        branch = master
+        ignore = dirty
