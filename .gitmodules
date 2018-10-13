@@ -1090,3 +1090,8 @@
         url = https://github.com/wikimedia/mediawiki-extensions-GettingStarted.git
         branch = master
         ignore = dirty
+[submodule "extensions/RottenLinks"]
+	path = extensions/RottenLinks
+	url = https://github.com/miraheze/RottenLinks
+	branch = master
+	ignore = dirty
