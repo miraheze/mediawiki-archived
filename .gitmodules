@@ -437,11 +437,6 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-WebChat
 	branch = REL1_31
 	ignore = dirty
-[submodule "extensions/MSCalendar"]
-	path = extensions/MSCalendar
-	url = https://github.com/wikimedia/mediawiki-extensions-MSCalendar
-	branch = REL1_31
-	ignore = dirty
 [submodule "extensions/Widgets"]
 	path = extensions/Widgets
 	url = https://github.com/wikimedia/mediawiki-extensions-Widgets
