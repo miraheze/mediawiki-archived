@@ -1,3 +1,26 @@
+== MediaWiki 1.31.2 ==
+
+THIS IS NOT A RELEASE YET
+
+=== Changes since MediaWiki 1.31.1 ===
+* (T204729) WatchedItemStore::countVisitingWatchersMultiple() shouldn't query all
+  titles when asked for none
+* (T205967) Fix syntax error typo in postgres database upgrade file.
+* (T200254) Add pear/Net_SMTP 1.7.3 to composer dependencies.
+* (T206765) Load installer i18n when running update.php.
+* (T109121) Remove deprecated pear/mail_mime-decode from composer suggested libraries.
+* (T200595) Fix PHP 7.3 warnings of using "continue" in some scenarios instead
+  of "break".
+* (T206979) Fix PHP 7.3 warnings of using "compact()" when some variables may
+  not be set.
+* Fix PHP 7.3 warnings "preg_replace(): [...] invalid range in character class"
+* (T207540) Include IP address in "Login for $1 succeeded" log entry.
+* (T207541) Pass email address to mail().
+* (T207603) User JS may no longer be loaded with mime type text/javascript if
+  there is no account associated with the username.
+* (T113042) Do not allow loading pages raw with a text/javascript MIME type if
+  non-admins can edit the page.
+
 == MediaWiki 1.31.1 ==
 
 This is a security and maintenance release of the MediaWiki 1.31 branch.
@@ -22,7 +45,7 @@ This is a security and maintenance release of the MediaWiki 1.31 branch.
 * (T200861) Fix total breakage of SQLite web upgrade.
 * (T200864) Fix pingback over-reporting on non-MySQL databases
 * (T202550) Unbreak SpecialListusersHeaderForm and SpecialListusersHeader
-  hooks. 
+  hooks.
 
 === Changes since MediaWiki 1.31.0-rc.2 ===
 * (T195783) Initialize PSR-4 namespaces at same stage as normal autoloader.
@@ -55,6 +78,10 @@ This is a security and maintenance release of the MediaWiki 1.31 branch.
   to the ar_text and ar_flags columns of the archive table or make those
   columns nullable before upgrading to MediaWiki 1.31.
   maintenance/archives/patch-nullable-ar_text.sql shows how to do this for MySQL.
+* The CologneBlue and Modern skins are no longer bundled with the tarball. You
+  will need to remove the wfLoadSkin() calls from your LocalSettings.php or
+  download them separately
+  (<https://www.mediawiki.org/wiki/Special:SkinDistributor>).
 
 === Configuration changes in 1.31 ===
 * $wgEnableAPI and $wgEnableWriteAPI are now deprecated and will be removed in
