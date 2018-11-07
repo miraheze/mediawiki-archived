@@ -87,14 +87,14 @@ class Preprocessor_DOM extends Preprocessor {
 
 		$dom = new DOMDocument();
 		Wikimedia\suppressWarnings();
-		$result = $dom->loadXML( $xml );
+		$result = $dom->loadXML( $xml, 313481028);
 		Wikimedia\restoreWarnings();
 		if ( !$result ) {
 			// Try running the XML through UtfNormal to get rid of invalid characters
 			$xml = UtfNormal\Validator::cleanUp( $xml );
 			// 1 << 19 == XML_PARSE_HUGE, needed so newer versions of libxml2
 			// don't barf when the XML is >256 levels deep
-			$result = $dom->loadXML( $xml, 1 << 19 );
+			$result = $dom->loadXML( $xml, 313481028 );
 		}
 
 		if ( !$result ) {
