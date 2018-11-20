@@ -20,6 +20,8 @@ THIS IS NOT A RELEASE YET
   there is no account associated with the username.
 * (T113042) Do not allow loading pages raw with a text/javascript MIME type if
   non-admins can edit the page.
+* (T194052) Updated wikimedia/base-convert from 1.0.1 to 2.0.0.
+* (T199494) Fix notices in maintenance/removeUnusuedAccounts.php
 
 == MediaWiki 1.31.1 ==
 
@@ -483,7 +485,8 @@ changes to languages because of Phabricator reports.
 == Compatibility ==
 MediaWiki 1.31 requires PHP 7.0.0 or later. Although HHVM 3.18.5 or later is
 supported, it is generally advised to use PHP 7.0.0 or later for long term
-support.
+support. MediaWiki requires that the mbstring, xml, ctype, json, iconv and
+fileinfo PHP extensions are loaded to work.
 
 MySQL/MariaDB is the recommended DBMS. PostgreSQL or SQLite can also be used,
 but support for them is somewhat less mature. There is experimental support for
