@@ -71,8 +71,6 @@ class RebuildTextIndex extends Maintenance {
 		}
 
 		if ( $this->db->getType() == 'mysql' ) {
-			// The disabled functions cause problems because we use InnoDB for searchindex
-			// and MediaWiki expects MyISAM -- SPF
 			$this->dropMysqlTextIndex();
 			$this->clearSearchIndex();
 			$this->populateSearchIndex();
