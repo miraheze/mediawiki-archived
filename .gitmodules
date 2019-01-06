@@ -1119,3 +1119,4 @@
 	path = extensions/MobileDetect
 	url = https://github.com/wikimedia/mediawiki-extensions-MobileDetect
 	branch = REL1_31
+	ignore = dirty
