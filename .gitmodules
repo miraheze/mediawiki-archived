@@ -1160,3 +1160,7 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-CategorySortHeaders
 	branch = REL1_33
 	ignore = dirty
+[submodule "mediawiki-extensions-MyVariables"]
+	path = mediawiki-extensions-MyVariables
+	url = https://github.com/wikimedia/mediawiki-extensions-MyVariables
+	branch = REL1_33
