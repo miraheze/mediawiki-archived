@@ -1180,3 +1180,7 @@
 	path = extensions/AdvancedSearch
 	url = https://github.com/wikimedia/mediawiki-extensions-AdvancedSearch
 	branch = REL1_33
+[submodule "extensions/CommonsMetadata"]
+	path = extensions/CommonsMetadata
+	url = https://github.com/wikimedia/mediawiki-extensions-CommonsMetadata
+	branch = REL1_33
