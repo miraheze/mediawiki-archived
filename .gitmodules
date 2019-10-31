@@ -400,7 +400,7 @@
 [submodule "extensions/Loops"]
 	path = extensions/Loops
 	url = https://github.com/wikimedia/mediawiki-extensions-Loops.git
-	branch = REL1_33
+	branch = REL1_34
 	ignore = dirty
 [submodule "extensions/NewestPages"]
 	path = extensions/NewestPages
