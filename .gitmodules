@@ -1215,10 +1215,22 @@
 	branch = REL1_34
 	ignore = dirty
 [submodule "extensions/FontAwesome"]
-	path = extensions/FontAwesome
-	url = https://github.com/cmln/mw-font-awesome
-	branch = master
+        path = extensions/FontAwesome
+        url = https://github.com/cmln/mw-font-awesome
+        branch = master
+        ignore = dirty
 [submodule "extensions/Preloader"]
-	path = extensions/Preloader
-	url = https://gitlab.com/troyengel/Preloader
-	branch = master
+        path = extensions/Preloader
+        url = https://gitlab.com/troyengel/Preloader
+        branch = master
+        ignore = dirty
+[submodule "extensions/DonationInterface"]
+        path = extensions/DonationInterface
+        url = https://github.com/wikimedia/mediawiki-extensions-DonationInterface
+        branch = REL1_33
+        ignore = dirty
+[submodule "extensions/ContributionTracking"]
+        path = extensions/ContributionTracking
+        url = https://github.com/wikimedia/mediawiki-extensions-ContributionTracking
+        branch = REL1_33
+        ignore = dirty
