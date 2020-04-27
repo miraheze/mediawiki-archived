@@ -1282,10 +1282,6 @@
 	url = https://github.com/ProfessionalWiki/Bootstrap
 	branch = master
 	ignore = dirty
-[submodule "mediawiki-extensions-Calendar"]
-	path = mediawiki-extensions-Calendar
-	url = https://github.com/wikimedia/mediawiki-extensions-Calendar
-	branch = REL1_34
 [submodule "extensions/Calendar"]
 	path = extensions/Calendar
 	url = https://github.com/wikimedia/mediawiki-extensions-Calendar
