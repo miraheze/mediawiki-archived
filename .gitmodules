@@ -1,3 +1,4 @@
+
 [submodule "extensions/CheckUser"]
 	path = extensions/CheckUser
 	url = https://github.com/wikimedia/mediawiki-extensions-CheckUser.git
