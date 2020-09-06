@@ -1361,3 +1361,4 @@
 	path = extensions/OrphanedTalkPages
 	url = https://github.com/wikimedia/mediawiki-extensions-OrphanedTalkPages.git
 	branch = REL1_34
+	ignore = dirty
