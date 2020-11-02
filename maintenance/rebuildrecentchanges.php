@@ -470,7 +470,7 @@ class RebuildRecentchanges extends Maintenance {
 						$cond,
 						'rc_timestamp > ' . $dbw->addQuotes( $dbw->timestamp( $this->cutoffFrom ) ),
 						'rc_timestamp < ' . $dbw->addQuotes( $dbw->timestamp( $this->cutoffTo ) ),
-						'rc_patrolled' => 0
+						'rc_patrolled' => 2
 					];
 
 					if ( !$wgUseRCPatrol ) {
