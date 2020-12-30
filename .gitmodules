@@ -1397,3 +1397,4 @@
 	path = mediawiki-extensions-EditNotify
 	url = https://github.com/wikimedia/mediawiki-extensions-EditNotify
 	branch = master
+	ignore = dirty
