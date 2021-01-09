@@ -118,6 +118,11 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector
 	branch = master
 	ignore = dirty
+[submodule "extensions/UrlShortener"]
+	path = extensions/UrlShortener
+	url = https://github.com/wikimedia/mediawiki-extensions-UrlShortener
+	branch = master
+	ignore = dirty
 [submodule "extensions/cldr"]
 	path = extensions/cldr
 	url = https://github.com/wikimedia/mediawiki-extensions-cldr
@@ -1408,7 +1413,3 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-Commentbox
 	branch = master
 	ignore = dirty
-[submodule "extensions/UrlShortener"]
-	path = extensions/UrlShortener
-	url = https://github.com/wikimedia/mediawiki-extensions-UrlShortener
-	branch = master
