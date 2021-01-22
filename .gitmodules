@@ -1346,7 +1346,7 @@
 	path = extensions/TimeMachine
 	url = https://github.com/wikimedia/mediawiki-extensions-TimeMachine
 	branch = REL1_35
-	ignpre = dirty
+	ignore = dirty
 [submodule "skins/Nimbus"]
 	path = skins/Nimbus
 	url = https://github.com/wikimedia/mediawiki-skins-Nimbus
