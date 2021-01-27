@@ -1398,3 +1398,4 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-LogoFunctions
 	branch = master
     ignore = dirty
+	
