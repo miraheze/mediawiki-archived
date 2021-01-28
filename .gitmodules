@@ -1396,6 +1396,5 @@
 [submodule "extensions/LogoFunctions"]
 	path = extensions/LogoFunctions
 	url = https://github.com/wikimedia/mediawiki-extensions-LogoFunctions
-	branch = master
-    ignore = dirty
-	
+	branch = REL1_35
+        ignore = dirty
