@@ -1402,3 +1402,4 @@
 	path = extensions/ProtectionIndicator
 	url = https://github.com/wikimedia/mediawiki-extensions-ProtectionIndicator
 	branch = REL1_35
+	ignore = dirty
