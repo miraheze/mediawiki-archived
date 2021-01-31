@@ -1402,3 +1402,4 @@
 	path = extensions/GeoGebra
 	url = https://github.com/wikimedia/mediawiki-extensions-GeoGebra
 	branch = REL1_35
+	ignore = dirty
