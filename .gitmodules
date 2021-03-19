@@ -1422,3 +1422,4 @@
 	path = extensions/MsCatSelect
 	url = https://github.com/wikimedia/mediawiki-extensions-MsCatSelect
 	branch = REL1_35
+	ignore = dirty
