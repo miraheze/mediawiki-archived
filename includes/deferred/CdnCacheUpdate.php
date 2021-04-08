@@ -295,14 +295,14 @@ class CdnCacheUpdate implements DeferrableUpdate, MergeableUpdate {
 		foreach ( $urls as $url ) {
 			// Southparkfan hack start (adds x-device)
 			foreach ( [ 'desktop', 'phone-tablet' ] as $deviceHeader ) {
-                $url = self::expand( $url );
-                $urlInfo = wfParseUrl( $url );
+				$url = self::expand( $url );
+				$urlInfo = wfParseUrl( $url );
 				$urlHost = strlen( $urlInfo['port'] ?? null )
 					? IP::combineHostAndPort( $urlInfo['host'], $urlInfo['port'] )
 					: $urlInfo['host'];
 				$baseReq = [
 					'method' => 'PURGE',		
-                    'url' => $url,
+					'url' => $url,
 					'headers' => [
 						'Host' => $urlHost,
 						'Connection' => 'Keep-Alive',
