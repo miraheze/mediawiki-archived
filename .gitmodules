@@ -1433,3 +1433,7 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-Video
 	branch = master
 	ignore = dirty
+[submodule "extensions/SecureLinkFixer"]
+	path = extensions/SecureLinkFixer
+	url = https://github.com/wikimedia/mediawiki-extensions-securelinkfixer
+	branch = REL1_35
