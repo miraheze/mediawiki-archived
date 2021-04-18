@@ -478,11 +478,6 @@
 	url = https://github.com/labster/HighlightLinksInCategory.git
 	branch = master
 	ignore = dirty
-[submodule "extensions/SimpleTooltip"]
-	path = extensions/SimpleTooltip
-	url = https://github.com/Fannon/SimpleTooltip.git
-	branch = master
-	ignore = dirty
 [submodule "extensions/Comments"]
 	path = extensions/Comments
 	url = https://github.com/wikimedia/mediawiki-extensions-Comments.git
@@ -1437,4 +1432,9 @@
 	path = extensions/SecureLinkFixer
 	url = https://github.com/wikimedia/mediawiki-extensions-securelinkfixer
 	branch = REL1_35
+	ignore = dirty
+[submodule "extensions/SimpleTooltip"]
+	path = extensions/SimpleTooltip
+	url = https://github.com/universal-omega/SimpleTooltip
+	branch = master
 	ignore = dirty
