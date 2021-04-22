@@ -1437,3 +1437,7 @@
 	path = extensions/SimpleTooltip
 	url = https://github.com/Fannon/SimpleTooltip.git
 	branch = master
+[submodule "extensions/PageAssessments"]
+	path = extensions/PageAssessments
+	url = https://github.com/wikimedia/mediawiki-extensions-PageAssessments
+	branch = REL1_35
