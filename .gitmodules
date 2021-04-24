@@ -530,7 +530,7 @@
 	ignore = dirty
 [submodule "extensions/FancyBoxThumbs"]
 	path = extensions/FancyBoxThumbs
-	url = https://github.com/Universal-Omega/FancyBoxThumbs
+	url = https://github.com/gilluminate/FancyBoxThumbs
 	branch = master
 	ignore = dirty
 [submodule "extensions/Maps"]
