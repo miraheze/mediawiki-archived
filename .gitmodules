@@ -1440,5 +1440,5 @@
 	ignore = dirty
 [submodule "extensions/FancyBoxThumbs"]
 	path = extensions/FancyBoxThumbs
-	url = https://github.com/gilluminate/FancyBoxThumbs
+	url = https://github.com/Universal-Omega/FancyBoxThumbs
 	branch = master
