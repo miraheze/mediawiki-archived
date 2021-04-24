@@ -528,11 +528,6 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-CookieWarning.git
 	branch = REL1_35
 	ignore = dirty
-[submodule "extensions/FancyBoxThumbs"]
-	path = extensions/FancyBoxThumbs
-	url = https://github.com/gilluminate/FancyBoxThumbs
-	branch = master
-	ignore = dirty
 [submodule "extensions/Maps"]
 	path = extensions/Maps
 	url = https://github.com/JeroenDeDauw/Maps
@@ -1443,3 +1438,7 @@
 	url = https://github.com/Universal-Omega/SimpleTooltip.git
 	branch = master
 	ignore = dirty
+[submodule "extensions/FancyBoxThumbs"]
+	path = extensions/FancyBoxThumbs
+	url = https://github.com/gilluminate/FancyBoxThumbs
+	branch = master
