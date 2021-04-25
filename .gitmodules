@@ -483,11 +483,6 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-Comments.git
 	branch = master
 	ignore = dirty
-[submodule "extensions/ScratchBlocks"]
-	path = extensions/ScratchBlocks
-	url = https://github.com/InternationalScratchWiki/mw-ScratchBlocks4
-	branch = master
-	ignore = dirty
 [submodule "extensions/PDFEmbed"]
 	path = extensions/PDFEmbed
 	url = https://github.com/miraheze/PDFEmbed.git
@@ -1436,4 +1431,8 @@
 [submodule "extensions/FancyBoxThumbs"]
 	path = extensions/FancyBoxThumbs
 	url = https://github.com/Universal-Omega/FancyBoxThumbs
+	branch = master
+[submodule "extensions/mw-ScratchBlocks4"]
+	path = extensions/mw-ScratchBlocks4
+	url = https://github.com/InternationalScratchWiki/mw-ScratchBlocks4
 	branch = master
