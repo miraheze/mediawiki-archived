@@ -485,7 +485,7 @@
 	ignore = dirty
 [submodule "extensions/ScratchBlocks"]
 	path = extensions/ScratchBlocks
-	url = https://github.com/tjvr/wiki-scratchblocks.git
+	url = https://github.com/InternationalScratchWiki/mw-ScratchBlocks4
 	branch = master
 	ignore = dirty
 [submodule "extensions/PDFEmbed"]
