@@ -303,11 +303,6 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-MsLinks.git
 	branch = REL1_35
 	ignore = dirty
-[submodule "extensions/MsCatSelect"]
-	path = extensions/MsCatSelect
-	url = https://github.com/wikimedia/mediawiki-extensions-MsCatSelect.git
-	branch = master
-	ignore = dirty
 [submodule "extensions/MultiBoilerplate"]
 	path = extensions/MultiBoilerplate
 	url = https://github.com/wikimedia/mediawiki-extensions-MultiBoilerplate
@@ -372,11 +367,6 @@
 	path = extensions/ContactPage
 	url = https://github.com/wikimedia/mediawiki-extensions-ContactPage
 	branch = REL1_35
-	ignore = dirty
-[submodule "extensions/Editcount"]
-	path = extensions/Editcount
-	url = https://github.com/wikimedia/mediawiki-extensions-Editcount.git
-	branch = master
 	ignore = dirty
 [submodule "extensions/PageNotice"]
 	path = extensions/PageNotice
@@ -473,11 +463,6 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-Tabs
 	branch = REL1_35
 	ignore = dirty
-[submodule "extensions/RandomSelection"]
-	path = extensions/RandomSelection
-	url = https://github.com/wikimedia/mediawiki-extensions-RandomSelection.git
-	branch = master
-	ignore = dirty
 [submodule "skins/foreground"]
 	path = skins/foreground
 	url = https://github.com/thingles/foreground.git
@@ -493,19 +478,9 @@
 	url = https://github.com/labster/HighlightLinksInCategory.git
 	branch = master
 	ignore = dirty
-[submodule "extensions/SimpleTooltip"]
-	path = extensions/SimpleTooltip
-	url = https://github.com/Fannon/SimpleTooltip.git
-	branch = master
-	ignore = dirty
 [submodule "extensions/Comments"]
 	path = extensions/Comments
 	url = https://github.com/wikimedia/mediawiki-extensions-Comments.git
-	branch = master
-	ignore = dirty
-[submodule "extensions/ScratchBlocks"]
-	path = extensions/ScratchBlocks
-	url = https://github.com/tjvr/wiki-scratchblocks.git
 	branch = master
 	ignore = dirty
 [submodule "extensions/PDFEmbed"]
@@ -547,11 +522,6 @@
 	path = extensions/CookieWarning
 	url = https://github.com/wikimedia/mediawiki-extensions-CookieWarning.git
 	branch = REL1_35
-	ignore = dirty
-[submodule "extensions/FancyBoxThumbs"]
-	path = extensions/FancyBoxThumbs
-	url = https://github.com/gilluminate/FancyBoxThumbs
-	branch = master
 	ignore = dirty
 [submodule "extensions/Maps"]
 	path = extensions/Maps
@@ -988,11 +958,6 @@
 	url = https://github.com/Hutchy68/Purge.git
 	branch = master
 	ignore = dirty
-[submodule "extensions/3D"]
-	path = extensions/3D
-	url = https://github.com/wikimedia/mediawiki-extensions-3D.git
-	branch = master
-	ignore = dirty
 [submodule "extensions/GettingStarted"]
 	path = extensions/GettingStarted
 	url = https://github.com/wikimedia/mediawiki-extensions-GettingStarted.git
@@ -1006,7 +971,7 @@
 [submodule "extensions/LinkTitles"]
 	path = extensions/LinkTitles
 	url = https://github.com/bovender/LinkTitles
-	branch = develop
+	branch = main
 	ignore = dirty
 [submodule "extensions/TemplateWizard"]
 	path = extensions/TemplateWizard
@@ -1125,7 +1090,7 @@
 	ignore = dirty
 [submodule "extensions/AutoCreatePage"]
 	path = extensions/AutoCreatePage
-	url = https://github.com/mkroetzsch/AutoCreatePage
+	url = https://github.com/Universal-Omega/AutoCreatePage
 	branch = master
 	ignore = dirty
 [submodule "extensions/LastModified"]
@@ -1207,11 +1172,6 @@
 	path = extensions/GlobalUsage
 	url = https://github.com/wikimedia/mediawiki-extensions-GlobalUsage.git
 	branch = REL1_35
-	ignore = dirty
-[submodule "extensions/GoogleDocs4MW"]
-	path = extensions/GoogleDocs4MW
-	url = https://github.com/wikimedia/mediawiki-extensions-GoogleDocs4MW
-	branch = master
 	ignore = dirty
 [submodule "skins/Femiwiki"]
 	path = skins/Femiwiki
@@ -1315,13 +1275,8 @@
 	ignore = dirty
 [submodule "extensions/SimpleBlogPage"]
 	path = extensions/SimpleBlogPage
-	url = https://github.com/1f604/SimpleBlogPage.git
+	url = https://github.com/Universal-Omega/SimpleBlogPage
 	branch = master
-	ignore = dirty
-[submodule "extensions/Video"]
-	path = extensions/Video
-	url = https://github.com/wikimedia/mediawiki-extensions-Video
-	branch = REL1_35
 	ignore = dirty
 [submodule "extensions/CleanChanges"]
 	path = extensions/CleanChanges
@@ -1366,11 +1321,6 @@
 [submodule "extensions/Report"]
 	path = extensions/Report
 	url = https://github.com/Kenny2github/Report
-	branch = master
-	ignore = dirty
-[submodule "extensions/Validator"]
-	path = extensions/Validator
-	url = https://github.com/JeroenDeDauw/Validator
 	branch = master
 	ignore = dirty
 [submodule "extensions/EditNotify"]
@@ -1423,3 +1373,66 @@
 	url = https://github.com/Liquipedia/VariablesLua/
 	branch = master
 	ignore = dirty
+[submodule "extensions/MsCatSelect"]
+	path = extensions/MsCatSelect
+	url = https://github.com/wikimedia/mediawiki-extensions-MsCatSelect
+	branch = REL1_35
+	ignore = dirty
+[submodule "extensions/Editcount"]
+	path = extensions/Editcount
+	url = https://github.com/wikimedia/mediawiki-extensions-Editcount
+	branch = REL1_35
+	ignore = dirty
+[submodule "extensions/RandomSelection"]
+	path = extensions/RandomSelection
+	url = https://github.com/wikimedia/mediawiki-extensions-RandomSelection
+	branch = REL1_35
+	ignore = dirty
+[submodule "extensions/GoogleDocs4MW"]
+	path = extensions/GoogleDocs4MW
+	url = https://github.com/wikimedia/mediawiki-extensions-GoogleDocs4MW
+	branch = REL1_35
+	ignore = dirty
+[submodule "extensions/3D"]
+	path = extensions/3D
+	url = https://github.com/wikimedia/mediawiki-extensions-3D
+	branch = REL1_35
+	ignore = dirty
+[submodule "extensions/PdfBook"]
+	path = extensions/PdfBook
+	url = https://gitlab.com/organicdesign/PdfBook
+	branch = master
+	ignore = dirty
+[submodule "extensions/ShortDescription"]
+	path = extensions/ShortDescription
+	url = https://github.com/StarCitizenTools/mediawiki-extensions-ShortDescription
+	branch = master
+	ignore = dirty
+[submodule "extensions/Video"]
+	path = extensions/Video
+	url = https://github.com/wikimedia/mediawiki-extensions-Video
+	branch = master
+	ignore = dirty
+[submodule "extensions/SecureLinkFixer"]
+	path = extensions/SecureLinkFixer
+	url = https://github.com/wikimedia/mediawiki-extensions-securelinkfixer
+	branch = REL1_35
+	ignore = dirty
+[submodule "extensions/PageAssessments"]
+	path = extensions/PageAssessments
+	url = https://github.com/wikimedia/mediawiki-extensions-PageAssessments
+	branch = REL1_35
+	ignore = dirty
+[submodule "extensions/SimpleTooltip"]
+	path = extensions/SimpleTooltip
+	url = https://github.com/Universal-Omega/SimpleTooltip.git
+	branch = master
+	ignore = dirty
+[submodule "extensions/FancyBoxThumbs"]
+	path = extensions/FancyBoxThumbs
+	url = https://github.com/Universal-Omega/FancyBoxThumbs
+	branch = master
+[submodule "extensions/mw-ScratchBlocks4"]
+	path = extensions/mw-ScratchBlocks4
+	url = https://github.com/InternationalScratchWiki/mw-ScratchBlocks4
+	branch = master
