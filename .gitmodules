@@ -1432,7 +1432,10 @@
 	path = extensions/FancyBoxThumbs
 	url = https://github.com/Universal-Omega/FancyBoxThumbs
 	branch = master
+	ignore = dirty
 [submodule "extensions/mw-ScratchBlocks4"]
 	path = extensions/mw-ScratchBlocks4
 	url = https://github.com/InternationalScratchWiki/mw-ScratchBlocks4
 	branch = master
+	ignore = dirty
+	
