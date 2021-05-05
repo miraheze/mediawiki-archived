@@ -1436,11 +1436,10 @@
 	path = extensions/mw-ScratchBlocks4
 	url = https://github.com/InternationalScratchWiki/mw-ScratchBlocks4
 	branch = master
-[submodule "mediawiki-extensions-CreatedPagesList"]
-	path = mediawiki-extensions-CreatedPagesList
-	url = https://github.com/wikimedia/mediawiki-extensions-CreatedPagesList.git
-	branch = REL1_35
+
 [submodule "extensions/CreatedPagesList"]
 	path = extensions/CreatedPagesList
 	url = https://github.com/wikimedia/mediawiki-extensions-CreatedPagesList.git
 	branch = REL1_35
+	ignore = dirty
+	
