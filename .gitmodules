@@ -1455,3 +1455,10 @@
 	path = extensions/UserPageEditProtection
 	url = https://github.com/wikimedia/mediawiki-extensions-UserPageEditProtection
 	branch = REL1_35
+	ignore = dirty
+[submodule "extensions/GlobalWatchlist"]
+	path = extensions/GlobalWatchlist
+	url = https://github.com/wikimedia/mediawiki-extensions-GlobalWatchlist
+	branch = REL1_35
+	ignore = dirty
+
