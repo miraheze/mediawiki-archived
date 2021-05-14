@@ -1451,3 +1451,7 @@
 	url = https://github.com/Universal-Omega/Monaco
 	branch = master
 	ignore = dirty
+[submodule "extensions/UserPageEditProtection"]
+	path = extensions/UserPageEditProtection
+	url = https://github.com/wikimedia/mediawiki-extensions-UserPageEditProtection
+	branch = REL1_35
