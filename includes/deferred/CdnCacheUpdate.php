@@ -295,7 +295,14 @@ class CdnCacheUpdate implements DeferrableUpdate, MergeableUpdate {
 
 		$reqs = [];
 		foreach ( $urls as $url ) {
-			// Southparkfan hack start (adds x-device)
+			/**
+                         * Southparkfan hack start (adds x-device)
+                         * In Varnish, we store two variants of an article: the mobile layout (via MobileFrontend) and the desktop version. 
+                         * This is done by running vcl_hash over the X-Device header. 
+                         * The X-Device header is set at Varnish level and can be one of ['mobile-tablet', 'desktop']. 
+                         * However, when purging a resource using merely the URL path, it's not possible to purge both the mobile and desktop variants. 
+                         * In order to purge properly, MediaWiki must set each possible X-Device value in the X-Device header, one per PURGE request.
+                         */
 			foreach ( [ 'desktop', 'phone-tablet' ] as $deviceHeader ) {
                 $url = self::expand( $url );
                 $urlInfo = wfParseUrl( $url );
