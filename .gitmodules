@@ -1181,7 +1181,7 @@
 [submodule "skins/Citizen"]
 	path = skins/Citizen
 	url = https://github.com/StarCitizenTools/mediawiki-skins-Citizen.git
-	branch = master
+	branch = main
 	ignore = dirty
 [submodule "extensions/Mermaid"]
 	path = extensions/Mermaid
