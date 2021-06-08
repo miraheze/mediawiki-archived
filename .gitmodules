@@ -1462,4 +1462,4 @@
 	path = extensions/CountDownClock
 	url = https://github.com/wikimedia/mediawiki-extensions-CountDownClock
 	branch = REL1_36
-	ignore=duty
+	ignore=dirty
