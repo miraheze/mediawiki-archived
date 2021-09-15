@@ -1523,3 +1523,8 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-MagicNumberedHeadings
 	branch = REL1_36
 	ignore = dirty
+[submodule "skins/Evelution"]
+	path = skins/Evelution
+	url = https://github.com/AWikia/SkinEvelution
+	branch = main
+	ignore = dirty
