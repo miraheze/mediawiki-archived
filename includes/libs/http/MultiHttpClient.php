@@ -462,7 +462,7 @@ class MultiHttpClient implements LoggerAwareInterface {
 
 		// Configure when to multiplex multiple requests onto single TCP handles
 		$pipelining = $opts['usePipelining'] ?? $this->usePipelining;
-		curl_multi_setopt( $this->cmh, CURLMOPT_PIPELINING, $pipelining ? 3 : 0 );
+		curl_multi_setopt( $this->cmh, CURLMOPT_PIPELINING, $pipelining ? 2 : 0 );
 
 		return $this->cmh;
 	}
