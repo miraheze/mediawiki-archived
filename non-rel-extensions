@@ -75,6 +75,7 @@ extensions/PageForms
 extensions/PageSchemas
 extensions/MintyDocs
 extensions/EmbedSpotify
+extensions/DynamicPageList3
 
 # main
 extensions/LinkTitles
