@@ -71,12 +71,13 @@ extensions/WikibaseLocalMedia
 extensions/WebP
 skins/chameleon
 extensions/Bootstrap
-extensions/EmbedVideo
+extensions/EmbedVideos
 extensions/PageForms
 extensions/PageSchemas
 extensions/MintyDocs
 extensions/EmbedSpotify
 extensions/DiscordNotifications
+extensions/DynamicPageList3
 
 # main
 extensions/LinkTitles
