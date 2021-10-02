@@ -71,7 +71,7 @@ extensions/WikibaseLocalMedia
 extensions/WebP
 skins/chameleon
 extensions/Bootstrap
-extensions/EmbedVideos
+extensions/EmbedVideo
 extensions/PageForms
 extensions/PageSchemas
 extensions/MintyDocs
