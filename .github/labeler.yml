@@ -1,0 +1,6 @@
+build:
+- any: ['.github/*', 'extensions/**/tests/*', 'skins/**/tests/*', 'extensions/**/composer.json', 'extensions/**/package.json', 'extensions/**/package-lock.json', 'extensions/**/composer.lock']
+i18n-only:
+- any: ['extensions/**/i18n/*.json', 'skins/**/i18n/*.json']
+reviewied-codechange:
+- any: ['extensions/**/*.php', 'skins/**/*.php']
