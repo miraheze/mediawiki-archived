@@ -76,6 +76,7 @@ extensions/MintyDocs
 extensions/EmbedSpotify
 extensions/DynamicPageList3
 extensions/RatePage
+skins/Flatbox
 
 # main
 extensions/LinkTitles
