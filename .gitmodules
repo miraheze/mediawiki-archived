@@ -1538,3 +1538,8 @@
 	url = https://github.com/wikimedia/mediawiki-skins-Mirage
 	branch = REL1_36
 	ignore = dirty
+[submodule "extensions/MixedNamespaceSearchSuggestions"]
+	path = extensions/MixedNamespaceSearchSuggestions
+	url = https://github.com/wikimedia/mediawiki-extensions-MixedNamespaceSearchSuggestions
+	branch = REL1_36
+	ignore = dirty
