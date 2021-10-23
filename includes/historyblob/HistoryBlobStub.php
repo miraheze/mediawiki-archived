@@ -34,19 +34,11 @@ class HistoryBlobStub {
 	 */
 	protected static $blobCache = [];
 
-	/**
-	 * Universal Omega temporary hack
-	 * Fixes checkStorage.php by making these properties public
-	 * Bug: T8184
-	 *
-	 * Upstream: https://gerrit.wikimedia.org/r/731819
-	 */
-
 	/** @var int */
-	public $mOldId;
+	protected $mOldId;
 
 	/** @var string */
-	public $mHash;
+	protected $mHash;
 
 	/** @var string */
 	protected $mRef;
