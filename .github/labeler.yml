@@ -15,7 +15,7 @@ labels:
   - 'extensions/**/i18n/*.json'
   - 'skins/**/i18n/*.json'
 
-- label: 'reviewied-codechange'
+- label: 'reviewed-codechange'
   files:
   - 'extensions/**/*.php'
   - 'skins/**/*.php'
