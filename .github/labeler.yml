@@ -1,0 +1,21 @@
+version: 1
+labels:
+- label: 'build'
+  files:
+  - '.github/*'
+  - 'extensions/**/tests/*'
+  - 'skins/**/tests/*'
+  - 'extensions/**/composer.json'
+  - 'extensions/**/package.json'
+  - 'extensions/**/package-lock.json'
+  - 'extensions/**/composer.lock'
+
+- label: 'i18n-only'
+  files:
+  - 'extensions/**/i18n/*.json'
+  - 'skins/**/i18n/*.json'
+
+- label: 'reviewied-codechange'
+  files:
+  - 'extensions/**/*.php'
+  - 'skins/**/*.php'
