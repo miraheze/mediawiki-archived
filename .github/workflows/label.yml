@@ -24,15 +24,15 @@ jobs:
         labels=()
         for file in $list; do
           if [ $(echo $file | cut -d'/' -f1 ) != b ]; then
-            if [[ $file =~ $codechangeFiles ]] && [[ ! $file =~ $buildFiles ]]; then
+            if [[ $file =~ $codechangeFiles ]] && [[ ! $file =~ $buildFiles ]] && [[ ! $labels[*] =~ "codechange" ]]; then
               labels+=("codechange")
             fi
 
-            if [[ $file =~ $buildFiles ]]; then
+            if [[ $file =~ $buildFiles ]] && [[ ! $labels[*] =~ "build" ]]; then
               labels+=("build")
             fi
 
-            if [[ $file =~ $i18nFiles ]]; then
+            if [[ $file =~ $i18nFiles ]] && [[ ! $labels[*] =~ "i18n" ]]; then
               labels+=("i18n")
             fi
           fi
