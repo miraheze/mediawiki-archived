@@ -32,7 +32,7 @@ jobs:
               -d '{"labels":["codechange"]}'
             fi
 
-            if [[ $file =~ $buildFiles ]] && [[ ! $file =~ $codechangeFiles ]]; then
+            if [[ $file =~ $buildFiles ]]; then
               curl \
               -X POST \
               -H "Accept: application/vnd.github.v3+json" \
