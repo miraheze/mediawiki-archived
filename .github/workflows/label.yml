@@ -38,7 +38,7 @@ jobs:
               -H "Accept: application/vnd.github.v3+json" \
               -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
               https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/$pull_number/labels \
-              -d '{"labels":["i18n-only"]}'
+              -d '{"labels":["i18n"]}'
             fi
 
             if [[ $file =~ $codechangeFiles ]]; then
@@ -47,7 +47,7 @@ jobs:
               -H "Accept: application/vnd.github.v3+json" \
               -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
               https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/$pull_number/labels \
-              -d '{"labels":["reviewed-codechange"]}'
+              -d '{"labels":["codechange"]}'
             fi
           fi
         done
