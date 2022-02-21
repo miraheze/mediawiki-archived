@@ -10,7 +10,7 @@ jobs:
       with:
         ref: 'REL1_37'
 
-    - if: github.actor == 'dependabot'
+    - if: ${{ github.actor == 'dependabot[bot]' }}
       run: |
         submodule=$(echo $(echo ${GITHUB_HEAD_REF} | cut -d'/' -f4,5 ) | cut -d'-' -f1 )
         git submodule update --init $submodule
