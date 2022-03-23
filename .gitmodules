@@ -1375,7 +1375,7 @@
 	ignore = dirty
 [submodule "extensions/SecureLinkFixer"]
 	path = extensions/SecureLinkFixer
-	url = https://github.com/wikimedia/mediawiki-extensions-securelinkfixer
+	url = https://github.com/wikimedia/mediawiki-extensions-SecureLinkFixer
 	branch = REL1_37
 	ignore = dirty
 [submodule "extensions/PageAssessments"]
