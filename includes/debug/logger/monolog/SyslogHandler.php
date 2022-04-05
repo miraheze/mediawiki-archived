@@ -98,7 +98,10 @@ class SyslogHandler extends SyslogUdpHandler {
 			return "<{$pri}>{$timestamp} {$this->hostname} {$this->appname}: ";
 		}
 
-		// Do not include {$this->hostname} in the log rule, unnecessary
+		// -- Southparkfan 2020-10-18
+		// Syslog-ng refuses to parse logs with the default timestamp format
+		$timestamp = date( 'Y-m-d\\TH:i:s' );
+
 		return "<{$pri}>{$timestamp} {$this->appname}: ";
 	}
 }
