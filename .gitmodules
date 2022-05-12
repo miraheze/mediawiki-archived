@@ -1588,3 +1588,8 @@
 	url = https://gitlab.com/nonsensopedia/extensions/namespacepreload
 	branch = master
 	ignore = dirty
+[submodule "extensions/SemanticScribunto"]
+	path = extensions/SemanticScribunto
+	url = https://github.com/SemanticMediaWiki/SemanticScribunto
+	branch = master
+	ignore = dirty
