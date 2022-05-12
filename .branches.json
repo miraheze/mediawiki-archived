@@ -83,7 +83,8 @@
     "extensions/TemplateStylesExtender",
     "extensions/SemanticMediaWiki",
     "extensions/QuickInstantCommons",
-    "extensions/StandardDialogs"
+    "extensions/StandardDialogs",
+    "extensions/SemanticScribunto"
   ],
   "stable": [
     "extensions/SnapProjectEmbed",
