@@ -294,7 +294,9 @@ class EmailNotification {
 				continue;
 			}
 			$user = User::newFromName( $name );
-			$this->compose( $user, self::ALL_CHANGES, $messageCache );
+			if ( $user instanceof User ) {
+				$this->compose( $user, self::ALL_CHANGES, $messageCache );
+			}
 		}
 
 		$this->sendMails();
