@@ -27,4 +27,15 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_FILTER_AUTHOR: "dependabot[bot]"
           MERGE_METHOD: "squash"
+          MERGE_LABELS: "automerge"
+  automerge-build:
+    runs-on: ubuntu-latest
+    steps:
+      - id: automerge-build
+        name: automerge-build
+        uses: "pascalgn/automerge-action@v0.15.3"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_FILTER_AUTHOR: "dependabot[bot]"
+          MERGE_METHOD: "squash"
           MERGE_LABELS: "!i18n,!codechange,!schema-change"
