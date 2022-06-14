@@ -14,4 +14,4 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_FILTER_AUTHOR: "dependabot[bot]"
           MERGE_METHOD: "squash"
-          MERGE_LABELS: "!l10n,!codechange,!schema-change"
+          MERGE_LABELS: "!i18n,!codechange,!schema-change"
