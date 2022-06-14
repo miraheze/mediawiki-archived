@@ -29,6 +29,8 @@ jobs:
           MERGE_FILTER_AUTHOR: "dependabot[bot]"
           MERGE_METHOD: "squash"
           MERGE_LABELS: "automerge"
+          MERGE_REMOVE_LABELS: "automerge,ready-to-deploy,applied-locally,needs-testing"
+          MERGE_DELETE_BRANCH: true
   automerge-build:
     runs-on: ubuntu-latest
     steps:
@@ -40,3 +42,5 @@ jobs:
           MERGE_FILTER_AUTHOR: "dependabot[bot]"
           MERGE_METHOD: "squash"
           MERGE_LABELS: "!i18n,!codechange,!schema-change"
+          MERGE_REMOVE_LABELS: "automerge,ready-to-deploy,applied-locally,needs-testing"
+          MERGE_DELETE_BRANCH: true
