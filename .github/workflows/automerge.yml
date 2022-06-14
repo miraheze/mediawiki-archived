@@ -3,6 +3,7 @@ on:
   pull_request_target:
     types:
       - labeled
+      - unlabeled
       - synchronize
       - opened
       - edited
