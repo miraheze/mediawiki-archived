@@ -1587,6 +1587,13 @@ class LocalFile extends File {
 			if ( strpos( $file, $reference ) !== false
 				|| strpos( $file, "-thumbnail" ) !== false // "short" thumb name
 			) {
+				// Miraheze specific hack for swift
+				$split = explode('/', $file);
+				$replace = $split[0] . '/' . $split[1];
+				if ( strpos($file, $split[0] . '/' . $split[1] ) ) {
+					$file = str_replace($replace . '/', '', $file);
+				}
+
 				$purgeList[] = "{$dir}/{$file}";
 			}
 		}
