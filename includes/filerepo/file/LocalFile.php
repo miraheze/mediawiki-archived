@@ -1410,7 +1410,12 @@ class LocalFile extends File {
 			$iterator = $backend->getFileList( [ 'dir' => $dir ] );
 			if ( $iterator !== null ) {
 				foreach ( $iterator as $file ) {
-					$files[] = $file;
+					// Miraheze hack to fix support for swift.
+					// In MediaWiki it presumes that you will have a wiki per container.
+					// But we don't want that. This is safe as if it doesn't contain
+					// '/' then it'll return a single file name (which is what it should be doing).
+					$file = explode('/', $file);
+					$files[] = end($split);
 				}
 			}
 		} catch ( FileBackendError $e ) {
@@ -1587,13 +1592,6 @@ class LocalFile extends File {
 			if ( strpos( $file, $reference ) !== false
 				|| strpos( $file, "-thumbnail" ) !== false // "short" thumb name
 			) {
-				// Miraheze specific hack for swift
-				$split = explode('/', $file);
-				$replace = $split[0] . '/' . $split[1];
-				if ( strpos($file, $split[0] . '/' . $split[1] ) ) {
-					$file = str_replace($replace . '/', '', $file);
-				}
-
 				$purgeList[] = "{$dir}/{$file}";
 			}
 		}
