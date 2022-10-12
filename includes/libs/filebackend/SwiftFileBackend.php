@@ -993,13 +993,17 @@ class SwiftFileBackend extends FileBackendStore {
 			return $dirs; // nothing more
 		}
 
+		list( , $shortCont, ) = FileBackend::splitStoragePath( $params['dir'] );
+		$contRoot = $this->containerSwiftRoot( $shortCont, $fullCont );
+
 		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 
-		$prefix = ( $dir == '' ) ? null : "{$dir}/";
+		list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $params['dir'] );
+		$prefix = ( !is_null( $srcRel ) ) ? "{$srcRel}/" : null;
 		// Non-recursive: only list dirs right under $dir
 		if ( !empty( $params['topOnly'] ) ) {
-			$status = $this->objectListing( $fullCont, 'names', $limit, $after, $prefix, '/' );
+			$status = $this->objectListing( $contRoot, 'names', $limit, $after, $prefix, '/' );
 			if ( !$status->isOK() ) {
 				throw new FileBackendError( "Iterator page I/O error." );
 			}
@@ -1018,7 +1022,7 @@ class SwiftFileBackend extends FileBackendStore {
 
 			// Get directory from last item of prior page
 			$lastDir = $getParentDir( $after ); // must be first page
-			$status = $this->objectListing( $fullCont, 'names', $limit, $after, $prefix );
+			$status = $this->objectListing( $contRoot, 'names', $limit, $after, $prefix );
 
 			if ( !$status->isOK() ) {
 				throw new FileBackendError( "Iterator page I/O error." );
@@ -1030,7 +1034,7 @@ class SwiftFileBackend extends FileBackendStore {
 			foreach ( $objects as $object ) { // files
 				$objectDir = $getParentDir( $object ); // directory of object
 
-				if ( $objectDir !== false && $objectDir !== $dir ) {
+				if ( $objectDir !== false && $objectDir !== $srcRel ) {
 					// Swift stores paths in UTF-8, using binary sorting.
 					// See function "create_container_table" in common/db.py.
 					// If a directory is not "greater" than the last one,
@@ -1075,6 +1079,7 @@ class SwiftFileBackend extends FileBackendStore {
 		if ( $after === INF ) {
 			return $files; // nothing more
 		}
+
 		list( , $shortCont, ) = FileBackend::splitStoragePath( $params['dir'] );
 		$contRoot = $this->containerSwiftRoot( $shortCont, $fullCont );
 
