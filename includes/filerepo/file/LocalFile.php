@@ -1414,7 +1414,7 @@ class LocalFile extends File {
 					// custom container paths.
 					// This is safe for FSFile.
 					$file = explode( '/', $file );
-					$files[] = end( $split );
+					$files[] = end( $file );
 				}
 			}
 		} catch ( FileBackendError $e ) {
