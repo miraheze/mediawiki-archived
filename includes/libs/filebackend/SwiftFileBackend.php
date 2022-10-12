@@ -81,6 +81,9 @@ class SwiftFileBackend extends FileBackendStore {
 	/** @var bool Whether the server is an Ceph RGW */
 	protected $isRGW = false;
 
+	/** @var object Map of container names to root paths and optionaly directory for custom container paths */
+	protected $containerPaths;
+
 	/**
 	 * @see FileBackendStore::__construct()
 	 * @param array $config Params include:
@@ -159,6 +162,11 @@ class SwiftFileBackend extends FileBackendStore {
 		$this->writeUsers = $config['writeUsers'] ?? [];
 		$this->secureReadUsers = $config['secureReadUsers'] ?? [];
 		$this->secureWriteUsers = $config['secureWriteUsers'] ?? [];
+
+		$this->containerPaths = [];
+		foreach ( ( $config['containerPaths'] ?? [] ) as $container => $path ) {
+			$this->containerPaths[$container] = rtrim( $path, '/' ); // remove trailing slash
+		}
 	}
 
 	public function setLogger( LoggerInterface $logger ) {
@@ -182,6 +190,48 @@ class SwiftFileBackend extends FileBackendStore {
 		}
 
 		return $relStoragePath;
+	}
+
+	/**
+	 * Given the short (unresolved) and full (resolved) name of
+	 * a container, return the file system path of the container.
+	 *
+	 * @param string $shortCont
+	 * @param string $fullCont
+	 * @return string|null
+	 */
+	protected function containerSwiftRoot( $shortCont, $fullCont ) {
+		if ( isset( $this->containerPaths[$shortCont] ) ) {
+			return $this->containerPaths[$shortCont]['container'];
+		}
+		return $fullCont;
+	}
+
+	/**
+	 * Get the absolute file system path for a storage path
+	 *
+	 * @param string $storagePath
+	 * @return string|null
+	 */
+	protected function resolveToSwiftPath( $storagePath ) {
+		list( $fullCont, $relPath ) = $this->resolveStoragePathReal( $storagePath );
+		if ( $relPath === null ) {
+			return null; // invalid
+		}
+		list( , $shortCont, ) = FileBackend::splitStoragePath( $storagePath );
+		$root = $this->containerFSRoot( $shortCont, $fullCont );
+		$path = null;
+		if ( $relPath != '' ) {
+			// Under swift we cannot do <container>/<directory>,
+			// we have to split it so it's <container> then <directory>.
+			if ( isset( $this->containerPaths[$shortCont]['directory'] ) ) {
+				$path .= $this->containerPaths[$shortCont]['directory'] . "/{$relPath}";
+			} else {
+				$path .= $relPath;
+			}
+		}
+
+		return [ $root, $path];
 	}
 
 	public function isPathUsableInternal( $storagePath ) {
