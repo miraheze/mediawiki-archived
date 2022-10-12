@@ -219,7 +219,7 @@ class SwiftFileBackend extends FileBackendStore {
 			return null; // invalid
 		}
 		list( , $shortCont, ) = FileBackend::splitStoragePath( $storagePath );
-		$root = $this->containerFSRoot( $shortCont, $fullCont );
+		$root = $this->containerSwiftRoot( $shortCont, $fullCont );
 		$path = null;
 		if ( $relPath != '' ) {
 			// Under swift we cannot do <container>/<directory>,
@@ -227,7 +227,7 @@ class SwiftFileBackend extends FileBackendStore {
 			if ( isset( $this->containerPaths[$shortCont]['directory'] ) ) {
 				$path = $this->containerPaths[$shortCont]['directory'] . "/{$relPath}";
 			} else {
-				$path . $relPath;
+				$path = $relPath;
 			}
 		}
 
