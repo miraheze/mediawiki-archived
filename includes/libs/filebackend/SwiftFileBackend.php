@@ -225,9 +225,9 @@ class SwiftFileBackend extends FileBackendStore {
 			// Under swift we cannot do <container>/<directory>,
 			// we have to split it so it's <container> then <directory>.
 			if ( isset( $this->containerPaths[$shortCont]['directory'] ) ) {
-				$path .= $this->containerPaths[$shortCont]['directory'] . "/{$relPath}";
+				$path = $this->containerPaths[$shortCont]['directory'] . "/{$relPath}";
 			} else {
-				$path .= $relPath;
+				$path . $relPath;
 			}
 		}
 
