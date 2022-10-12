@@ -1413,8 +1413,8 @@ class LocalFile extends File {
 					// This is for swift which can now support
 					// custom container paths.
 					// This is safe for FSFile.
-					$file = explode('/', $file);
- 					$files[] = end($split);
+					$file = explode( '/', $file );
+					$files[] = end( $split );
 				}
 			}
 		} catch ( FileBackendError $e ) {
