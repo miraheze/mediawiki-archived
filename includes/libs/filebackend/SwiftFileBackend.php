@@ -1082,7 +1082,7 @@ class SwiftFileBackend extends FileBackendStore {
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 
 		list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $params['dir'] );
-		$prefix = ( !is_null( $srcRel ) ) ? "{$srcRel}/" : $contRoot;
+		$prefix = ( !is_null( $srcRel ) ) ? "{$srcRel}/" : null;
 		// $objects will contain a list of unfiltered names or stdClass items
 		// Non-recursive: only list files right under $dir
 		if ( !empty( $params['topOnly'] ) ) {
