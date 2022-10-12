@@ -121,6 +121,8 @@ class SwiftFileBackend extends FileBackendStore {
 	 *                           seconds.
 	 *   - reqTimeout          : The HTTP request timeout to use when communicating with Swift, in
 	 *                           seconds.
+	 *   - containerPaths      : Map of container names to custom file system directories.
+	 *                           This should only be used for backwards-compatibility.
 	 */
 	public function __construct( array $config ) {
 		parent::__construct( $config );
@@ -164,8 +166,8 @@ class SwiftFileBackend extends FileBackendStore {
 		$this->secureWriteUsers = $config['secureWriteUsers'] ?? [];
 
 		$this->containerPaths = [];
-		foreach ( ( $config['containerPaths'] ?? [] ) as $container => $path ) {
-			$this->containerPaths[$container] = rtrim( $path, '/' ); // remove trailing slash
+		foreach ( ( $config['containerPaths'] ?? [] ) as $container => $options ) {
+			$this->containerPaths[$container] = $options;
 		}
 	}
 
@@ -211,12 +213,12 @@ class SwiftFileBackend extends FileBackendStore {
 	 * Get the absolute file system path for a storage path
 	 *
 	 * @param string $storagePath
-	 * @return string|null
+	 * @return array|null
 	 */
 	protected function resolveToSwiftPath( $storagePath ) {
-		list( $fullCont, $relPath ) = $this->resolveStoragePathReal( $storagePath );
+		list( $fullCont, $relPath ) = $this->resolveToSwiftPath( $storagePath );
 		if ( $relPath === null ) {
-			return null; // invalid
+			return [ null, null ]; // invalid
 		}
 		list( , $shortCont, ) = FileBackend::splitStoragePath( $storagePath );
 		$root = $this->containerSwiftRoot( $shortCont, $fullCont );
@@ -231,11 +233,11 @@ class SwiftFileBackend extends FileBackendStore {
 			}
 		}
 
-		return [ $root, $path];
+		return [ $root, $path ];
 	}
 
 	public function isPathUsableInternal( $storagePath ) {
-		list( $container, $rel ) = $this->resolveStoragePathReal( $storagePath );
+		list( $container, $rel ) = $this->resolveToSwiftPath( $storagePath );
 		if ( $rel === null ) {
 			return false; // invalid
 		}
@@ -323,7 +325,7 @@ class SwiftFileBackend extends FileBackendStore {
 	protected function doCreateInternal( array $params ) {
 		$status = $this->newStatus();
 
-		list( $dstCont, $dstRel ) = $this->resolveStoragePathReal( $params['dst'] );
+		list( $dstCont, $dstRel ) = $this->resolveToSwiftPath( $params['dst'] );
 		if ( $dstRel === null ) {
 			$status->fatal( 'backend-fail-invalidpath', $params['dst'] );
 
@@ -378,7 +380,7 @@ class SwiftFileBackend extends FileBackendStore {
 	protected function doStoreInternal( array $params ) {
 		$status = $this->newStatus();
 
-		list( $dstCont, $dstRel ) = $this->resolveStoragePathReal( $params['dst'] );
+		list( $dstCont, $dstRel ) = $this->resolveToSwiftPath( $params['dst'] );
 		if ( $dstRel === null ) {
 			$status->fatal( 'backend-fail-invalidpath', $params['dst'] );
 
@@ -467,14 +469,14 @@ class SwiftFileBackend extends FileBackendStore {
 	protected function doCopyInternal( array $params ) {
 		$status = $this->newStatus();
 
-		list( $srcCont, $srcRel ) = $this->resolveStoragePathReal( $params['src'] );
+		list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $params['src'] );
 		if ( $srcRel === null ) {
 			$status->fatal( 'backend-fail-invalidpath', $params['src'] );
 
 			return $status;
 		}
 
-		list( $dstCont, $dstRel ) = $this->resolveStoragePathReal( $params['dst'] );
+		list( $dstCont, $dstRel ) = $this->resolveToSwiftPath( $params['dst'] );
 		if ( $dstRel === null ) {
 			$status->fatal( 'backend-fail-invalidpath', $params['dst'] );
 
@@ -522,14 +524,14 @@ class SwiftFileBackend extends FileBackendStore {
 	protected function doMoveInternal( array $params ) {
 		$status = $this->newStatus();
 
-		list( $srcCont, $srcRel ) = $this->resolveStoragePathReal( $params['src'] );
+		list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $params['src'] );
 		if ( $srcRel === null ) {
 			$status->fatal( 'backend-fail-invalidpath', $params['src'] );
 
 			return $status;
 		}
 
-		list( $dstCont, $dstRel ) = $this->resolveStoragePathReal( $params['dst'] );
+		list( $dstCont, $dstRel ) = $this->resolveToSwiftPath( $params['dst'] );
 		if ( $dstRel === null ) {
 			$status->fatal( 'backend-fail-invalidpath', $params['dst'] );
 
@@ -589,7 +591,7 @@ class SwiftFileBackend extends FileBackendStore {
 	protected function doDeleteInternal( array $params ) {
 		$status = $this->newStatus();
 
-		list( $srcCont, $srcRel ) = $this->resolveStoragePathReal( $params['src'] );
+		list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $params['src'] );
 		if ( $srcRel === null ) {
 			$status->fatal( 'backend-fail-invalidpath', $params['src'] );
 
@@ -631,7 +633,7 @@ class SwiftFileBackend extends FileBackendStore {
 	protected function doDescribeInternal( array $params ) {
 		$status = $this->newStatus();
 
-		list( $srcCont, $srcRel ) = $this->resolveStoragePathReal( $params['src'] );
+		list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $params['src'] );
 		if ( $srcRel === null ) {
 			$status->fatal( 'backend-fail-invalidpath', $params['src'] );
 
@@ -861,7 +863,7 @@ class SwiftFileBackend extends FileBackendStore {
 					$objHdrs['x-object-meta-sha1base36'] = $hash;
 					// Merge new SHA1 header into the old ones
 					$postHeaders['x-object-meta-sha1base36'] = $hash;
-					list( $srcCont, $srcRel ) = $this->resolveStoragePathReal( $path );
+					list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $path );
 					list( $rcode ) = $this->http->run( [
 						'method' => 'POST',
 						'url' => $this->storageUrl( $auth, $srcCont, $srcRel ),
@@ -893,7 +895,7 @@ class SwiftFileBackend extends FileBackendStore {
 		// Initial dummy values to preserve path order
 		$contents = array_fill_keys( $params['srcs'], self::$RES_ERROR );
 		foreach ( $params['srcs'] as $path ) { // each path in this concurrent batch
-			list( $srcCont, $srcRel ) = $this->resolveStoragePathReal( $path );
+			list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $path );
 			if ( $srcRel === null || !$auth ) {
 				continue; // invalid storage path or auth error
 			}
@@ -1190,7 +1192,7 @@ class SwiftFileBackend extends FileBackendStore {
 
 		$flags = !empty( $params['headless'] ) ? HTTPFileStreamer::STREAM_HEADLESS : 0;
 
-		list( $srcCont, $srcRel ) = $this->resolveStoragePathReal( $params['src'] );
+		list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $params['src'] );
 		if ( $srcRel === null ) {
 			HTTPFileStreamer::send404Message( $params['src'], $flags );
 			$status->fatal( 'backend-fail-invalidpath', $params['src'] );
@@ -1262,7 +1264,7 @@ class SwiftFileBackend extends FileBackendStore {
 		// Initial dummy values to preserve path order
 		$tmpFiles = array_fill_keys( $params['srcs'], self::$RES_ERROR );
 		foreach ( $params['srcs'] as $path ) { // each path in this concurrent batch
-			list( $srcCont, $srcRel ) = $this->resolveStoragePathReal( $path );
+			list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $path );
 			if ( $srcRel === null || !$auth ) {
 				continue; // invalid storage path or auth error
 			}
@@ -1329,7 +1331,7 @@ class SwiftFileBackend extends FileBackendStore {
 		if ( $this->swiftTempUrlKey != '' ||
 			( $this->rgwS3AccessKey != '' && $this->rgwS3SecretKey != '' )
 		) {
-			list( $srcCont, $srcRel ) = $this->resolveStoragePathReal( $params['src'] );
+			list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $params['src'] );
 			if ( $srcRel === null ) {
 				return self::TEMPURL_ERROR; // invalid path
 			}
@@ -1723,7 +1725,7 @@ class SwiftFileBackend extends FileBackendStore {
 		$reqs = []; // (path => op)
 		// (a) Check the containers of the paths...
 		foreach ( $params['srcs'] as $path ) {
-			list( $srcCont, $srcRel ) = $this->resolveStoragePathReal( $path );
+			list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $path );
 			if ( $srcRel === null || !$auth ) {
 				$stats[$path] = self::$RES_ERROR;
 				continue; // invalid storage path or auth error
