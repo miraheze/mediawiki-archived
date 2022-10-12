@@ -1075,25 +1075,28 @@ class SwiftFileBackend extends FileBackendStore {
 		if ( $after === INF ) {
 			return $files; // nothing more
 		}
+		list( , $shortCont, ) = FileBackend::splitStoragePath( $params['dir'] );
+		$contRoot = $this->containerSwiftRoot( $shortCont, $fullCont );
 
 		/** @noinspection PhpUnusedLocalVariableInspection */
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 
-		$prefix = ( $dir == '' ) ? null : "{$dir}/";
+		list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $params['dir'] );
+		$prefix = ( !is_null( $srcRel ) ) ? "{$srcRel}/" : $contRoot;
 		// $objects will contain a list of unfiltered names or stdClass items
 		// Non-recursive: only list files right under $dir
 		if ( !empty( $params['topOnly'] ) ) {
 			if ( !empty( $params['adviseStat'] ) ) {
-				$status = $this->objectListing( $fullCont, 'info', $limit, $after, $prefix, '/' );
+				$status = $this->objectListing( $contRoot, 'info', $limit, $after, $prefix, '/' );
 			} else {
-				$status = $this->objectListing( $fullCont, 'names', $limit, $after, $prefix, '/' );
+				$status = $this->objectListing( $contRoot, 'names', $limit, $after, $prefix, '/' );
 			}
 		} else {
 			// Recursive: list all files under $dir and its subdirs
 			if ( !empty( $params['adviseStat'] ) ) {
-				$status = $this->objectListing( $fullCont, 'info', $limit, $after, $prefix );
+				$status = $this->objectListing( $contRoot, 'info', $limit, $after, $prefix );
 			} else {
-				$status = $this->objectListing( $fullCont, 'names', $limit, $after, $prefix );
+				$status = $this->objectListing( $contRoot, 'names', $limit, $after, $prefix );
 			}
 		}
 
