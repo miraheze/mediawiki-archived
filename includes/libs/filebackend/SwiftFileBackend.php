@@ -216,7 +216,7 @@ class SwiftFileBackend extends FileBackendStore {
 	 * @return array|null
 	 */
 	protected function resolveToSwiftPath( $storagePath ) {
-		list( $fullCont, $relPath ) = $this->resolveToSwiftPath( $storagePath );
+		list( $fullCont, $relPath ) = $this->resolveStoragePathReal( $storagePath );
 		if ( $relPath === null ) {
 			return [ null, null ]; // invalid
 		}
