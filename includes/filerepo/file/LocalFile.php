@@ -1410,11 +1410,7 @@ class LocalFile extends File {
 			$iterator = $backend->getFileList( [ 'dir' => $dir ] );
 			if ( $iterator !== null ) {
 				foreach ( $iterator as $file ) {
-					// This is for swift which can now support
-					// custom container paths.
-					// This is safe for FSFile.
-					$file = explode( '/', $file );
-					$files[] = end( $file );
+					$files[] = $file;
 				}
 			}
 		} catch ( FileBackendError $e ) {
