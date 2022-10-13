@@ -967,7 +967,8 @@ class SwiftFileBackend extends FileBackendStore {
 	 * @return SwiftFileBackendDirList
 	 */
 	public function getDirectoryListInternal( $fullCont, $dir, array $params ) {
-		return new SwiftFileBackendDirList( $this, $fullCont, $dir, $params );
+		list( , $srcRel ) = $this->resolveToSwiftPath( $params['dir'] );
+		return new SwiftFileBackendDirList( $this, $fullCont, $srcRel, $params );
 	}
 
 	/**
