@@ -81,7 +81,7 @@ class SwiftFileBackend extends FileBackendStore {
 	/** @var bool Whether the server is an Ceph RGW */
 	protected $isRGW = false;
 
-	/** @var object Map of container names to root paths and optionaly directory for custom container paths */
+	/** @var array|array[] */
 	protected $containerPaths;
 
 	/**
@@ -1000,7 +1000,7 @@ class SwiftFileBackend extends FileBackendStore {
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 
 		list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $params['dir'] );
-		$prefix = ( !is_null( $srcRel ) ) ? "{$srcRel}/" : null;
+		$prefix = ( $srcRel !== null ) ? "{$srcRel}/" : null;
 		// Non-recursive: only list dirs right under $dir
 		if ( !empty( $params['topOnly'] ) ) {
 			$status = $this->objectListing( $contRoot, 'names', $limit, $after, $prefix, '/' );
@@ -1087,7 +1087,7 @@ class SwiftFileBackend extends FileBackendStore {
 		$ps = $this->scopedProfileSection( __METHOD__ . "-{$this->name}" );
 
 		list( $srcCont, $srcRel ) = $this->resolveToSwiftPath( $params['dir'] );
-		$prefix = ( !is_null( $srcRel ) ) ? "{$srcRel}/" : null;
+		$prefix = ( $srcRel !== null ) ? "{$srcRel}/" : null;
 		// $objects will contain a list of unfiltered names or stdClass items
 		// Non-recursive: only list files right under $dir
 		if ( !empty( $params['topOnly'] ) ) {
