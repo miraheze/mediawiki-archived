@@ -165,6 +165,7 @@ class SwiftFileBackend extends FileBackendStore {
 		$this->secureReadUsers = $config['secureReadUsers'] ?? [];
 		$this->secureWriteUsers = $config['secureWriteUsers'] ?? [];
 
+		// Miraheze hack - upstream at https://gerrit.wikimedia.org/r/c/mediawiki/core/+/841877
 		$this->containerPaths = [];
 		foreach ( ( $config['containerPaths'] ?? [] ) as $container => $options ) {
 			$this->containerPaths[$container] = $options;
@@ -198,6 +199,8 @@ class SwiftFileBackend extends FileBackendStore {
 	 * Given the short (unresolved) and full (resolved) name of
 	 * a container, return the file system path of the container.
 	 *
+	 * Miraheze hack - upstream at https://gerrit.wikimedia.org/r/c/mediawiki/core/+/841877
+	 *
 	 * @param string $shortCont
 	 * @param string $fullCont
 	 * @return string|null
@@ -211,6 +214,8 @@ class SwiftFileBackend extends FileBackendStore {
 
 	/**
 	 * Get the absolute file system path for a storage path
+	 *
+	 * Miraheze hack - upstream at https://gerrit.wikimedia.org/r/c/mediawiki/core/+/841877
 	 *
 	 * @param string $storagePath
 	 * @return array|null
