@@ -1593,8 +1593,8 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-FlexDiagrams
 	branch = master
 	ignore = dirty
-[submodule "skins/skinsPivot"]
-	path = skins/skinsPivot
+[submodule "skins/Pivot"]
+	path = skins/Pivot
 	url = git@github.com:wikimedia/mediawiki-skins-Pivot.git
 	branch = REL1_39
 	ignore = dirty
