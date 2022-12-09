@@ -1595,6 +1595,6 @@
 	ignore = dirty
 [submodule "skins/Pivot"]
 	path = skins/Pivot
-	url = https://github.com:wikimedia/mediawiki-skins-Pivot.git
+	url = https://github.com/wikimedia/mediawiki-skins-Pivot
 	branch = REL1_39
 	ignore = dirty
