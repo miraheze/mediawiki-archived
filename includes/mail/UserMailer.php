@@ -361,7 +361,6 @@ class UserMailer {
 			return Status::newGood();
 		} elseif ( $ret !== true ) {
 			// the hook implementation will return a string to pass an error message
-			// @phan-suppress-next-line PhanTypeVoidArgument
 			return Status::newFatal( 'php-mail-error', $ret );
 		}
 
