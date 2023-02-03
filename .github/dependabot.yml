@@ -22,7 +22,7 @@ updates:
       - dependency-name: "extensions/Math"
       - dependency-name: "extensions/MultimediaViewer"
       - dependency-name: "extensions/Nuke"
-      - dependency-name: "extensions/OAUTHAuth"
+      - dependency-name: "extensions/OATHAuth"
       - dependency-name: "extensions/PageImages"
       - dependency-name: "extensions/ParserFunctions"
       - dependency-name: "extensions/PdfHandler"
