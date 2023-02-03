@@ -425,8 +425,6 @@ class Names {
 		'shy' => 'tacawit', # Shawiya (Multiple scripts - defaults to Latin)
 		'shy-latn' => 'tacawit', # Shawiya (Latin script) - T194047
 		'si' => 'සිංහල', # Sinhalese
-		'sjd' => 'кӣллт са̄мь кӣлл', # Kildin Sami
-		'sje' => 'bidumsámegiella', # Pite Sami
 		'simple' => 'Simple English', # Simple English
 		'sjd' => 'кӣллт са̄мь кӣлл', # Kildin Sami
 		'sje' => 'bidumsámegiella', # Pite Sami
