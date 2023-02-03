@@ -552,7 +552,7 @@ class PostgresUpdater extends DatabaseUpdater {
 			[ 'renameIndex', 'revision', 'revision_unique', 'rev_page_id' ],
 			[ 'renameIndex', 'revision', 'rev_timestamp_idx', 'rev_timestamp' ],
 			[ 'addPgIndex', 'revision', 'rev_page_timestamp', '(rev_page,rev_timestamp)' ],
-			[ 'changeNullableField', 'mwuser', 'user_touched', 'NOT NULL', true ],
+			[ 'changeNullableField', 'user', 'user_touched', 'NOT NULL', true ],
 
 			// 1.37
 			[ 'changeNullableField', 'user', 'user_token', 'NOT NULL', true ],
