@@ -1318,11 +1318,6 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-3D
 	branch = REL1_39
 	ignore = dirty
-[submodule "extensions/PdfBook"]
-	path = extensions/PdfBook
-	url = https://gitlab.com/organicdesign/PdfBook
-	branch = master
-	ignore = dirty
 [submodule "extensions/ShortDescription"]
 	path = extensions/ShortDescription
 	url = https://github.com/StarCitizenTools/mediawiki-extensions-ShortDescription
