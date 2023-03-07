@@ -1603,3 +1603,7 @@
 	url = https://github.com/wikimedia/mediawiki-skins-Splash
 	branch = REL1_39
 	ignore = dirty
+[submodule "skins/splash"]
+	path = skins/splash
+	url = https://github.com/wikimedia/mediawiki-skins-Splash
+	branch = REL1_39
