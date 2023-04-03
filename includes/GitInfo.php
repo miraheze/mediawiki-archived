@@ -420,7 +420,7 @@ class GitInfo {
 
 			$cacheDir = dirname( $this->cacheFile );
 			if ( !( file_exists( $cacheDir ) || wfMkdirParents( $cacheDir, null, __METHOD__ ) )
-				|| !is_writable( $cacheDir )
+				|| !is_writable( $cacheDir ) )
 			{
 				throw new RuntimeException( "Unable to create GitInfo cache \"{$cacheDir}\"" );
 			}
