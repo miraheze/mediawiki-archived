@@ -1612,3 +1612,4 @@
 	path = extensions/WebAuthn
 	url = https://github.com/wikimedia/mediawiki-extensions-WebAuthn
 	branch = REL1_40
+	ignore = dirty
