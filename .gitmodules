@@ -1617,3 +1617,4 @@
 	path = extensions/OOJSPlus
 	url = https://github.com/wikimedia/mediawiki-extensions-OOJSPlus
 	branch = REL1_39
+	ignore = dirty
