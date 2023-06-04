@@ -1613,8 +1613,8 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-WebAuthn
 	branch = REL1_40
 	ignore = dirty
-[submodule "extensions/extensions/OOJSPlus"]
-	path = extensions/extensions/OOJSPlus
+[submodule "extensions/OOJSPlus"]
+	path = extensions/OOJSPlus
 	url = https://github.com/wikimedia/mediawiki-extensions-OOJSPlus
 	branch = REL1_40
 	ignore = dirty
