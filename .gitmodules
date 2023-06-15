@@ -743,11 +743,6 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-MagicNoCache
 	branch = REL1_39
 	ignore = dirty
-[submodule "extensions/WikiForum"]
-	path = extensions/WikiForum
-	url = https://github.com/wikimedia/mediawiki-extensions-WikiForum
-	branch = master
-	ignore = dirty
 [submodule "extensions/Cargo"]
 	path = extensions/Cargo
 	url = https://github.com/wikimedia/mediawiki-extensions-Cargo
