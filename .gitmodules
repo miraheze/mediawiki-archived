@@ -1618,3 +1618,6 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-OOJSPlus
 	branch = REL1_39
 	ignore = dirty
+[submodule "extensions/RealMe"]
+	path = extensions/RealMe
+	url = https://github.com/wikimedia/mediawiki-extensions-RealMe
