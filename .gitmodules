@@ -1621,3 +1621,5 @@
 [submodule "extensions/RealMe"]
 	path = extensions/RealMe
 	url = https://github.com/wikimedia/mediawiki-extensions-RealMe
+	branch = REL1_39
+	ignore = dirty
