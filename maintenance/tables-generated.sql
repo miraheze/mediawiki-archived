@@ -874,11 +874,12 @@ CREATE TABLE /*_*/revision (
 
 
 CREATE TABLE /*_*/searchindex (
-  si_page INT UNSIGNED NOT NULL PRIMARY KEY,
+  si_page INT UNSIGNED NOT NULL,
   si_title TINYTEXT NOT NULL,
   si_text MEDIUMTEXT NOT NULL,
   FULLTEXT INDEX si_title (si_title),
-  FULLTEXT INDEX si_text (si_text)
+  FULLTEXT INDEX si_text (si_text),
+	PRIMARY KEY(si_page)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 
