@@ -3658,7 +3658,7 @@
 				]
 			}
 		],
-		"pk": [ "si_page" ]
+		"pk": [ "si_page" ],
 		"table_options": [
 			"ENGINE=InnoDB",
 			"DEFAULT CHARSET=utf8mb4"
