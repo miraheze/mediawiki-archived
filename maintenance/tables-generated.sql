@@ -874,13 +874,12 @@ CREATE TABLE /*_*/revision (
 
 
 CREATE TABLE /*_*/searchindex (
-  si_page INT UNSIGNED NOT NULL,
-  si_title VARCHAR(255) DEFAULT '' NOT NULL,
+  si_page int unsigned NOT NULL PRIMARY KEY,
+  si_title tinytext NOT NULL,
   si_text MEDIUMTEXT NOT NULL,
-  UNIQUE INDEX si_page (si_page),
   FULLTEXT INDEX si_title (si_title),
   FULLTEXT INDEX si_text (si_text)
-) ENGINE = MyISAM DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 
 CREATE TABLE /*_*/linktarget (
