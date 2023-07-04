@@ -874,8 +874,8 @@ CREATE TABLE /*_*/revision (
 
 
 CREATE TABLE /*_*/searchindex (
-  si_page int unsigned NOT NULL PRIMARY KEY,
-  si_title tinytext NOT NULL,
+  si_page INT UNSIGNED NOT NULL PRIMARY KEY,
+  si_title TINYTEXT NOT NULL,
   si_text MEDIUMTEXT NOT NULL,
   FULLTEXT INDEX si_title (si_title),
   FULLTEXT INDEX si_text (si_text)
