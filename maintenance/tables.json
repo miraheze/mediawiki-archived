@@ -3630,8 +3630,8 @@
 			{
 				"name": "si_title",
 				"comment": "Munged version of title",
-				"type": "string",
-				"options": { "length": 255, "notnull": true, "default": "" }
+				"type": "text",
+				"options": { "length": 255, "notnull": true }
 			},
 			{
 				"name": "si_text",
@@ -3641,11 +3641,6 @@
 			}
 		],
 		"indexes": [
-			{
-				"name": "si_page",
-				"columns": [ "si_page" ],
-				"unique": true
-			},
 			{
 				"name": "si_title",
 				"columns": [ "si_title" ],
@@ -3663,10 +3658,10 @@
 				]
 			}
 		],
-		"pk": [],
+		"pk": [ "si_page" ]
 		"table_options": [
-			"ENGINE=MyISAM",
-			"DEFAULT CHARSET=utf8"
+			"ENGINE=InnoDB",
+			"DEFAULT CHARSET=utf8mb4"
 		]
 	},
 	{
