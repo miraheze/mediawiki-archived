@@ -915,7 +915,7 @@
 	ignore = dirty
 [submodule "extensions/Purge"]
 	path = extensions/Purge
-	url = https://github.com/Hutchy68/Purge
+	url = https://github.com/AlPha5130/mediawiki-extensions-Purge
 	branch = master
 	ignore = dirty
 [submodule "extensions/RottenLinks"]
