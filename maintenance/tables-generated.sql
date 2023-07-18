@@ -879,7 +879,7 @@ CREATE TABLE /*_*/searchindex (
   si_text MEDIUMTEXT NOT NULL,
   FULLTEXT INDEX si_title (si_title),
   FULLTEXT INDEX si_text (si_text),
-	PRIMARY KEY(si_page)
+  PRIMARY KEY(si_page)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 
