@@ -1081,7 +1081,7 @@
 [submodule "extensions/DataTransfer"]
 	path = extensions/DataTransfer
 	url = https://github.com/wikimedia/mediawiki-extensions-DataTransfer
-	branch = REL1_40
+	branch = master
 	ignore = dirty
 [submodule "extensions/Calendar"]
 	path = extensions/Calendar
