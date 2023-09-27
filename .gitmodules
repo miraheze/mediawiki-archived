@@ -1618,3 +1618,8 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-OOJSPlus
 	branch = REL1_40
 	ignore = dirty
+[submodule "extensions/MessageCachePerformance"]
+	path = extensions/MessageCachePerformance
+	url = https://github.com/miraheze/MessageCachePerformance
+	branch = main
+	ignore = dirty
