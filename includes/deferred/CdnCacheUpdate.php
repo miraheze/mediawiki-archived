@@ -286,7 +286,7 @@ class CdnCacheUpdate implements DeferrableUpdate, MergeableUpdate {
 
 		$reqs = [];
 		foreach ( $urls as $url ) {
-/**
+			/**
 			 * Southparkfan hack start (adds x-device)
 			 * In Varnish, we store two variants of an article: the mobile layout (via MobileFrontend) and the desktop version. 
 			 * This is done by running vcl_hash over the X-Device header. 
