@@ -8,8 +8,6 @@ use Generator;
 use JavaScriptContent;
 use Language;
 use LanguageCode;
-use MediaWiki\MainConfigNames;
-use MediaWiki\MainConfigSchema;
 use MediaWiki\Page\PageIdentity;
 use MediaWiki\Parser\ParserCacheFactory;
 use MediaWiki\Parser\Parsoid\Config\PageConfigFactory;
@@ -26,16 +24,16 @@ use MediaWiki\Rest\RequestData;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseFactory;
 use MediaWiki\Revision\MutableRevisionRecord;
+use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Tests\Rest\RestTestTrait;
+use MediaWiki\Title\TitleValue;
 use MediaWiki\User\UserIdentityValue;
 use MediaWikiIntegrationTestCase;
 use NullStatsdDataFactory;
 use ParserCache;
 use PHPUnit\Framework\MockObject\MockObject;
-use TitleValue;
-use Wikimedia\Bcp47Code\Bcp47Code;
 use Wikimedia\Message\ITextFormatter;
 use Wikimedia\Message\MessageValue;
 use Wikimedia\Parsoid\Config\DataAccess;
@@ -56,11 +54,12 @@ use WikitextContent;
 class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 	use RestTestTrait;
 
+	protected $tablesUsed = [ 'page' ];
+
 	/**
 	 * Default request attributes, see ParsoidHandler::getRequestAttributes()
 	 */
 	private const DEFAULT_ATTRIBS = [
-		'titleMissing' => false,
 		'pageName' => '',
 		'oldid' => null,
 		'body_only' => null,
@@ -107,11 +106,9 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newParsoidHandler( $methodOverrides = [], $serviceOverrides = [] ): ParsoidHandler {
-		$parsoidSettings = [];
 		$method = 'POST';
 
-		$parsoidSettings += MainConfigSchema::getDefaultValue( MainConfigNames::ParsoidSettings );
-
+		$revisionLookup = $this->getServiceContainer()->getRevisionLookup();
 		$dataAccess = $serviceOverrides['ParsoidDataAccess'] ?? $this->getServiceContainer()->getParsoidDataAccess();
 		$siteConfig = $serviceOverrides['ParsoidSiteConfig'] ?? $this->getServiceContainer()->getParsoidSiteConfig();
 		$pageConfigFactory = $serviceOverrides['ParsoidPageConfigFactory']
@@ -119,7 +116,7 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$handler = new class (
 			$this,
-			$parsoidSettings,
+			$revisionLookup,
 			$siteConfig,
 			$pageConfigFactory,
 			$dataAccess,
@@ -130,14 +127,14 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 
 			public function __construct(
 				$testCase,
-				array $parsoidSettings,
+				RevisionLookup $revisionLookup,
 				SiteConfig $siteConfig,
 				PageConfigFactory $pageConfigFactory,
 				DataAccess $dataAccess,
 				array $overrides
 			) {
 				parent::__construct(
-					$parsoidSettings,
+					$revisionLookup,
 					$siteConfig,
 					$pageConfigFactory,
 					$dataAccess
@@ -169,7 +166,7 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 			protected function getHtmlInputTransformHelper(
 				array $attribs,
 				string $html,
-				$page
+				PageIdentity $page
 			): HtmlInputTransformHelper {
 				if ( isset( $this->overrides['getHtmlInputHelper'] ) ) {
 					return $this->overrides['getHtmlInputHelper']();
@@ -200,26 +197,6 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 				}
 
 				return parent::acceptable( $attribs );
-			}
-
-			public function createPageConfig(
-				string $title,
-				?int $revision,
-				?string $wikitextOverride = null,
-				?Bcp47Code $pagelanguageOverride = null
-			): PageConfig {
-				if ( isset( $this->overrides['createPageConfig'] ) ) {
-					return $this->overrides['createPageConfig'](
-						$title, $revision, $wikitextOverride, $pagelanguageOverride
-					);
-				}
-
-				return parent::createPageConfig(
-					$title,
-					$revision,
-					$wikitextOverride,
-					$pagelanguageOverride
-				);
 			}
 
 			public function tryToCreatePageConfig(
@@ -1416,7 +1393,7 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function provideDom2wikitextException() {
+	public static function provideDom2wikitextException() {
 		yield 'ClientError' => [
 			new ClientError( 'test' ),
 			new HttpException( 'test', 400 )
@@ -1496,7 +1473,6 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 			'attribs' => [ 'oldid' => 1, 'pageName' => 'Test', 'pagelanguage' => $en ],
 			'wikitext' => null,
 			'html2WtMode' => false,
-			'expectedWikitext' => 'UTContent',
 			'expectedPageLanguage' => $en,
 		];
 
@@ -1504,7 +1480,6 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 			'attribs' => [ 'oldid' => 1, 'pageName' => 'Test', 'pagelanguage' => $en ],
 			'wikitext' => "=test=",
 			'html2WtMode' => false,
-			'expected wikitext' => '=test=',
 			'expected page language' => $en,
 		];
 
@@ -1512,7 +1487,6 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 			'attribs' => [ 'oldid' => 1, 'pageName' => 'Test', 'pagelanguage' => null ],
 			'wikitext' => null,
 			'html2WtMode' => true,
-			'expected wikitext' => 'UTContent',
 			'expected page language' => $en,
 		];
 
@@ -1520,7 +1494,6 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 			'attribs' => [ 'oldid' => 1, 'pageName' => 'Test', 'pagelanguage' => $ar ],
 			'wikitext' => "=header=",
 			'html2WtMode' => true,
-			'expected wikitext' => '=header=',
 			'expected page language' => $ar,
 		];
 
@@ -1528,7 +1501,6 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 			'attribs' => [ 'oldid' => 1, 'pageName' => '', 'pagelanguage' => $de ],
 			'wikitext' => null,
 			'html2WtMode' => false,
-			'expected wikitext' => 'UTContent',
 			'expected page language' => $de,
 		];
 
@@ -1536,7 +1508,6 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 			'attribs' => [ 'oldid' => 1, 'pageName' => '', 'pagelanguage' => null ],
 			'wikitext' => null,
 			false,
-			'expected wikitext' => 'UTContent',
 			'expected page language' => $en,
 		];
 	}
@@ -1548,11 +1519,15 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testTryToCreatePageConfig(
 		array $attribs,
-		$wikitext,
+		?string $wikitext,
 		$html2WtMode,
-		$expectedWikitext,
 		Language $expectedLanguage
 	) {
+		// Create a page, if needed, to test with oldid
+		$origContent = 'Test content for ' . __METHOD__;
+		$page = $this->getNonexistingTestPage();
+		$this->editPage( $page, $origContent );
+		$expectedWikitext = $wikitext ?? $origContent;
 		$pageConfig = $this->newParsoidHandler()->tryToCreatePageConfig( $attribs, $wikitext, $html2WtMode );
 
 		$this->assertSame(
@@ -1599,13 +1574,13 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->newParsoidHandler()->tryToCreatePageConfig( $attribs, $wikitext, $html2WtMode );
 	}
 
-	public function provideRoundTripNoSelser() {
+	public static function provideRoundTripNoSelser() {
 		yield 'space in heading' => [
 			"==foo==\nsomething\n"
 		];
 	}
 
-	public function provideRoundTripNeedingSelser() {
+	public static function provideRoundTripNeedingSelser() {
 		yield 'uppercase tags' => [
 			"<DIV>foo</div>"
 		];
@@ -1701,6 +1676,11 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$pageConfig = $handler->tryToCreatePageConfig( $attribs, $wikitext );
 		$response = $handler->wt2html( $pageConfig, $attribs, $wikitext );
+
+		// NOTE: Make sure there is no ETag if no stashing was requested (T331629)
+		$etag = $response->getHeaderLine( 'etag' );
+		$this->assertSame( '', $etag, 'ETag' );
+
 		$body = $response->getBody();
 		$body->rewind();
 		$pbJson = $body->getContents();
@@ -1857,7 +1837,7 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function provideWt2html() {
+	public static function provideWt2html() {
 		$profileVersion = '2.6.0';
 		$htmlProfileUri = 'https://www.mediawiki.org/wiki/Specs/HTML/' . $profileVersion;
 		$pbProfileUri = 'https://www.mediawiki.org/wiki/Specs/pagebundle/' . $profileVersion;
@@ -1927,6 +1907,9 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 			'oldid' => 1, // will be replaced by a real revision id
 			'opts' => [ 'format' => ParsoidFormatHelper::FORMAT_PAGEBUNDLE ],
 			'envOptions' => [
+				// Ensure this is ucs2 so we have a ucs2 offsetType test since
+				// Parsoid's rt-testing script is node.js based and hence needs
+				// ucs2 offsets to function correctly!
 				'offsetType' => 'ucs2', // make sure this is looped through to data-parsoid attribute
 			]
 		];
@@ -2028,7 +2011,7 @@ class ParsoidHandlerTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @param array $attribs
 	 * @param string|null $text
-	 * @param string[] $expectedData
+	 * @param array $expectedData
 	 * @param string[] $unexpectedHtml
 	 * @param string[] $expectedHeaders
 	 */

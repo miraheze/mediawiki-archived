@@ -22,13 +22,36 @@
  * @ingroup Upload
  */
 
+namespace MediaWiki\Specials;
+
+use BitmapHandler;
+use ChangeTags;
+use ErrorPageError;
+use HTMLForm;
+use ImageGalleryBase;
+use LocalFile;
+use LocalRepo;
+use LogEventsList;
+use MediaWiki\Config\Config;
+use MediaWiki\HookContainer\HookRunner;
 use MediaWiki\Html\Html;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Request\WebRequest;
+use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Title\NamespaceInfo;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use MediaWiki\User\UserOptionsLookup;
 use MediaWiki\Watchlist\WatchlistManager;
+use PermissionsError;
+use RepoGroup;
+use UnexpectedValueException;
+use UploadBase;
+use UploadForm;
+use UploadFromStash;
+use UserBlockedError;
 
 /**
  * Form for handling uploads and special page.
@@ -38,17 +61,10 @@ use MediaWiki\Watchlist\WatchlistManager;
  */
 class SpecialUpload extends SpecialPage {
 
-	/** @var LocalRepo */
-	private $localRepo;
-
-	/** @var UserOptionsLookup */
-	private $userOptionsLookup;
-
-	/** @var NamespaceInfo */
-	private $nsInfo;
-
-	/** @var WatchlistManager */
-	private $watchlistManager;
+	private LocalRepo $localRepo;
+	private UserOptionsLookup $userOptionsLookup;
+	private NamespaceInfo $nsInfo;
+	private WatchlistManager $watchlistManager;
 
 	/**
 	 * @param RepoGroup|null $repoGroup
@@ -640,7 +656,8 @@ class SpecialUpload extends SpecialPage {
 		}
 
 		// allow extensions to modify the content
-		Hooks::runner()->onUploadForm_getInitialPageText( $pageText, $msg, $config );
+		( new HookRunner( MediaWikiServices::getInstance()->getHookContainer() ) )
+			->onUploadForm_getInitialPageText( $pageText, $msg, $config );
 
 		return $pageText;
 	}
@@ -864,3 +881,9 @@ class SpecialUpload extends SpecialPage {
 		return $bitmapHandler->autoRotateEnabled();
 	}
 }
+
+/**
+ * Retain the old class name for backwards compatibility.
+ * @deprecated since 1.41
+ */
+class_alias( SpecialUpload::class, 'SpecialUpload' );

@@ -32,11 +32,13 @@ module.exports = function ( grunt ) {
 					basePath;
 				try {
 					basePath = 'extensions';
+					// eslint-disable-next-line security/detect-non-literal-fs-filename
 					settingsJson = fs.readFileSync(
 						path.resolve( __dirname + '/' + basePath + '/' + qunitComponent + '/extension.json' )
 					);
 				} catch ( e ) {
 					basePath = 'skins';
+					// eslint-disable-next-line security/detect-non-literal-fs-filename
 					settingsJson = fs.readFileSync(
 						path.resolve( __dirname + '/' + basePath + '/' + qunitComponent + '/skin.json' )
 					);
@@ -97,7 +99,7 @@ module.exports = function ( grunt ) {
 		},
 		watch: {
 			files: [
-				'.{stylelintrc,eslintrc.json}',
+				'.{stylelintrc,eslintrc}.json',
 				'**/*',
 				'!{extensions,node_modules,skins,vendor}/**'
 			],
@@ -110,7 +112,7 @@ module.exports = function ( grunt ) {
 						base: 'ChromeHeadless',
 						// Chrome requires --no-sandbox in Docker/CI.
 						// WMF CI images expose CHROMIUM_FLAGS which sets that.
-						flags: ( process.env.CHROMIUM_FLAGS || '' ).split( ' ' )
+						flags: process.env.CHROMIUM_FLAGS ? ( process.env.CHROMIUM_FLAGS || '' ).split( ' ' ) : []
 					}
 				},
 				proxies: karmaProxy,

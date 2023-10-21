@@ -18,8 +18,8 @@ use MediaWiki\Rest\Handler\RevisionHTMLHandler;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Utils\MWTimestamp;
 use MediaWikiIntegrationTestCase;
-use MWTimestamp;
 use NullStatsdDataFactory;
 use Psr\Http\Message\StreamInterface;
 use Psr\Log\NullLogger;
@@ -156,10 +156,8 @@ class RevisionHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testExecuteWithHtml() {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Parsoid' );
 		[ $page, $revisions ] = $this->getExistingPageWithRevisions( __METHOD__ );
-		$this->assertTrue(
-			$this->editPage( $page, self::WIKITEXT )->isGood(),
+		$this->assertStatusGood( $this->editPage( $page, self::WIKITEXT ),
 			'Edited a page'
 		);
 
@@ -179,10 +177,8 @@ class RevisionHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testExecuteHtmlOnly() {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Parsoid' );
 		[ $page, $revisions ] = $this->getExistingPageWithRevisions( __METHOD__ );
-		$this->assertTrue(
-			$this->editPage( $page, self::WIKITEXT )->isGood(),
+		$this->assertStatusGood( $this->editPage( $page, self::WIKITEXT ),
 			'Edited a page'
 		);
 
@@ -202,8 +198,6 @@ class RevisionHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testEtagLastModified() {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Parsoid' );
-
 		$time = time();
 		MWTimestamp::setFakeTime( $time );
 
@@ -257,7 +251,7 @@ class RevisionHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 			$response->getHeaderLine( 'Last-Modified' ) );
 	}
 
-	public function provideHandlesParsoidError() {
+	public static function provideHandlesParsoidError() {
 		yield 'ClientError' => [
 			new ClientError( 'TEST_TEST' ),
 			new LocalizedHttpException(
@@ -287,8 +281,6 @@ class RevisionHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 		Exception $parsoidException,
 		Exception $expectedException
 	) {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Parsoid' );
-
 		[ $page, $revisions ] = $this->getExistingPageWithRevisions( __METHOD__ );
 		$request = new RequestData(
 			[ 'pathParams' => [ 'id' => $revisions['first']->getId() ] ]
@@ -443,8 +435,7 @@ class RevisionHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 		string $expectedContentLanguage,
 		string $expectedVaryHeader
 	) {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Parsoid' );
-
+		$this->overrideConfigValue( MainConfigNames::UsePigLatinVariant, true );
 		$page = $this->getNonexistingTestPage( __METHOD__ );
 		$this->editPage( $page, '<p>test language conversion</p>', 'Edited a page' );
 		$revRecord = $page->getRevisionRecord();
@@ -479,7 +470,7 @@ class RevisionHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertStringContainsString( $acceptLanguage, $response->getHeaderLine( 'ETag' ) );
 	}
 
-	public function provideExecuteWithVariant() {
+	public static function provideExecuteWithVariant() {
 		yield 'with_html request should contain accept language but not content language' => [
 			'with_html',
 			static function ( StreamInterface $response ) {

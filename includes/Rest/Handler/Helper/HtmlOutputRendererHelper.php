@@ -22,7 +22,6 @@ namespace MediaWiki\Rest\Handler\Helper;
 use Content;
 use HttpError;
 use IBufferingStatsdDataFactory;
-use Language;
 use LanguageCode;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use LogicException;
@@ -44,11 +43,12 @@ use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionAccessException;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Status\Status;
+use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use MWUnknownContentModelException;
 use ParserOptions;
 use ParserOutput;
-use Status;
-use User;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Bcp47Code\Bcp47Code;
 use Wikimedia\Bcp47Code\Bcp47CodeValue;
@@ -87,7 +87,7 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 	/** @var RevisionRecord|int|null */
 	private $revisionOrId = null;
 
-	/** @var Language|null */
+	/** @var Bcp47Code|null */
 	private $pageLanguage = null;
 
 	/** @var ?string One of the flavors from OUTPUT_FLAVORS */
@@ -178,6 +178,10 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 	 * Flavors may influence parser options, parsoid options, and DOM transformations.
 	 * They will be reflected by the ETag returned by getETag().
 	 *
+	 * @note This method should not be called if stashing mode is enabled.
+	 * @see setStashingEnabled
+	 * @see getFlavor()
+	 *
 	 * @param string $flavor
 	 *
 	 * @return void
@@ -187,7 +191,21 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 			throw new LogicException( 'Invalid flavor supplied' );
 		}
 
+		if ( $this->stash ) {
+			// XXX: throw?
+			$flavor = 'stash';
+		}
+
 		$this->flavor = $flavor;
+	}
+
+	/**
+	 * Returns the flavor of HTML that will be generated.
+	 * @see setFlavor()
+	 * @return string
+	 */
+	public function getFlavor(): string {
+		return $this->flavor;
 	}
 
 	/**
@@ -210,9 +228,15 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 
 		// Only set the option if the value isn't the default!
 		if ( $outputContentVersion !== Parsoid::defaultHTMLVersion() ) {
-			// See Parsoid::wikitext2html
-			$this->parsoidOptions['outputContentVersion'] = $outputContentVersion;
-			$this->isCacheable = false;
+			throw new HttpException( "Unsupported profile version: $version", 406 );
+
+			// TODO: (T347426) At some later point, we may reintroduce support for
+			// non-default content versions as part of work on the content
+			// negotiatiation protocol.
+			//
+			// // See Parsoid::wikitext2html
+			// $this->parsoidOptions['outputContentVersion'] = $outputContentVersion;
+			// $this->isCacheable = false;
 		}
 	}
 
@@ -332,6 +356,10 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 	}
 
 	/**
+	 * This is equivalent of 'pageLanguageOverride' in PageConfigFactory
+	 * For example, when clients call the REST API with the 'content-language'
+	 * header to effect language variant conversion.
+	 *
 	 * @param Bcp47Code|string $pageLanguage the page language, as a Bcp47Code
 	 *   or a BCP-47 string.
 	 */
@@ -358,6 +386,8 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 		array $parameters,
 		User $user,
 		$revision = null,
+		// FIXME: This is not set anywhere except in tests?
+		// Should we remove this?
 		?Bcp47Code $pageLanguage = null
 	) {
 		$this->page = $page;
@@ -516,6 +546,19 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 		];
 	}
 
+	private function getDefaultPageLanguage( ParserOptions $options ): Bcp47Code {
+		// NOTE: keep in sync with Parser::getTargetLanguage!
+
+		// XXX: Inject a TitleFactory just for this?! We need a better way to determine the page language...
+		$title = Title::castFromPageIdentity( $this->page );
+
+		if ( $options->getInterfaceMessage() ) {
+			return $options->getUserLangObj();
+		}
+
+		return $title->getPageLanguage();
+	}
+
 	/**
 	 * @return ParserOutput
 	 */
@@ -524,8 +567,13 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 			$parserOptions = ParserOptions::newFromAnon();
 			$parserOptions->setRenderReason( __METHOD__ );
 
-			if ( $this->pageLanguage ) {
-				$parserOptions->setTargetLanguage( $this->pageLanguage );
+			$defaultLanguage = $this->getDefaultPageLanguage( $parserOptions );
+
+			if ( $this->pageLanguage
+				&& $this->pageLanguage->toBcp47Code() !== $defaultLanguage->toBcp47Code()
+			) {
+				$languageObj = $this->languageFactory->getLanguage( $this->pageLanguage );
+				$parserOptions->setTargetLanguage( $languageObj );
 			}
 
 			try {
@@ -700,13 +748,33 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 			// We are not really interested in lint data for old revisions, but
 			// we don't have a good way to tell at this point.
 			$flags = $this->parsoidOutputAccessOptions | ParsoidOutputAccess::OPT_LOG_LINT_DATA;
-
 			$status = $this->parsoidOutputAccess->getParserOutput(
 				$this->page,
 				$parserOptions,
 				$this->revisionOrId,
 				$flags
 			);
+
+			// T333606: Force a reparse if the version coming from cache is not the default
+			if ( $status->isOK() ) {
+				$parserOutput = $status->getValue();
+				$pageBundleData = $parserOutput->getExtensionData(
+					PageBundleParserOutputConverter::PARSOID_PAGE_BUNDLE_KEY
+				);
+				$cachedVersion = $pageBundleData['version'] ?? null;
+				if (
+					$cachedVersion !== null && // T325137: BadContentModel, no sense in reparsing
+					$cachedVersion !== Parsoid::defaultHTMLVersion()
+				) {
+					$parserOptions->setRenderReason( 'not-parsoid-default' );
+					$status = $this->parsoidOutputAccess->getParserOutput(
+						$this->page,
+						$parserOptions,
+						$this->revisionOrId,
+						$flags | ParsoidOutputAccess::OPT_FORCE_PARSE
+					);
+				}
+			}
 		} else {
 			$status = $this->parsoidOutputAccess->parse(
 				$this->page,
@@ -720,6 +788,3 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 	}
 
 }
-
-/** @deprecated since 1.40, remove in 1.41 */
-class_alias( HtmlOutputRendererHelper::class, "MediaWiki\\Rest\\Handler\\HtmlOutputRendererHelper" );

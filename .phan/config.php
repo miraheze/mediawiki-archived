@@ -28,7 +28,6 @@ $cfg['minimum_target_php_version'] = '7.4.3';
 $cfg['file_list'] = array_merge(
 	$cfg['file_list'],
 	class_exists( Socket::class ) ? [] : [ '.phan/stubs/Socket.php' ],
-	class_exists( ReturnTypeWillChange::class ) ? [] : [ '.phan/stubs/ReturnTypeWillChange.php' ],
 	class_exists( AllowDynamicProperties::class ) ? [] : [ '.phan/stubs/AllowDynamicProperties.php' ],
 	class_exists( WeakMap::class ) ? [] : [ '.phan/stubs/WeakMap.php' ],
 	[
@@ -68,7 +67,7 @@ if ( PHP_VERSION_ID >= 80000 ) {
 }
 
 $cfg['autoload_internal_extension_signatures'] = [
-	'excimer' => '.phan/internal_stubs/excimer.php',
+	'excimer' => '.phan/internal_stubs/excimer.phan_php',
 	'imagick' => '.phan/internal_stubs/imagick.phan_php',
 	'memcached' => '.phan/internal_stubs/memcached.phan_php',
 	'pcntl' => '.phan/internal_stubs/pcntl.phan_php',
@@ -87,6 +86,7 @@ $cfg['directory_list'] = [
 	'resources/',
 	'tests/common/',
 	'tests/parser/',
+	'tests/phan',
 	'tests/phpunit/mocks/',
 	// Do NOT add .phan/stubs/ here: stubs are conditionally loaded in file_list
 ];
@@ -131,8 +131,6 @@ $cfg['exclude_analysis_directory_list'] = [
 	'vendor/',
 	'.phan/',
 	'tests/phpunit/',
-	// Generated documentation stub for configuration variables.
-	'includes/config-vars.php',
 	// The referenced classes are not available in vendor, only when
 	// included from composer.
 	'includes/composer/',
@@ -147,9 +145,10 @@ $cfg['exclude_analysis_directory_list'] = [
 	'includes/PHPVersionCheck.php',
 ];
 
-// Do not use aliases in core.
-// Use the correct name, because we don't need backward compatibility
-$cfg['enable_class_alias_support'] = false;
+// TODO: Ideally we'd disable this in core, given we don't need backwards compatibility here and aliases
+// should not be used. However, that would have unwanted side effects such as being unable to test
+// taint-check (T321806).
+$cfg['enable_class_alias_support'] = true;
 
 $cfg['ignore_undeclared_variables_in_global_scope'] = true;
 // @todo It'd be great if we could just make phan read these from config-schema.php, to avoid
@@ -158,7 +157,7 @@ $cfg['ignore_undeclared_variables_in_global_scope'] = true;
 // remove them from here as well, so phan complains when something tries to use them.
 $cfg['globals_type_map'] = array_merge( $cfg['globals_type_map'], [
 	'IP' => 'string',
-	'wgTitle' => 'MediaWiki\Title\Title',
+	'wgTitle' => \MediaWiki\Title\Title::class,
 	'wgGalleryOptions' => 'array',
 	'wgDummyLanguageCodes' => 'string[]',
 	'wgNamespaceProtection' => 'array<int,string|string[]>',
@@ -176,8 +175,9 @@ $cfg['globals_type_map'] = array_merge( $cfg['globals_type_map'], [
 	'wgLocalInterwikis' => 'string[]',
 	'wgDebugLogGroups' => 'string|false|array{destination:string,sample?:int,level:int}',
 	'wgCookiePrefix' => 'string|false',
-	'wgOut' => 'OutputPage',
+	'wgOut' => \MediaWiki\Output\OutputPage::class,
 	'wgExtraNamespaces' => 'string[]',
+	'wgRequest' => \MediaWiki\Request\WebRequest::class,
 ] );
 
 // Include a local config file if it exists

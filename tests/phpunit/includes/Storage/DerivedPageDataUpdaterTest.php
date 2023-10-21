@@ -25,18 +25,18 @@ use MediaWiki\Storage\EditResult;
 use MediaWiki\Storage\EditResultCache;
 use MediaWiki\Storage\RevisionSlotsUpdate;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserIdentityValue;
+use MediaWiki\Utils\MWTimestamp;
 use MediaWikiIntegrationTestCase;
 use Message;
 use MockTitleTrait;
 use MWCallableUpdate;
-use MWTimestamp;
 use ParserOptions;
 use PHPUnit\Framework\MockObject\MockObject;
 use TextContent;
 use TextContentHandler;
-use User;
 use Wikimedia\TestingAccessWrapper;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 use WikiPage;
@@ -600,7 +600,9 @@ class DerivedPageDataUpdaterTest extends MediaWikiIntegrationTestCase {
 						'ParserFactory',
 						'GlobalIdGenerator',
 						'LanguageNameUtils',
+						'LinkRenderer',
 						'MagicWordFactory',
+						'ParsoidParserFactory',
 					],
 				],
 				'testing' => DummyContentHandlerForTesting::class,
@@ -995,7 +997,7 @@ class DerivedPageDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		self::assertFalse( $updater->isCountable() );
 	}
 
-	public function provideIsCountable() {
+	public static function provideIsCountable() {
 		yield 'deleted revision' => [
 			'$articleCountMethod' => 'any',
 			'$wikitextContent' => 'Test',
@@ -1089,7 +1091,11 @@ class DerivedPageDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		$rev = $this->createRevision( $page, 'first', $content );
 		$pageId = $page->getId();
 
-		$oldStats = $this->db->selectRow( 'site_stats', '*', '1=1' );
+		$oldStats = $this->db->newSelectQueryBuilder()
+			->select( '*' )
+			->from( 'site_stats' )
+			->where( '1=1' )
+			->fetchRow();
 		$this->db->delete( 'pagelinks', '*' );
 
 		$pcache = $this->getServiceContainer()->getParserCache();
@@ -1104,13 +1110,12 @@ class DerivedPageDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		$updater->doUpdates();
 
 		// links table update
-		$pageLinks = $this->db->select(
-			'pagelinks',
-			'*',
-			[ 'pl_from' => $pageId ],
-			__METHOD__,
-			[ 'ORDER BY' => [ 'pl_namespace', 'pl_title' ] ]
-		);
+		$pageLinks = $this->db->newSelectQueryBuilder()
+			->select( '*' )
+			->from( 'pagelinks' )
+			->where( [ 'pl_from' => $pageId ] )
+			->orderBy( [ 'pl_namespace', 'pl_title' ] )
+			->caller( __METHOD__ )->fetchResultSet();
 
 		$pageLinksRow = $pageLinks->fetchObject();
 		$this->assertIsObject( $pageLinksRow );
@@ -1126,7 +1131,11 @@ class DerivedPageDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $updater->getCanonicalParserOutput(), $cached );
 
 		// site stats
-		$stats = $this->db->selectRow( 'site_stats', '*', '1=1' );
+		$stats = $this->db->newSelectQueryBuilder()
+			->select( '*' )
+			->from( 'site_stats' )
+			->where( '1=1' )
+			->fetchRow();
 		$this->assertSame( $oldStats->ss_total_pages + 1, (int)$stats->ss_total_pages );
 		$this->assertSame( $oldStats->ss_total_edits + 1, (int)$stats->ss_total_edits );
 		$this->assertSame( $oldStats->ss_good_articles + 1, (int)$stats->ss_good_articles );
@@ -1207,7 +1216,7 @@ class DerivedPageDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		$this->assertNotFalse( $pcache->get( $page, $updater->getCanonicalParserOptions() ) );
 	}
 
-	public function provideEnqueueRevertedTagUpdateJob() {
+	public static function provideEnqueueRevertedTagUpdateJob() {
 		return [
 			'approved' => [ true, 1 ],
 			'not approved' => [ false, 0 ]
@@ -1246,7 +1255,7 @@ class DerivedPageDataUpdaterTest extends MediaWikiIntegrationTestCase {
 		$services = $this->getServiceContainer();
 		$editResultCache = new EditResultCache(
 			$services->getMainObjectStash(),
-			$services->getDBLoadBalancer(),
+			$services->getDBLoadBalancerFactory(),
 			new ServiceOptions(
 				EditResultCache::CONSTRUCTOR_OPTIONS,
 				[ 'RCMaxAge' => BagOStuff::TTL_MONTH ]

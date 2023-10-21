@@ -27,6 +27,7 @@ use MediaWiki\Auth\AuthManager;
 use MediaWiki\Auth\CreateFromLoginAuthenticationRequest;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Status\Status;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
@@ -43,8 +44,7 @@ class ApiAuthManagerHelper {
 	/** @var string Message output format */
 	private $messageFormat;
 
-	/** @var AuthManager */
-	private $authManager;
+	private AuthManager $authManager;
 
 	/**
 	 * @param ApiBase $module API module, for context and parameters

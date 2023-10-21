@@ -11,8 +11,8 @@ use MediaWiki\Rest\Handler\PageHTMLHandler;
 use MediaWiki\Rest\LocalizedHttpException;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Title\Title;
+use MediaWiki\Utils\MWTimestamp;
 use MediaWikiIntegrationTestCase;
-use MWTimestamp;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\StreamInterface;
 use Wikimedia\Message\MessageValue;
@@ -64,10 +64,8 @@ class PageHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testExecuteWithHtml() {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Parsoid' );
 		$page = $this->getExistingTestPage( 'HtmlEndpointTestPage/with/slashes' );
-		$this->assertTrue(
-			$this->editPage( $page, self::WIKITEXT )->isGood(),
+		$this->assertStatusGood( $this->editPage( $page, self::WIKITEXT ),
 			'Edited a page'
 		);
 
@@ -87,8 +85,6 @@ class PageHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testExecuteWillLint() {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Parsoid' );
-
 		$this->overrideConfigValue( MainConfigNames::ParsoidSettings, [
 			'linting' => true
 		] );
@@ -115,7 +111,6 @@ class PageHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testExecuteWithHtmlForSystemMessagePage() {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Parsoid' );
 		$title = Title::newFromText( 'MediaWiki:Logouttext' );
 		$page = $this->getNonexistingTestPage( $title );
 
@@ -144,10 +139,8 @@ class PageHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testExecuteHtmlOnly() {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Parsoid' );
 		$page = $this->getExistingTestPage( 'HtmlEndpointTestPage/with/slashes' );
-		$this->assertTrue(
-			$this->editPage( $page, self::WIKITEXT )->isGood(),
+		$this->assertStatusGood( $this->editPage( $page, self::WIKITEXT ),
 			'Edited a page'
 		);
 
@@ -167,7 +160,6 @@ class PageHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testExecuteHtmlOnlyForSystemMessagePage() {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Parsoid' );
 		$title = Title::newFromText( 'MediaWiki:Logouttext/de' );
 		$page = $this->getNonexistingTestPage( $title );
 
@@ -203,9 +195,9 @@ class PageHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 		string $expectedContentLanguage,
 		string $expectedVaryHeader
 	) {
+		$this->overrideConfigValue( 'UsePigLatinVariant', true );
 		$page = $this->getExistingTestPage( 'HtmlVariantConversion' );
-		$this->assertTrue(
-			$this->editPage( $page, '<p>test language conversion</p>' )->isGood(),
+		$this->assertStatusGood( $this->editPage( $page, '<p>test language conversion</p>' ),
 			'Edited a page'
 		);
 
@@ -234,7 +226,7 @@ class PageHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertStringContainsString( $acceptLanguage, $response->getHeaderLine( 'ETag' ) );
 	}
 
-	public function provideExecuteWithVariant() {
+	public static function provideExecuteWithVariant() {
 		yield 'with_html request should contain accept language but not content language' => [
 			'with_html',
 			static function ( StreamInterface $response ) {
@@ -255,8 +247,6 @@ class PageHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testEtagLastModified() {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Parsoid' );
-
 		$time = time();
 		MWTimestamp::setFakeTime( $time );
 
@@ -315,7 +305,7 @@ class PageHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 			$response->getHeaderLine( 'Last-Modified' ) );
 	}
 
-	public function provideHandlesParsoidError() {
+	public static function provideHandlesParsoidError() {
 		yield 'ClientError' => [
 			new ClientError( 'TEST_TEST' ),
 			new LocalizedHttpException(
@@ -345,8 +335,6 @@ class PageHTMLHandlerTest extends MediaWikiIntegrationTestCase {
 		Exception $parsoidException,
 		Exception $expectedException
 	) {
-		$this->markTestSkippedIfExtensionNotLoaded( 'Parsoid' );
-
 		$page = $this->getExistingTestPage( 'HtmlEndpointTestPage/with/slashes' );
 		$request = new RequestData(
 			[ 'pathParams' => [ 'title' => $page->getTitle()->getPrefixedText() ] ]

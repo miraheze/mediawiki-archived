@@ -4,7 +4,6 @@ use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Hook\ParserLogLinterDataHook;
 use MediaWiki\Json\JsonCodec;
 use MediaWiki\MainConfigNames;
-use MediaWiki\MainConfigSchema;
 use MediaWiki\Parser\ParserCacheFactory;
 use MediaWiki\Parser\ParserOutputFlags;
 use MediaWiki\Parser\Parsoid\PageBundleParserOutputConverter;
@@ -12,7 +11,9 @@ use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
 use MediaWiki\Rest\HttpException;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionAccessException;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Status\Status;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\NullLogger;
 use Wikimedia\Parsoid\Config\PageConfig;
@@ -101,9 +102,6 @@ class ParsoidOutputAccessTest extends MediaWikiIntegrationTestCase {
 				ParsoidOutputAccess::CONSTRUCTOR_OPTIONS,
 				[
 					'ParsoidCacheConfig' => $parsoidCacheConfig,
-					'ParsoidSettings' => MainConfigSchema::getDefaultValue(
-						MainConfigNames::ParsoidSettings
-					),
 					'ParsoidWikiID' => 'MyWiki'
 				]
 			),
@@ -136,8 +134,8 @@ class ParsoidOutputAccessTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$html = preg_replace( '/<!--.*?-->/s', '', $value );
-		$html = trim( preg_replace( '/[\r\n]{2,}/s', "\n", $html ) );
-		$html = trim( preg_replace( '/\s{2,}/s', ' ', $html ) );
+		$html = trim( preg_replace( '/[\r\n]{2,}/', "\n", $html ) );
+		$html = trim( preg_replace( '/\s{2,}/', ' ', $html ) );
 		return $html;
 	}
 
@@ -378,7 +376,7 @@ class ParsoidOutputAccessTest extends MediaWikiIntegrationTestCase {
 		$this->assertContainsHtml( 'Dummy output', $status );
 	}
 
-	public function provideCacheThresholdData() {
+	public static function provideCacheThresholdData() {
 		return [
 			yield "fast parse" => [ 1, 2 ], // high threshold, no caching
 			yield "slow parse" => [ 0, 1 ], // low threshold, caching
@@ -466,7 +464,7 @@ class ParsoidOutputAccessTest extends MediaWikiIntegrationTestCase {
 		$this->assertNotNull( $access->getParsoidRenderID( $output1 ) );
 	}
 
-	public function provideSupportsContentModels() {
+	public static function provideSupportsContentModels() {
 		yield [ CONTENT_MODEL_WIKITEXT, true ];
 		yield [ CONTENT_MODEL_JSON, true ];
 		yield [ CONTENT_MODEL_JAVASCRIPT, false ];
@@ -506,7 +504,7 @@ class ParsoidOutputAccessTest extends MediaWikiIntegrationTestCase {
 
 		/** @var ParserOutput $parserOutput */
 		$parserOutput = $status->getValue();
-		$this->assertStringContainsString( __METHOD__, $parserOutput->getText() );
+		$this->assertStringContainsString( __METHOD__, $parserOutput->getRawText() );
 		$this->assertNotEmpty( $parserOutput->getExtensionData( 'parsoid-render-id' ) );
 		$this->assertNotEmpty( $parserOutput->getCacheRevisionId() );
 		$this->assertNotEmpty( $parserOutput->getCacheTime() );
@@ -540,7 +538,7 @@ class ParsoidOutputAccessTest extends MediaWikiIntegrationTestCase {
 
 		/** @var ParserOutput $parserOutput */
 		$parserOutput = $status->getValue();
-		$this->assertStringContainsString( __METHOD__, $parserOutput->getText() );
+		$this->assertStringContainsString( __METHOD__, $parserOutput->getRawText() );
 		$this->assertNotEmpty( $parserOutput->getExtensionData( 'parsoid-render-id' ) );
 		$this->assertNotEmpty( $parserOutput->getCacheRevisionId() );
 		$this->assertNotEmpty( $parserOutput->getCacheTime() );
@@ -564,7 +562,7 @@ class ParsoidOutputAccessTest extends MediaWikiIntegrationTestCase {
 
 		/** @var ParserOutput $parserOutput */
 		$parserOutput = $status->getValue();
-		$this->assertStringContainsString( __METHOD__, $parserOutput->getText() );
+		$this->assertStringContainsString( __METHOD__, $parserOutput->getRawText() );
 		$this->assertNotEmpty( $parserOutput->getExtensionData( 'parsoid-render-id' ) );
 		$this->assertNotEmpty( $parserOutput->getCacheRevisionId() );
 		$this->assertNotEmpty( $parserOutput->getCacheTime() );
@@ -596,11 +594,39 @@ class ParsoidOutputAccessTest extends MediaWikiIntegrationTestCase {
 
 		/** @var ParserOutput $parserOutput */
 		$parserOutput = $status->getValue();
-		$this->assertStringContainsString( __METHOD__, $parserOutput->getText() );
+		$this->assertStringContainsString( __METHOD__, $parserOutput->getRawText() );
 		$this->assertNotEmpty( $parserOutput->getExtensionData( 'parsoid-render-id' ) );
 		// The revision ID is set to 0, so that's what is in the cache.
 		$this->assertSame( 0, $parserOutput->getCacheRevisionId() );
 		$this->assertNotEmpty( $parserOutput->getCacheTime() );
+	}
+
+	/**
+	 * @covers \MediaWiki\Parser\Parsoid\ParsoidOutputAccess::parse
+	 */
+	public function testParseDeletedRevision() {
+		$page = $this->getNonexistingTestPage( __METHOD__ );
+		$pOpts = ParserOptions::newFromAnon();
+
+		// Create a fake revision record
+		$revRecord = new MutableRevisionRecord( $page->getTitle() );
+		$revRecord->setId( 0 );
+		$revRecord->setPageId( $page->getId() );
+		$revRecord->setContent(
+			SlotRecord::MAIN,
+			new WikitextContent( 'test' )
+		);
+		// Induce a RevisionAccessException
+		$revRecord->setVisibility( RevisionRecord::DELETED_TEXT );
+
+		$parsoidOutputAccess = $this->getServiceContainer()->getParsoidOutputAccess();
+		$status = $parsoidOutputAccess->parse( $page->getTitle(), $pOpts, self::ENV_OPTS, $revRecord );
+
+		$this->assertStatusError( 'parsoid-revision-access', $status );
+		$this->assertSame(
+			[ 'parsoid-revision-access', 'Not an available content version.' ],
+			$status->getErrorsArray()[0] ?? []
+		);
 	}
 
 	/**
@@ -652,15 +678,17 @@ class ParsoidOutputAccessTest extends MediaWikiIntegrationTestCase {
 		$services = $this->getServiceContainer();
 		$parserOutputAccess = $services->getParsoidOutputAccess();
 
-		$page = $this->getExistingTestPage();
+		$content = 'Test content for ' . __METHOD__;
+		$page = Title::makeTitle( NS_MAIN, 'TestGetParserOutputWithLanguageOverride' );
+		$this->editPage( $page, $content );
 
 		$status = $parserOutputAccess->getParserOutput( $page, $parserOptions );
 
 		$this->assertTrue( $status->isOK() );
 
 		// assert dummy content in parsoid output HTML
-		$html = $status->getValue()->getText();
-		$this->assertStringContainsString( 'UTContent', $html );
+		$html = $status->getValue()->getRawText();
+		$this->assertStringContainsString( $content, $html );
 
 		if ( $parserOptions->getTargetLanguage() !== null ) {
 			$targetLanguage = $parserOptions->getTargetLanguage()->getCode();

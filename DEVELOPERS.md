@@ -34,14 +34,24 @@ You'll need to have Docker installed:
 **Linux users**:
 
 * We recommend installing `docker-ce`, `docker-ce-cli`, `containerd.io`, and `docker-compose-plugin` by [downloading the server
-  releases][dc-release] for your distribution rather than Docker Desktop. You can also install the [binaries][dc-binaries]. 
+  releases][dc-release] for your distribution rather than Docker Desktop. You can also install the [binaries][dc-binaries].
 * Follow the instructions to ["Manage Docker as a non-root user"][dc-non-root]
 
 [dc-release]: https://docs.docker.com/engine/install/
 [dc-binaries]: https://docs.docker.com/engine/install/binaries/
 [dc-non-root]: https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
 
-### 2. Prepare `.env` file
+**Windows users**:
+
+We recommend [configuring Docker to use the Windows Subsystem for Linux (WSL)](https://docs.docker.com/desktop/wsl/#best-practices). This will result in performance improvements.
+
+### 2. Download MediaWiki files
+
+Download the latest MediaWiki files to your computer. One way to download the latest alpha version of MediaWiki is to [install git](https://git-scm.com/), open a shell, navigate to the directory where you want to save the files, then type `git clone https://gerrit.wikimedia.org/r/mediawiki/core.git mediawiki`.
+
+Optional: If you plan to submit patches to this repository, you will probably want to [create a Gerrit account](https://wikitech.wikimedia.org/wiki/Help:Create_a_Wikimedia_developer_account), then type `git remote set-url origin ssh://YOUR-GERRIT-USERNAME-HERE@gerrit.wikimedia.org:29418/mediawiki/core`, replacing YOUR-GERRIT-USERNAME-HERE with your Gerrit username. Please see the official [MediaWiki Gerrit tutorial](https://www.mediawiki.org/wiki/Gerrit/Tutorial) for more information.
+
+### 3. Prepare `.env` file
 
 Using a text editor, create a `.env` file in the root of the MediaWiki core
 repository, and copy these contents into that file:
@@ -57,7 +67,15 @@ XDEBUG_ENABLE=true
 XHPROF_ENABLE=true
 ```
 
-Non-Windows users: Next, run the following command to add your user ID and group ID to your `.env` file:
+Windows users: Run the following command to add a blank user ID and group ID to your `.env` file:
+
+```sh
+echo "
+MW_DOCKER_UID=
+MW_DOCKER_GID=" >> .env
+```
+
+Non-Windows users: Run the following command to add your user ID and group ID to your `.env` file:
 
 ```sh
 echo "MW_DOCKER_UID=$(id -u)
@@ -75,7 +93,7 @@ services:
       - "host.docker.internal:host-gateway"
 ```
 
-### 3. Create the environment
+### 4. Create the environment
 
 * Start the containers:
   ```sh
@@ -100,6 +118,11 @@ services:
   ```
   Windows users: make sure you run the above command in PowerShell as it does not work in Bash.
 
+* Windows users: Make sure to set the SQLite directory to be writable.
+  ```sh
+  docker compose exec mediawiki chmod -R o+rwx cache/sqlite
+  ```
+
 Done! The wiki should now be available for you at <http://localhost:8080>.
 
 ## Usage
@@ -111,7 +134,7 @@ MediaWiki container. You can then run one or more commands as needed and stay
 within the container shell.
 
 You can also run a single command in the container directly from your host
-shell, for example: `docker compose exec mediawiki php maintenance/update.php`.
+shell, for example: `docker compose exec mediawiki php maintenance/run.php update`.
 
 ### PHPUnit
 
@@ -120,7 +143,7 @@ Run a single PHPUnit file or directory:
 ```sh
 docker compose exec mediawiki bash
 instance:/w$ cd tests/phpunit
-instance:/w/tests/phpunit$ php phpunit.php path/to/my/test/
+instance:/w/tests/phpunit$ composer phpunit -- path/to/my/test/
 ```
 
 See [PHPUnit on mediawiki.org][phpunit-testing] for more examples.
@@ -208,14 +231,14 @@ To install the EventLogging extension:
     git clone https://gerrit.wikimedia.org/r/mediawiki/extensions/EventLogging
     ```
 
-    Alternatively, if you need to extension repositories elsewhere on disk, mount each one as a overlapping volume in `docker-compose.override.yml`. The is comparable to a symlink, but those are not well-supported in Docker.
+    Alternatively, if you have extension repositories elsewhere on disk, mount each one as an overlapping volume in `docker-compose.override.yml`. This is comparable to a symlink, but those are not well-supported in Docker.
 
     ```yaml
    version: '3.7'
    services:
      mediawiki:
        volumes:
-         - ~/Code/Vector:/var/www/html/w/skins/vector:cached
+         - ~/Code/EventLogging:/var/www/html/w/extensions/EventLogging:cached
     ```
 
 2. Enable the extension, by adding the following to `LocalSettings.php`:
@@ -277,7 +300,7 @@ To empty the wiki database and re-install it:
 * Delete the `cache/sqlite` directory.
 * Re-run the "Install MediaWiki database" command.
 
-You can now restore or copy over any modifications you had in your previous `LocalSettings.php` file. And if you have additonal extensions installed that required a database table, then also run: `docker compose exec mediawiki php maintenance/update.php`.
+You can now restore or copy over any modifications you had in your previous `LocalSettings.php` file. And if you have additonal extensions installed that required a database table, then also run: `docker compose exec mediawiki php maintenance/run.php update`.
 
 ## Troubleshooting
 

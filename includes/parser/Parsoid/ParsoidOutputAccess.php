@@ -19,11 +19,11 @@
 
 namespace MediaWiki\Parser\Parsoid;
 
-use Config;
-use HashConfig;
 use IBufferingStatsdDataFactory;
 use InvalidArgumentException;
 use Liuggio\StatsdClient\Factory\StatsdDataFactory;
+use MediaWiki\Config\Config;
+use MediaWiki\Config\HashConfig;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Content\IContentHandlerFactory;
 use MediaWiki\Logger\LoggerFactory;
@@ -38,11 +38,11 @@ use MediaWiki\Revision\RevisionAccessException;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Status\Status;
 use MWUnknownContentModelException;
 use ParserCache;
 use ParserOptions;
 use ParserOutput;
-use Status;
 use Wikimedia\Parsoid\Config\PageConfig;
 use Wikimedia\Parsoid\Config\SiteConfig;
 use Wikimedia\Parsoid\Core\ClientError;
@@ -82,7 +82,6 @@ class ParsoidOutputAccess {
 
 	public const CONSTRUCTOR_OPTIONS = [
 		MainConfigNames::ParsoidCacheConfig,
-		MainConfigNames::ParsoidSettings,
 		'ParsoidWikiID'
 	];
 
@@ -285,9 +284,13 @@ class ParsoidOutputAccess {
 	): Status {
 		$defaultOptions = [
 			'pageBundle' => true,
-			'prefix' => $this->parsoidWikiId,
-			'pageName' => $pageConfig->getTitle(),
-			'htmlVariantLanguage' => $pageConfig->getPageLanguage(),
+			'wrapSections' => true,
+			// Defaults to page title language unless the REST API
+			// sets a target language in ParserOptions which it does if:
+			// (a) a content-language header is passed in which is usually
+			//     a language variant conversion request
+			// (b) user language (for interface messages)
+			'htmlVariantLanguage' => $pageConfig->getPageLanguageBcp47(),
 			'outputContentVersion' => Parsoid::defaultHTMLVersion(),
 		];
 
@@ -412,6 +415,13 @@ class ParsoidOutputAccess {
 		$output->updateCacheExpiry( 0 );
 		// The render ID is required for rendering of dummy output: T311728.
 		$output->setExtensionData( self::RENDER_ID_KEY, '0/dummy-output' );
+		// Required in HtmlOutputRendererHelper::putHeaders when $forHtml
+		$output->setExtensionData(
+			PageBundleParserOutputConverter::PARSOID_PAGE_BUNDLE_KEY,
+			[
+				'headers' => [ 'content-language' => 'en' ],
+			]
+		);
 
 		return Status::newGood( $output );
 	}
@@ -436,31 +446,34 @@ class ParsoidOutputAccess {
 			[ $page, $revision ] = $this->resolveRevision( $page, $revision );
 		}
 
-		$mainSlot = $revision->getSlot( SlotRecord::MAIN );
-		$contentModel = $mainSlot->getModel();
-		if ( !$this->supportsContentModel( $contentModel ) ) {
-			// This is a messy fix for T324711. The real solution is T311648.
-			// For now, just return dummy parser output.
-			return $this->makeDummyParserOutput( $contentModel );
+		try {
+			$mainSlot = $revision->getSlot( SlotRecord::MAIN );
+			$contentModel = $mainSlot->getModel();
+			if ( !$this->supportsContentModel( $contentModel ) ) {
+				// This is a messy fix for T324711. The real solution is T311648.
+				// For now, just return dummy parser output.
+				return $this->makeDummyParserOutput( $contentModel );
 
-			// TODO: go back to throwing, once RESTbase no longer expects to get a parsoid rendering for
-			//any kind of content (T324711).
-			/*
-				// TODO: throw an internal exception here, convert to HttpError in HtmlOutputRendererHelper.
-				throw new HttpException( 'Parsoid does not support content model ' . $mainSlot->getModel(), 400 );
+				// TODO: go back to throwing, once RESTbase no longer expects to get a parsoid rendering for
+				//any kind of content (T324711).
+				/*
+					// TODO: throw an internal exception here, convert to HttpError in HtmlOutputRendererHelper.
+					throw new HttpException( 'Parsoid does not support content model ' . $mainSlot->getModel(), 400 );
+				}
+				*/
 			}
-			*/
-		}
 
-		$languageOverride = $parserOpts->getTargetLanguage();
-		$pageConfig = $this->parsoidPageConfigFactory->create(
-			$page,
-			null,
-			$revision,
-			null,
-			$languageOverride,
-			$this->options->get( MainConfigNames::ParsoidSettings )
-		);
+			$pageConfig = $this->parsoidPageConfigFactory->create(
+				$page,
+				null,
+				$revision,
+				null,
+				$parserOpts->getTargetLanguage(),
+				true  // ensureAccessibleContent
+			);
+		} catch ( RevisionAccessException $e ) {
+			return Status::newFatal( 'parsoid-revision-access', $e->getMessage() );
+		}
 
 		$status = $this->parseInternal( $pageConfig, $parsoidOptions );
 

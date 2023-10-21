@@ -287,9 +287,20 @@ class ParserCache {
 		array $usedOptions = null
 	): string {
 		$usedOptions ??= ParserOptions::allCacheVaryingOptions();
+
+		// HACK! Ignore the 'useParsoid' option when we are querying content
+		// from the 'parsoid' cache that was used by ParsoidOutputAccess to store
+		// Parsoid content (without setting 'useParsoid' option in ParerOptions).
+		// During this migration away from ParsoidOutputAccess to ParserOutputAccess,
+		// this lets us fetch content from previously stored content without running
+		// into cold cache problems!
+		// (T347632 tracks removal of this hack)
+		if ( $this->name === 'parsoid' ) {
+			$usedOptions = array_diff( $usedOptions, [ 'useParsoid' ] );
+		}
 		// idhash seem to mean 'page id' + 'rendering hash' (r3710)
 		$pageid = $page->getId( PageRecord::LOCAL );
-		$title = $this->titleFactory->castFromPageIdentity( $page );
+		$title = $this->titleFactory->newFromPageIdentity( $page );
 		$hash = $options->optionsHash( $usedOptions, $title );
 		// Before T263581 ParserCache was split between normal page views
 		// and action=parse. -0 is left in the key to avoid invalidating the entire
@@ -490,8 +501,7 @@ class ParserCache {
 		// ...and to the global cache.
 		$this->cache->set( $pageKey, $metadataData, $expire );
 
-		$title = $this->titleFactory->castFromPageIdentity( $page );
-		// @phan-suppress-next-line PhanTypeMismatchArgumentNullable castFrom does not return null here
+		$title = $this->titleFactory->newFromPageIdentity( $page );
 		$this->hookRunner->onParserCacheSaveComplete( $this, $parserOutput, $title, $popts, $revId );
 
 		$this->logger->debug( 'Saved in parser cache', [

@@ -529,6 +529,7 @@
 	"template-semiprotected": "(မစဵုဒၞာလဝ်-ကဝက်)",
 	"hiddencategories": "မုက်လိက်ဏအ်ဂှ် ဒှ်ဂကောံ ကု{{PLURAL:$1|1 hidden category|$1 hidden categories}}:",
 	"permissionserrors": "တင်သၠးအခေါင် ဗၠေတ်",
+	"permissionserrorstext": "ဗှ်ေသွက်ဂွံကၠောန်သ္ပအကာဲအရာအခေါၚ်ဟွံမွဲဟေၚ်၊ သွက်ပွမဗက်ကေတ်နကဵု{{PLURAL:$1|ပရောဟိုတ်|ပရောဟိုတ်ဂမၠိုၚ်}}:",
 	"permissionserrorstext-withaction": "မၞး ဟွံကလိဂွံလဝ် အခေါင် သွက် $2, အတိုင်ဗွဲသၟဝ်ဏအ်ရ၊၊ {{PLURAL:$1|ဟိုတ်|ဟိုတ်ဂမၠိုင်}}:$1",
 	"recreate-moveddeleted-warn": "<strong>သတိ - မုက်လိက် မဒးဒုင်ပလီုလဝ်တုဲ ခြာဟွံလအ်ဂှ် မၞး ကလေင်ခၞံကၠောန်ဒၟံင်ရ၊၊</strong>\nမုက်လိက်ဂှ် မၞးကလေင်ပလေဝ်ဒါန်ကၠောန် ထေက် ဟွံထေက်ဂှ် မၞးထေက် ကဵုဒးဗစာရဏာရ၊၊\n\nသွက်မၞး ဂွံဆဵုကေတ်မာန်ဂှ် တင်စၟတ်သမ္တီ ဒဒှ်မပလီု ကေုာံ မပြံင်ပဆုဲတအ်ဂှ် ထ္ၜးကဵုလဝ် ပ္ဍဲဒၞာဲဏအ်ရ၊၊",
 	"moveddeleted-notice": "မုက်လိက်ဏအ် ဟွံမဲ။\nဒဒှ်မပလီု၊ ဒဒှ်မစဵုဒၞာ၊ ကေုာံ ပဆုဲလဝ် သွက်မုက်လိက်ဏအ်ဂှ် ဗၟံက်ထ္ၜးလဝ် အတိုင်ဗွဲသၟဝ်ဝွံ။",
@@ -546,7 +547,6 @@
 	"slot-name-main": "အဓိက",
 	"content-model-wikitext": "ဖျုန်လိက်ဝဳကဳ",
 	"content-model-text": "လိက်ပလး",
-	"content-model-javascript": "JavaScript",
 	"content-json-empty-object": "ဟွံမွဲကဵု ကပေါတ်",
 	"undo-failure": "ပရေင်ပလေဝ်ဒါန်ဂှ် ပတုဲဟွံဂွံ ဟိုတ်တုန် ဒၟာနူ မၞုံ ကုအခက်အခုဲ ပရေင်ပလေဝ်ဒါန် ဗွဲအပ္ဍဲ၊၊",
 	"viewpagelogs": "ဗဵု တင်စၟတ်သမ္တီ မုက်လိက်ဏအ်",
@@ -694,7 +694,6 @@
 	"default": "မူလ",
 	"prefs-files": "ဝှာၚ်ဂမၠိုၚ်",
 	"prefs-custom-css": "Custom CSS",
-	"prefs-custom-json": "Custom JSON",
 	"prefs-custom-js": "Custom JavaScript",
 	"prefs-common-config": "ပါ်ပရအ်လဝ် CSS/JSON/JavaScript သွက်စၞာံအလုံဖအိုတ်:",
 	"prefs-emailconfirm-label": "ပွမသ္ပဒတန် အီမေး:",
@@ -852,7 +851,6 @@
 	"rcfilters-savedqueries-new-name-label": "ယၟု",
 	"rcfilters-savedqueries-new-name-placeholder": "ထမံက်ထ္ၜး တၚ်ရန်တၟံဖဍိုဟ်",
 	"rcfilters-savedqueries-apply-label": "ခၞံကၠောန် ဟဍိုဟ်",
-	"rcfilters-savedqueries-apply-and-setdefault-label": "ခၞံကၠောန်ဖဍိုဟ်မလၟိုန်",
 	"rcfilters-savedqueries-cancel-label": "တးပဲါ",
 	"rcfilters-savedqueries-add-new-title": "ဂိုၚ်သိပ် လချိၚ်ဖဍိုဟ်လၟုဟ်တအ်",
 	"rcfilters-search-placeholder-mobile": "ဖဍိုဟ်",
@@ -1657,5 +1655,6 @@
 	"blockedtext-start-time": "စကၟာတ်လဒဵု: $1",
 	"blockedtext-expiration-time": "အခိၚ်အယုက်ကၟာတ်လဒဵု: $1",
 	"blockedtext-intended-blockee": "ရန်တၟအ်ပွမကၟာတ်လဒဵု: $1",
-	"blockedtext-contact-blocker-admin": "ဗှ်ေပွမဆက်ဆောံ $1 ဟွံသေၚ်တှ်ေ ကေတ်အဆက် [[{{MediaWiki:Grouppage-sysop\n}}|ညးမဖန်ဖက်]] တၞဟ်နကဵုမကၟာတ်လဒဵုလဝ်။"
+	"blockedtext-contact-blocker-admin": "ဗှ်ေပွမဆက်ဆောံ $1 ဟွံသေၚ်တှ်ေ ကေတ်အဆက် [[{{MediaWiki:Grouppage-sysop\n}}|ညးမဖန်ဖက်]] တၞဟ်နကဵုမကၟာတ်လဒဵုလဝ်။",
+	"blockedtext-block-ip": "အာဲပဳဗှ်ေဂှ်လၟုဟ်မဒှ် $1 ရ။"
 }
