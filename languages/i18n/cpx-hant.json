@@ -4,13 +4,8 @@
 			"Amire80",
 			"ChoiChong",
 			"Kahin He",
-<<<<<<<< HEAD:languages/i18n/cpx.json
-			"魔琴",
-			"Amire80"
-========
 			"Winston Sung",
 			"魔琴"
->>>>>>>> upstream/REL1_41:languages/i18n/cpx-hant.json
 		]
 	},
 	"tog-underline": "連結底線：",
@@ -78,13 +73,8 @@
 	"category-file-count": "{{PLURAL:$2|者個分類那含有以下兮檔案。|者個分類含有以下兮$1個檔案，一共$2個。}}",
 	"broken-file-category": "獃兮檔案連結兮頁面",
 	"about": "關於",
-<<<<<<<< HEAD:languages/i18n/cpx.json
-	"article": "内容页",
-	"newwindow": "（伫新窗口开爬起）",
-========
 	"article": "內容頁",
 	"newwindow": "（佇新視窗開爬起）",
->>>>>>>> upstream/REL1_41:languages/i18n/cpx-hant.json
 	"cancel": "取消",
 	"moredotdotdot": "厄価兮",
 	"mypage": "頁面",
