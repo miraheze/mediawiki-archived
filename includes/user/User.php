@@ -1513,14 +1513,14 @@ class User implements Authority, UserIdentity, UserEmailContact {
 	 *                 For backwards compatibility, a boolean is also accepted,
 	 *                 with true meaning READ_NORMAL and false meaning
 	 *                 READ_LATEST.
-	 * @param bool $disableIpBlockExemptChecking This is used internally to prevent
-	 *   a infinite recursion with autopromote. See T270145.
+	 * @param bool $autoPromoteBlockedDisable This is used internally to prevent
+	 *   a infinite recursion with autopromote. See T270145 and T349608.
 	 *
 	 * @return ?AbstractBlock
 	 */
 	public function getBlock(
 		$freshness = self::READ_NORMAL,
-		$disableIpBlockExemptChecking = false
+		$autoPromoteBlockedDisable = false
 	): ?Block {
 		if ( is_bool( $freshness ) ) {
 			$fromReplica = $freshness;
@@ -1528,7 +1528,7 @@ class User implements Authority, UserIdentity, UserEmailContact {
 			$fromReplica = ( $freshness !== self::READ_LATEST );
 		}
 
-		$this->getBlockedStatus( $fromReplica, $disableIpBlockExemptChecking );
+		$this->getBlockedStatus( $fromReplica, $autoPromoteBlockedDisable );
 		return $this->mBlock instanceof AbstractBlock ? $this->mBlock : null;
 	}
 

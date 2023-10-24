@@ -1421,16 +1421,22 @@ class PermissionManager {
 	 * @since 1.34
 	 * @param UserIdentity $user
 	 * @param string $action
+	 * @param bool $autoPromoteBlockedDisable This is used internally to prevent
+	 *   a infinite recursion with autopromote. See T270145 and T349608.
 	 * @return bool True if allowed
 	 */
-	public function userHasRight( UserIdentity $user, $action = '' ): bool {
+	public function userHasRight(
+		UserIdentity $user,
+		$action = '',
+		bool $autoPromoteBlockedDisable = false
+	): bool {
 		if ( $action === '' ) {
 			// In the spirit of DWIM
 			return true;
 		}
 		// Use strict parameter to avoid matching numeric 0 accidentally inserted
 		// by misconfiguration: 0 == 'foo'
-		return in_array( $action, $this->getUserPermissions( $user ), true );
+		return in_array( $action, $this->getUserPermissions( $user, $autoPromoteBlockedDisable ), true );
 	}
 
 	/**
@@ -1472,14 +1478,20 @@ class PermissionManager {
 	 *
 	 * @since 1.34
 	 * @param UserIdentity $user
+	 * @param bool $autoPromoteBlockedDisable This is used internally to prevent
+	 *   a infinite recursion with autopromote. See T270145 and T349608.
 	 * @return string[] permission names
 	 */
-	public function getUserPermissions( UserIdentity $user ): array {
+	public function getUserPermissions(
+		UserIdentity $user,
+		bool $autoPromoteBlockedDisable = false
+	): array {
 		$rightsCacheKey = $this->getRightsCacheKey( $user );
 		if ( !isset( $this->usersRights[ $rightsCacheKey ] ) ) {
 			$userObj = User::newFromIdentity( $user );
 			$this->usersRights[ $rightsCacheKey ] = $this->groupPermissionsLookup->getGroupPermissions(
-				$this->userGroupManager->getUserEffectiveGroups( $user )
+				$this->userGroupManager->getUserEffectiveGroups(
+					$user, 0, false, $autoPromoteBlockedDisable )
 			);
 			// Hook requires a full User object
 			$this->hookRunner->onUserGetRights( $userObj, $this->usersRights[ $rightsCacheKey ] );

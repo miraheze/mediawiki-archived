@@ -283,12 +283,15 @@ class UserGroupManager implements IDBAccessObject {
 	 * @param UserIdentity $user
 	 * @param int $queryFlags
 	 * @param bool $recache Whether to avoid the cache
+	 * @param bool $autoPromoteBlockedDisable This is used internally to prevent
+	 *   a infinite recursion with autopromote. See T270145 and T349608.
 	 * @return string[] internal group names
 	 */
 	public function getUserImplicitGroups(
 		UserIdentity $user,
 		int $queryFlags = self::READ_NORMAL,
-		bool $recache = false
+		bool $recache = false,
+		bool $autoPromoteBlockedDisable = false
 	): array {
 		$userKey = $this->getCacheKey( $user );
 		if ( $recache ||
@@ -305,7 +308,7 @@ class UserGroupManager implements IDBAccessObject {
 				}
 				$groups = array_unique( array_merge(
 					$groups,
-					$this->getUserAutopromoteGroups( $user )
+					$this->getUserAutopromoteGroups( $user, $autoPromoteBlockedDisable )
 				) );
 			}
 			$this->setCache( $userKey, self::CACHE_IMPLICIT, $groups, $queryFlags );
@@ -327,12 +330,15 @@ class UserGroupManager implements IDBAccessObject {
 	 * @param UserIdentity $user
 	 * @param int $queryFlags
 	 * @param bool $recache Whether to avoid the cache
+	 * @param bool $autoPromoteBlockedDisable This is used internally to prevent
+	 *   a infinite recursion with autopromote. See T270145 and T349608.
 	 * @return string[] internal group names
 	 */
 	public function getUserEffectiveGroups(
 		UserIdentity $user,
 		int $queryFlags = self::READ_NORMAL,
-		bool $recache = false
+		bool $recache = false,
+		bool $autoPromoteBlockedDisable = false
 	): array {
 		$userKey = $this->getCacheKey( $user );
 		// Ignore cache if the $recache flag is set, cached values can not be used
@@ -343,7 +349,8 @@ class UserGroupManager implements IDBAccessObject {
 		) {
 			$groups = array_unique( array_merge(
 				$this->getUserGroups( $user, $queryFlags ), // explicit groups
-				$this->getUserImplicitGroups( $user, $queryFlags, $recache ) // implicit groups
+				$this->getUserImplicitGroups(
+					$user, $queryFlags, $recache, $autoPromoteBlockedDisable ) // implicit groups
 			) );
 			// TODO: Deprecate passing out user object in the hook by introducing
 			// an alternative hook
@@ -408,16 +415,21 @@ class UserGroupManager implements IDBAccessObject {
 	 * Get the groups for the given user based on $wgAutopromote.
 	 *
 	 * @param UserIdentity $user The user to get the groups for
+	 * @param bool $autoPromoteBlockedDisable This is used internally to prevent
+	 *   a infinite recursion with autopromote. See T270145 and T349608.
 	 * @return string[] Array of groups to promote to.
 	 *
 	 * @see $wgAutopromote
 	 */
-	public function getUserAutopromoteGroups( UserIdentity $user ): array {
+	public function getUserAutopromoteGroups(
+		UserIdentity $user,
+		bool $autoPromoteBlockedDisable = false
+	): array {
 		$promote = [];
 		// TODO: remove the need for the full user object
 		$userObj = User::newFromIdentity( $user );
 		foreach ( $this->options->get( MainConfigNames::Autopromote ) as $group => $cond ) {
-			if ( $this->recCheckCondition( $cond, $userObj ) ) {
+			if ( $this->recCheckCondition( $cond, $userObj, $autoPromoteBlockedDisable ) ) {
 				$promote[] = $group;
 			}
 		}
@@ -534,16 +546,22 @@ class UserGroupManager implements IDBAccessObject {
 	 *
 	 * @param mixed $cond A condition, possibly containing other conditions
 	 * @param User $user The user to check the conditions against
+	 * @param bool $autoPromoteBlockedDisable This is used internally to prevent
+	 *   a infinite recursion with autopromote. See T270145 and T349608.
 	 * @return bool Whether the condition is true
 	 */
-	private function recCheckCondition( $cond, User $user ): bool {
+	private function recCheckCondition(
+		$cond,
+		User $user,
+		bool $autoPromoteBlockedDisable = false
+	): bool {
 		$validOps = [ '&', '|', '^', '!' ];
 
 		if ( is_array( $cond ) && count( $cond ) >= 2 && in_array( $cond[0], $validOps ) ) {
 			// Recursive condition
 			if ( $cond[0] == '&' ) { // AND (all conds pass)
 				foreach ( array_slice( $cond, 1 ) as $subcond ) {
-					if ( !$this->recCheckCondition( $subcond, $user ) ) {
+					if ( !$this->recCheckCondition( $subcond, $user, $autoPromoteBlockedDisable ) ) {
 						return false;
 					}
 				}
@@ -551,7 +569,7 @@ class UserGroupManager implements IDBAccessObject {
 				return true;
 			} elseif ( $cond[0] == '|' ) { // OR (at least one cond passes)
 				foreach ( array_slice( $cond, 1 ) as $subcond ) {
-					if ( $this->recCheckCondition( $subcond, $user ) ) {
+					if ( $this->recCheckCondition( $subcond, $user, $autoPromoteBlockedDisable ) ) {
 						return true;
 					}
 				}
@@ -564,11 +582,11 @@ class UserGroupManager implements IDBAccessObject {
 						' Check your $wgAutopromote and $wgAutopromoteOnce settings.'
 					);
 				}
-				return $this->recCheckCondition( $cond[1], $user )
-					xor $this->recCheckCondition( $cond[2], $user );
+				return $this->recCheckCondition( $cond[1], $user, $autoPromoteBlockedDisable )
+					xor $this->recCheckCondition( $cond[2], $user, $autoPromoteBlockedDisable );
 			} elseif ( $cond[0] == '!' ) { // NOT (no conds pass)
 				foreach ( array_slice( $cond, 1 ) as $subcond ) {
-					if ( $this->recCheckCondition( $subcond, $user ) ) {
+					if ( $this->recCheckCondition( $subcond, $user, $autoPromoteBlockedDisable ) ) {
 						return false;
 					}
 				}
@@ -582,7 +600,7 @@ class UserGroupManager implements IDBAccessObject {
 			$cond = [ $cond ];
 		}
 
-		return $this->checkCondition( $cond, $user );
+		return $this->checkCondition( $cond, $user, $autoPromoteBlockedDisable );
 	}
 
 	/**
@@ -592,10 +610,16 @@ class UserGroupManager implements IDBAccessObject {
 	 *
 	 * @param array $cond A condition, which must not contain other conditions
 	 * @param User $user The user to check the condition against
+	 * @param bool $autoPromoteBlockedDisable This is used internally to prevent
+	 *   a infinite recursion with autopromote. See T270145 and T349608.
 	 * @return bool Whether the condition is true for the user
 	 * @throws InvalidArgumentException if autopromote condition was not recognized.
 	 */
-	private function checkCondition( array $cond, User $user ): bool {
+	private function checkCondition(
+		array $cond,
+		User $user,
+		bool $autoPromoteBlockedDisable = false
+	): bool {
 		if ( count( $cond ) < 1 ) {
 			return false;
 		}
@@ -634,10 +658,11 @@ class UserGroupManager implements IDBAccessObject {
 			case APCOND_IPINRANGE:
 				return IPUtils::isInRange( $user->getRequest()->getIP(), $cond[1] );
 			case APCOND_BLOCKED:
-				// Because checking for ipblock-exempt leads back to here (thus infinite recursion),
-				// we stop checking for ipblock-exempt via here. We do this by setting the second
-				// param to true.
-				// See T270145.
+				// This is to  prevent a infinite recursion. See T270145 and T349608.
+				if ( $autoPromoteBlockedDisable ) {
+					return false;
+				}
+
 				$block = $user->getBlock( Authority::READ_LATEST, true );
 				return $block && $block->isSitewide();
 			case APCOND_ISBOT:
