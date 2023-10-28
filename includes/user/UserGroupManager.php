@@ -659,9 +659,9 @@ class UserGroupManager implements IDBAccessObject {
 				return IPUtils::isInRange( $user->getRequest()->getIP(), $cond[1] );
 			case APCOND_BLOCKED:
 				// This is to  prevent a infinite recursion. See T270145 and T349608.
-				if ( $autoPromoteBlockedDisable ) {
-					return false;
-				}
+				// Miraheze HACK:
+				// Until the above tasks are fully resolved, return false
+				return false;
 
 				$block = $user->getBlock( Authority::READ_LATEST, true );
 				return $block && $block->isSitewide();
