@@ -1623,3 +1623,8 @@
 	url = https://github.com/miraheze/MessageCachePerformance
 	branch = main
 	ignore = dirty
+[submodule "extensions/ParserMigration"]
+	path = extensions/ParserMigration
+	url = https://github.com/wikimedia/mediawiki-extensions-ParserMigration.git
+	branch = REL1_41
+	ignore = dirty
