@@ -8,7 +8,7 @@ updates:
       time: "00:00"
     open-pull-requests-limit: 750
     rebase-strategy: auto
-    target-branch: REL1_40
+    target-branch: REL1_41
     ignore:
       - dependency-name: "extensions/AbuseFilter"
       - dependency-name: "extensions/CategoryTree"
