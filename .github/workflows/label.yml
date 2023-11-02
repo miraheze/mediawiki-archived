@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        ref: 'REL1_40'
+        ref: 'REL1_41'
 
     - run: |
         git config pull.rebase false
