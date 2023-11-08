@@ -416,6 +416,7 @@ LUA;
 			if kRootJob then
 				-- Delete the rootjob as well
 				redis.call('DEL',kRootJob)
+			end
 			-- Delete the job data itself
 			return redis.call('hDel',kData,id)
 LUA;
