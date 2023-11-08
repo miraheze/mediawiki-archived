@@ -393,12 +393,17 @@ LUA;
 			throw new UnexpectedValueException( "Job of type '{$job->getType()}' has no UUID." );
 		}
 
+		$params = $job->getRootJobParams();
+
+		$rootKey = $params['rootJobSignature'] ?
+			$this->getRootJobCacheKey( $params['rootJobSignature'], $job->getType() ) : null;
+
 		$conn = $this->getConnection();
 		try {
 			static $script =
 			/** @lang Lua */
 <<<LUA
-			local kClaimed, kAttempts, kData = unpack(KEYS)
+			local kClaimed, kAttempts, kData, kRootJob = unpack(KEYS)
 			local id = unpack(ARGV)
 			-- Unmark the job as claimed
 			local removed = redis.call('zRem',kClaimed,id)
@@ -408,6 +413,9 @@ LUA;
 			end
 			-- Delete the retry data
 			redis.call('hDel',kAttempts,id)
+			if kRootJob then
+				-- Delete the rootjob as well
+				redis.call('DEL',kRootJob)
 			-- Delete the job data itself
 			return redis.call('hDel',kData,id)
 LUA;
@@ -416,9 +424,10 @@ LUA;
 					$this->getQueueKey( 'z-claimed' ), # KEYS[1]
 					$this->getQueueKey( 'h-attempts' ), # KEYS[2]
 					$this->getQueueKey( 'h-data' ), # KEYS[3]
+					$rootKey, # KEYS[4]
 					$uuid # ARGV[1]
 				],
-				3 # number of first argument(s) that are keys
+				4 # number of first argument(s) that are keys
 			);
 
 			if ( !$res ) {
