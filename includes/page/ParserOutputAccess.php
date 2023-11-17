@@ -23,7 +23,6 @@ use IBufferingStatsdDataFactory;
 use InvalidArgumentException;
 use MediaWiki\Logger\Spi as LoggerSpi;
 use MediaWiki\Parser\ParserCacheFactory;
-use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
 use MediaWiki\Parser\RevisionOutputCache;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
@@ -98,7 +97,7 @@ class ParserOutputAccess {
 	/**
 	 * In cases that an extension tries to get the same ParserOutput of
 	 * the page right after it was parsed (T301310).
-	 * @var ParserOutput[]
+	 * @var ParserOutput[][]
 	 */
 	private $localCache = [];
 
@@ -218,8 +217,8 @@ class ParserOutputAccess {
 		$classCacheKey = $primaryCache->makeParserOutputKey( $page, $parserOptions );
 
 		if ( $useCache === self::CACHE_PRIMARY ) {
-			if ( isset( $this->localCache[$classCacheKey] ) && !$isOld ) {
-				return $this->localCache[$classCacheKey];
+			if ( isset( $this->localCache[$classCacheKey][$page->getLatest()] ) && !$isOld ) {
+				return $this->localCache[$classCacheKey][$page->getLatest()];
 			}
 			$output = $primaryCache->get( $page, $parserOptions );
 		} elseif ( $useCache === self::CACHE_SECONDARY && $revision ) {
@@ -230,27 +229,7 @@ class ParserOutputAccess {
 		}
 
 		if ( $output && !$isOld ) {
-			$this->localCache[$classCacheKey] = $output;
-		}
-
-		// HACK! If the 'useParsoid' option is set, also look up content
-		// from the 'parsoid' cache that was used by ParsoidOutputAccess to store
-		// Parsoid content. This lets us fetch content from previously stored content
-		// without running into cold cache problems!
-		// (T347632 tracks removal of this hack)
-		if ( !$output && $parserOptions->getUseParsoid() ) {
-			if ( $useCache === self::CACHE_PRIMARY ) {
-				$fallbackParsoidCache = $this->parserCacheFactory->getParserCache(
-					ParsoidOutputAccess::PARSOID_PARSER_CACHE_NAME
-				);
-				$output = $fallbackParsoidCache->get( $page, $parserOptions );
-				// Unforunately, fallback content doesn't have the wrapper div
-				// class set properly.
-				$class = $parserOptions->getWrapOutputClass();
-				if ( $output && $class !== false && !$parserOptions->getInterfaceMessage() ) {
-					$output->addWrapperDivClass( $class );
-				}
-			}
+			$this->localCache[$classCacheKey] = [ $page->getLatest() => $output ];
 		}
 
 		if ( $output ) {
@@ -329,7 +308,7 @@ class ParserOutputAccess {
 		if ( $output && !$isOld ) {
 			$primaryCache = $this->getPrimaryCache( $parserOptions );
 			$classCacheKey = $primaryCache->makeParserOutputKey( $page, $parserOptions );
-			$this->localCache[$classCacheKey] = $output;
+			$this->localCache[$classCacheKey] = [ $page->getLatest() => $output ];
 		}
 
 		if ( $status->isGood() ) {

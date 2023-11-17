@@ -107,7 +107,8 @@
 			"مشعل الحربي",
 			"نصوح",
 			"وهراني",
-			"아라"
+			"아라",
+			"LaMagiaaa"
 		]
 	},
 	"tog-underline": "سطر تحت الوصلات:",
@@ -729,6 +730,7 @@
 	"temp-user-banner-description": "أنت تستخدم حساباً مؤقتاً",
 	"temp-user-banner-tooltip-label": "مزيد من المعلومات حول الحسابات المؤقتة",
 	"temp-user-banner-tooltip-title": "حساب مؤقت",
+	"temp-user-banner-tooltip-description-learn-more": "أنشئ هذا الحساب المؤقت بعد إجراء تعديل دون حساب عبر هذا المتصفح والجهاز.  [[mw:Help:Temporary_accounts|تعلم المزيد]].",
 	"blankarticle": "<strong>تنبيه:</strong> الصفحة التي تريد إنشاءها فارغة. إذا نقرت \"$1\" ثانية فستنشأ الصفحة بدون محتوى.",
 	"anoneditwarning": "<strong>تحذير:</strong> أنت غير مسجل الدخول. عنوان الأيبي الخاص بك سيكون معروضا بشكل علني لو قمت بأي تعديلات. لو أنك <strong>[$1 سجلت الدخول]</strong> أو <strong>[$2 أنشأت حسابا]</strong>، فتعديلاتك ستنسب لاسم المستخدم الخاص بك، بالإضافة إلى فوائد أخرى.",
 	"autocreate-edit-warning": "<strong>تحذير:</strong> أنت لم تسجل الدخول. سينسب تعديلك إلى <strong>[[{{MediaWiki:tempuser-helppage}}|auto-generated name]]</strong> عن طريق إضافة ملف تعريف ارتباط إلى متصفحك. سيكون عنوان IP الخاص بك مرئيًا للمستخدمين الموثوق بهم. عندما <strong>[تسجل الدخول $1]</strong> أو <strong>[تنشئ حساباً $2]</strong>، ستُنسب تعديلاتك إلى الاسم الذي تختاره، إلى جانب المزايا الأخرى.",
@@ -3851,8 +3853,8 @@
 	"logentry-move-move_redir-noredirect": "{{GENDER:$2|نقل|نقلت}} $1 صفحة $3 إلى $4 على تحويلة دون ترك تحويلة",
 	"logentry-patrol-patrol": "{{GENDER:$2|عاين|عاين}} $1 المراجعة $4 للصفحة $3",
 	"logentry-patrol-patrol-auto": "{{GENDER:$2|عاين|عاينت}} $1 تلقائيا المراجعة $4 للصفحة $3",
-	"logentry-newusers-newusers": "تم إنشاء حساب {{GENDER:$2|المستخدم|المستخدمة}} $1",
-	"logentry-newusers-create": "تم إنشاء حساب {{GENDER:$2|المستخدم|المستخدمة}} $1",
+	"logentry-newusers-newusers": "أُنشِئ حساب {{GENDER:$2|المستخدم|المستخدمة}} $1",
+	"logentry-newusers-create": "أُنشِئ حساب {{GENDER:$2|المستخدم|المستخدمة}} $1",
 	"logentry-newusers-create2": "أنشأ $1 حسابا {{GENDER:$2|للمستخدم|للمستخدمة}} $3",
 	"logentry-newusers-byemail": "{{GENDER:$2|أنشأ|أنشأت}} $1 حساب المستخدم $3 وأُرسلت كلمة السر بالبريد الإلكتروني",
 	"logentry-newusers-autocreate": "أنشئ حساب {{GENDER:$2|المستخدم|المستخدمة}} $1 تلقائيًا",
@@ -4273,7 +4275,7 @@
 	"newpages-showhide-registered": "$1 المستخدمين المسجلين",
 	"blockedtext-made-by": "المنع أجراه $1",
 	"blockedtext-reason-comment": "السبب المعطى هو <em>$1</em>",
-	"blockedtext-start-time": "بد$1اية المنع: $1",
+	"blockedtext-start-time": "بداية المنع: $1",
 	"blockedtext-expiration-time": "انتهاء المنع: $1",
 	"blockedtext-expiration-longest-block": "انتهاء صلاحية أطول كتلة: $1",
 	"blockedtext-intended-blockee": "الممنوع المقصود: $1",

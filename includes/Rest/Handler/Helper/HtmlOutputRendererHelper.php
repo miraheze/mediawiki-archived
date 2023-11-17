@@ -31,6 +31,7 @@ use MediaWiki\Edit\SelserContext;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Page\PageIdentity;
+use MediaWiki\Page\ParserOutputAccess;
 use MediaWiki\Parser\Parsoid\HtmlTransformFactory;
 use MediaWiki\Parser\Parsoid\PageBundleParserOutputConverter;
 use MediaWiki\Parser\Parsoid\ParsoidOutputAccess;
@@ -55,9 +56,12 @@ use Wikimedia\Bcp47Code\Bcp47CodeValue;
 use Wikimedia\Message\MessageValue;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\Parsoid\Core\PageBundle;
+use Wikimedia\Parsoid\DOM\Element;
 use Wikimedia\Parsoid\Parsoid;
 use Wikimedia\Parsoid\Utils\ContentUtils;
+use Wikimedia\Parsoid\Utils\DOMCompat;
 use Wikimedia\Parsoid\Utils\DOMUtils;
+use Wikimedia\Parsoid\Utils\WTUtils;
 
 /**
  * Helper for getting output of a given wikitext page rendered by parsoid.
@@ -126,6 +130,9 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 	/** @var ?Bcp47Code */
 	private $targetLanguage = null;
 
+	/** Should we ignore mismatched $page and $revisionOrId values? */
+	private bool $lenientRevHandling = false;
+
 	/**
 	 * Flags to be passed as $options to ParsoidOutputAccess::getParserOutput,
 	 * to control parser cache access.
@@ -155,6 +162,10 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 	 * @param HtmlTransformFactory $htmlTransformFactory
 	 * @param IContentHandlerFactory $contentHandlerFactory
 	 * @param LanguageFactory $languageFactory
+	 * @param bool $lenientRevHandling Should we ignore mismatches
+	 *    $page and the page that $revision belongs to? Usually happens
+	 *    because of page moves. This should be set to true only for
+	 *	  internal API calls.
 	 */
 	public function __construct(
 		ParsoidOutputStash $parsoidOutputStash,
@@ -162,7 +173,8 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 		ParsoidOutputAccess $parsoidOutputAccess,
 		HtmlTransformFactory $htmlTransformFactory,
 		IContentHandlerFactory $contentHandlerFactory,
-		LanguageFactory $languageFactory
+		LanguageFactory $languageFactory,
+		bool $lenientRevHandling = false
 	) {
 		$this->parsoidOutputStash = $parsoidOutputStash;
 		$this->stats = $statsDataFactory;
@@ -170,6 +182,7 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 		$this->htmlTransformFactory = $htmlTransformFactory;
 		$this->contentHandlerFactory = $contentHandlerFactory;
 		$this->languageFactory = $languageFactory;
+		$this->lenientRevHandling = $lenientRevHandling;
 	}
 
 	/**
@@ -241,22 +254,6 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 	}
 
 	/**
-	 * Set the desired offset type for data-parsoid attributes.
-	 *
-	 * @note Will disable caching if the given offset type is different from the default.
-	 *
-	 * @param string $offsetType One of the offset types accepted by Parsoid::wikitext2html.
-	 */
-	public function setOffsetType( $offsetType ) {
-		// Only set the option if the value isn't the default (see Wikimedia\Parsoid\Config\Env)!
-		// See Parsoid::wikitext2html for possible values.
-		if ( $offsetType !== 'byte' ) {
-			$this->parsoidOptions['offsetType'] = $offsetType;
-			$this->isCacheable = false;
-		}
-	}
-
-	/**
 	 * Controls how the parser cache is used.
 	 *
 	 * @param bool $read Whether we should look for cached output before parsing
@@ -264,8 +261,8 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 	 */
 	public function setUseParserCache( bool $read, bool $write ) {
 		$this->parsoidOutputAccessOptions =
-			( $read ? 0 : ParsoidOutputAccess::OPT_FORCE_PARSE ) |
-			( $write ? 0 : ParsoidOutputAccess::OPT_NO_UPDATE_CACHE );
+			( $read ? 0 : ParserOutputAccess::OPT_FORCE_PARSE ) |
+			( $write ? 0 : ParserOutputAccess::OPT_NO_UPDATE_CACHE );
 	}
 
 	/**
@@ -717,42 +714,59 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 	}
 
 	/**
+	 * Strip Parsoid's section wrappers
+	 *
+	 * TODO: Should we move this to Parsoid's ContentUtils class?
+	 * There already is a stripUnnecessaryWrappersAndSyntheticNodes but
+	 * it targets html2wt and does a lot more than just section unwrapping.
+	 *
+	 * @param Element $elt
+	 */
+	private function stripParsoidSectionTags( Element $elt ): void {
+		$n = $elt->firstChild;
+		while ( $n ) {
+			$next = $n->nextSibling;
+			if ( $n instanceof Element ) {
+				// Recurse into subtree before stripping this
+				$this->stripParsoidSectionTags( $n );
+				// Strip <section> tags and synthetic extended-annotation-region wrappers
+				if ( WTUtils::isParsoidSectionTag( $n ) ) {
+					$parent = $n->parentNode;
+					// Help out phan
+					'@phan-var Element $parent';
+					DOMUtils::migrateChildren( $n, $parent, $n );
+					$parent->removeChild( $n );
+				}
+			}
+			$n = $next;
+		}
+	}
+
+	/**
 	 * @param ParserOptions $parserOptions
 	 *
 	 * @return Status
 	 */
 	private function getParserOutputInternal( ParserOptions $parserOptions ): Status {
-		// XXX: $parsoidOptions are really parser options, and they should be integrated with
-		//      the ParserOptions class. That would allow us to use the ParserCache with
-		//      various flavors.
-		$parsoidOptions = $this->parsoidOptions;
-
-		// NOTE: VisualEditor would set this flavor when transforming from Wikitext to HTML
-		//       for the purpose of editing when doing parsefragment (in body only mode).
-		if ( $this->flavor === 'fragment' ) {
-			$parsoidOptions += [
-				'body_only' => true,
-				'wrapSections' => false
-			];
-		}
-
 		// NOTE: ParsoidOutputAccess::getParserOutput() should be used for revisions
 		//       that comes from the database. Either this revision is null to indicate
 		//       the current revision or the revision must have an ID.
 		// If we have a revision and the ID is 0 or null, then it's a fake revision
 		// representing a preview.
-		$isFakeRevision = $this->getRevisionId() === null;
-
-		if ( !$isFakeRevision && !$parsoidOptions && $this->isCacheable ) {
-			// Always log lint info when generating cacheable output.
-			// We are not really interested in lint data for old revisions, but
-			// we don't have a good way to tell at this point.
-			$flags = $this->parsoidOutputAccessOptions | ParsoidOutputAccess::OPT_LOG_LINT_DATA;
+		$parsoidOptions = $this->parsoidOptions;
+		// NOTE: VisualEditor would set this flavor when transforming from Wikitext to HTML
+		//       for the purpose of editing when doing parsefragment (in body only mode).
+		if ( $this->flavor === 'fragment' || $this->getRevisionId() === null ) {
+			$this->isCacheable = false;
+		}
+		if ( $this->isCacheable ) {
+			$flags = $this->parsoidOutputAccessOptions;
 			$status = $this->parsoidOutputAccess->getParserOutput(
 				$this->page,
 				$parserOptions,
 				$this->revisionOrId,
-				$flags
+				$flags,
+				$this->lenientRevHandling
 			);
 
 			// T333606: Force a reparse if the version coming from cache is not the default
@@ -771,17 +785,31 @@ class HtmlOutputRendererHelper implements HtmlOutputHelper {
 						$this->page,
 						$parserOptions,
 						$this->revisionOrId,
-						$flags | ParsoidOutputAccess::OPT_FORCE_PARSE
+						$flags | ParserOutputAccess::OPT_FORCE_PARSE,
+						$this->lenientRevHandling
 					);
 				}
 			}
 		} else {
-			$status = $this->parsoidOutputAccess->parse(
+			$status = $this->parsoidOutputAccess->parseUncacheable(
 				$this->page,
 				$parserOptions,
-				$parsoidOptions,
-				$this->revisionOrId
+				$this->revisionOrId,
+				$this->lenientRevHandling
 			);
+
+			// @phan-suppress-next-line PhanSuspiciousValueComparison
+			if ( $status->isOK() && $this->flavor === 'fragment' ) {
+				// Unwrap sections and return body_only content
+				// NOTE: This introduces an extra html -> dom -> html roundtrip
+				// This will get addressed once HtmlHolder work is complete
+				$parserOutput = $status->getValue();
+				$body = DOMCompat::getBody( DOMUtils::parseHTML( $parserOutput->getRawText() ) );
+				if ( $body ) {
+					$this->stripParsoidSectionTags( $body );
+					$parserOutput->setText( DOMCompat::getInnerHTML( $body ) );
+				}
+			}
 		}
 
 		return $status;
