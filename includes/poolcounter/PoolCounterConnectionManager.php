@@ -51,7 +51,7 @@ class PoolCounterConnectionManager {
 	 * @internal Public for testing only
 	 */
 	public $port;
-å
+
 	/**
 	 * @param array $conf
 	 * @throws MWException
