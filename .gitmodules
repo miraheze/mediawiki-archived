@@ -1076,7 +1076,7 @@
 [submodule "extensions/VEForAll"]
 	path = extensions/VEForAll
 	url = https://github.com/wikimedia/mediawiki-extensions-VEForAll
-	branch = REL1_41
+	branch = master
 	ignore = dirty
 [submodule "extensions/DataTransfer"]
 	path = extensions/DataTransfer
