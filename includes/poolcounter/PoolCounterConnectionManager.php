@@ -43,14 +43,14 @@ class PoolCounterConnectionManager {
 	public $connect_timeout;
 
 	/**
-	 * @internal For testing only
+	 * @internal Public for testing only
 	 */
-	protected $host;
+	public $host;
 
 	/**
-	 * @internal For testing only
+	 * @internal Public for testing only
 	 */
-	protected $port;
+	public $port;
 
 	/**
 	 * @param array $conf
