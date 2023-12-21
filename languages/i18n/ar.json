@@ -107,7 +107,8 @@
 			"MRidhaAJ",
 			"Alshamiri1",
 			"أيوب",
-			"أبو هشام"
+			"أبو هشام",
+			"LaMagiaaa"
 		]
 	},
 	"tog-underline": "سطر تحت الوصلات:",
@@ -1896,7 +1897,7 @@
 	"backend-fail-describe": "لا يمكن تغيير بيانات التعريف metadata للملف \"$1\".",
 	"backend-fail-alreadyexists": "الملف \"$1\" موجود بالفعل.",
 	"backend-fail-store": "لا يمكن تخزين الملف \"$1\" في \"$2\".",
-	"backend-fail-copy": "لا يمكن نسخ الملف  \"$1\"  إلى  \"$2\".",
+	"backend-fail-copy": "لا يمكن نسخ الملف \"$1\" إلى \"$2\".",
 	"backend-fail-move": "تعذر نقل ملف \"$1\" إلى \"$2\".",
 	"backend-fail-opentemp": "تعذّر فتح ملف مؤقت.",
 	"backend-fail-writetemp": "تعذرت كتابة ملف مؤقت.",
@@ -2426,7 +2427,7 @@
 	"notanarticle": "ليست صفحة محتوى",
 	"notvisiblerev": "المراجعة تم حذفها",
 	"watchlist-details": "{{PLURAL:$1||صفحة واحدة|صفحتان|$1 صفحات|$1 صفحة}} في قائمة مراقبتك (بالإضافة لصفحات النقاش).",
-	"watchlist-expiry-days-left": "بقي {{PLURAL:$1||يوم واحد|يومين|$1 أيام|$1 يومًا|$1 يوم}}",
+	"watchlist-expiry-days-left": "بقي {{PLURAL:$1||يوم واحد|يومان|$1 أيام|$1 يومًا|$1 يوم}}",
 	"watchlist-expiring-days-full-text": "{{PLURAL:$1|1 يوم|$1 أيام}} بقيت في قائمة مراقبتك",
 	"watchlist-expiry-hours-left": "بقيت بضع ساعات فقط",
 	"watchlist-expiring-hours-full-text": "بقيت بضع ساعات في قائمة مراقبتك",
@@ -3292,7 +3293,7 @@
 	"metadata-help": "هذا الملف يحتوي على معلومات إضافية، غالبا ما تكون أضيفت من قبل الكاميرا الرقمية أو الماسح الضوئي المستخدم في إنشاء الملف.\nإذا كان الملف قد عدل عن حالته الأصلية، فبعض التفاصيل قد لا تعبر عن الملف المعدل.",
 	"metadata-expand": "أظهر التفاصيل الممتدة",
 	"metadata-collapse": "أخفِ التفاصيل الممتدة",
-	"metadata-fields": "سيتم تضمين حقول البيانات الوصفية للصور المدرجة في هذه الرسالة في عرض صفحة الصورة عند طي جدول البيانات الوصفية.! N! سيتم إخفاء الحقول الأخرى افتراضيًا.! N! * make! N! * model! N! * datetimeoriginal! N! * exposuretime! N! * fnumber! N! * isospeedratings! N! * focallength! N! * فنان! N! * DC-rights! N! * copyright owner! N! * usageterms! N! * webstatement! N! N! * giffilecomment! N! * usercomment! N! * citydest! N! * citycreated! N! * headline! N! * source! N! * locationdest! N! ! * dc-publisher! N! * dc-Relations! N! * label! N! * nickname! N! * personinimage! N! * إخلاء المسؤولية! N! * event! N! * objectname",
+	"metadata-fields": "ستعرض حقول معطيات الميتا الموجودة في هذه الرسالة في صفحة الصورة عندما يكون جدول معطيات الميتا مطوياً.\nالحقول الأخرى ستكون مخفية افتراضياً.\n* make \n* model \n* datetimeoriginal \n* exposuretime \n* fnumber \n* isospeedratings \n* focallength \n* artist \n* copyright \n* imagedescription \n* gpslatitude \n* gpslongitude \n* gpsaltitude \n* dc-rights \n* copyrightowner \n* usageterms \n* webstatement \n* licenseurl \n* attributionurl \n* preferredattributionname \n* credit \n* jpegfilecomment \n* pngfilecomment \n* giffilecomment \n* usercomment \n* citydest \n* citycreated \n* headline \n* source \n* locationdest \n* dc-contributor \n* dc-coverage \n* dc-publisher \n* dc-relation \n* label \n* nickname \n* personinimage \n* disclaimer \n* event \n* objectname",
 	"metadata-langitem": "<strong>$2:</strong> $1",
 	"namespacesall": "الكل",
 	"monthsall": "الكل",
@@ -3832,8 +3833,8 @@
 	"logentry-move-move_redir-noredirect": "{{GENDER:$2|نقل|نقلت}} $1 صفحة $3 إلى $4 على تحويلة دون ترك تحويلة",
 	"logentry-patrol-patrol": "{{GENDER:$2|عاين|عاين}} $1 المراجعة $4 للصفحة $3",
 	"logentry-patrol-patrol-auto": "{{GENDER:$2|عاين|عاينت}} $1 تلقائيا المراجعة $4 للصفحة $3",
-	"logentry-newusers-newusers": "تم إنشاء حساب {{GENDER:$2|المستخدم|المستخدمة}} $1",
-	"logentry-newusers-create": "تم إنشاء حساب {{GENDER:$2|المستخدم|المستخدمة}} $1",
+	"logentry-newusers-newusers": "أُنشِئ حساب {{GENDER:$2|المستخدم|المستخدمة}} $1",
+	"logentry-newusers-create": "أُنشِئ حساب {{GENDER:$2|المستخدم|المستخدمة}} $1",
 	"logentry-newusers-create2": "أنشأ $1 حسابا {{GENDER:$2|للمستخدم|للمستخدمة}} $3",
 	"logentry-newusers-byemail": "{{GENDER:$2|أنشأ|أنشأت}} $1 حساب المستخدم $3 وأُرسلت كلمة السر بالبريد الإلكتروني",
 	"logentry-newusers-autocreate": "أنشئ حساب {{GENDER:$2|المستخدم|المستخدمة}} $1 تلقائيًا",
@@ -4255,7 +4256,7 @@
 	"newpages-showhide-registered": "$1 المستخدمين المسجلين",
 	"blockedtext-made-by": "المنع أجراه $1",
 	"blockedtext-reason-comment": "السبب المعطى هو <em>$1</em>",
-	"blockedtext-start-time": "بد$1اية المنع: $1",
+	"blockedtext-start-time": "بداية المنع: $1",
 	"blockedtext-expiration-time": "انتهاء المنع: $1",
 	"blockedtext-expiration-longest-block": "انتهاء صلاحية أطول كتلة: $1",
 	"blockedtext-intended-blockee": "الممنوع المقصود: $1",
@@ -4292,5 +4293,5 @@
 	"renameuser-move-log": "نقل الصفحة تلقائيا خلال إعادة تسمية {{GENDER:$1|المستخدم}} من \"[[User:$1|$1]]\" إلى \"[[User:$2|$2]]\"",
 	"action-renameuser": "إعادة تسمية المستخدمين",
 	"right-renameuser": "إعادة تسمية المستخدمين",
-	"renameuser-renamed-notice": "تمت إعادة تسمية هذا المستخدم.! N! تم توفير سجل إعادة التسمية أدناه كمرجع."
+	"renameuser-renamed-notice": "لقد تمت إعادة تسمية {{GENDER:$1|هذا المستخدم|هذه المستخدمة}}.\nسجل إعادة التسمية معروض بالأسفل كمرجع:"
 }
