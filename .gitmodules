@@ -1623,3 +1623,8 @@
 	url = https://github.com/miraheze/MessageCachePerformance
 	branch = main
 	ignore = dirty
+[submodule "extensions/InterwikiDispatcher"]
+	path = extensions/InterwikiDispatcher
+	url = https://github.com/wikimedia/mediawiki-extensions-InterwikiDispatcher
+	branch = REL1_41
+	ignore = dirty
