@@ -1625,6 +1625,6 @@
 	ignore = dirty
 [submodule "extensions/InterwikiDispatcher"]
 	path = extensions/InterwikiDispatcher
-	url = https://github.com/wikimedia/mediawiki-extensions-InterwikiDispatcher
-	branch = REL1_41
+	url = https://github.com/Markus-Rost/InterwikiDispatcher.git
+	branch = master
 	ignore = dirty
