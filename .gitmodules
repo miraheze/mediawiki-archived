@@ -1628,3 +1628,7 @@
 	url = https://github.com/wikimedia/mediawiki-extensions-ParserMigration.git
 	branch = REL1_41
 	ignore = dirty
+[submodule "extensions/InterwikiDispatcher"]
+	path = extensions/InterwikiDispatcher
+	url = https://github.com/Markus-Rost/InterwikiDispatcher.git
+	branch = master
