@@ -1632,3 +1632,4 @@
 	path = extensions/InterwikiDispatcher
 	url = https://github.com/Markus-Rost/InterwikiDispatcher.git
 	branch = master
+	ignore = dirty
